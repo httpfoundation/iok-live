@@ -1,10 +1,10 @@
 import { DatoLanguage } from "../../types"
 import LanguageIcon from '@mui/icons-material/Language'
 import DoneIcon from '@mui/icons-material/Done'
-import Select from "@mui/material/Select"
-import MenuItem from "@mui/material/MenuItem"
 import Chip from "@mui/material/Chip"
 import Avatar from "@mui/material/Avatar"
+//import Select from "@mui/material/Select"
+//import MenuItem from "@mui/material/MenuItem"
 
 
 const LanguageSelect = (props: {

@@ -57,7 +57,7 @@ const StagePage = () => {
 
 	return (
 		<Grid container spacing={0} id="stage">
-			<Grid item xs={9} className="embed-video-row">
+			<Grid item xs={12} md={9} className="embed-video-row">
 				{ selectedStream?.youtubeVideoId ? <YouTubeVideo
 					videoId={selectedStream.youtubeVideoId}
 					containerClassName="embed-video"
@@ -77,7 +77,7 @@ const StagePage = () => {
 					}}
 				/> : <h1>No stream</h1>}
 			</Grid>
-			<Grid item xs sx={{px: 3}} className="sidebar">
+			<Grid item xs md sx={{px: 3}} className="sidebar">
 				<h1>
 					{stage.name}
 				</h1>
