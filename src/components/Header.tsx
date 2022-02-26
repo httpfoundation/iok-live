@@ -34,7 +34,12 @@ const Header = () => {
 			</Typography>
 
 			<Tabs value={activeTab} onChange={(e,v) => setActiveTab(v)} sx={{ flexGrow: 1, height: 64 }} centered>
-				{stages.map(stage => <Tab key={stage.id} label={stage.name} sx={{height: 64}} component={Link}  to={`/stage/${stage.slug}`} />)}
+				{/* Static tabs */}
+				<Tab label={"Előadók"} sx={{height: 64}} component={Link}  to={`/eloadok`} />
+
+
+				{/* Dynamic tabs for stages */}
+				{stages.map(stage => <Tab key={stage.id} label={stage.name} sx={{height: 64}} component={Link}  to={`/szekcio/${stage.slug}`} />)}
 			</Tabs>
 		</Toolbar>
 	</AppBar>)
