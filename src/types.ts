@@ -21,6 +21,9 @@ export type DatoLanguage = {
 	id: number
 	name: string
 	slug: string
+	image?: {
+		url: string
+	}
 }
 
 export type DatoStream = {

@@ -25,6 +25,9 @@ const StagePage = () => {
 						id
 						name
 						slug
+						image {
+							url
+						}
 					}
 				}
 				schedule {
@@ -45,18 +48,17 @@ const StagePage = () => {
 	  	}
 	`, {} as DatoStage)
 
-	useEffect(() => {
-		if (stage?.streams?.length) {
-			setSelectedStream(stage.streams[0])
-		}
-	}, [stage])
-
 	const [selectedStream, setSelectedStream] = useState<DatoStream| null>(null)
+
+	useEffect(() => {
+		if (!stage?.streams?.find(stream => stream.id === selectedStream?.id)) setSelectedStream(stage?.streams?.length ? stage?.streams[0] : null)
+	}, [selectedStream?.id, stage])
+
 
 	return (
 		<Grid container spacing={0} id="stage">
 			<Grid item xs={9} className="embed-video-row">
-				{ selectedStream?.youtubeVideoId && <YouTubeVideo
+				{ selectedStream?.youtubeVideoId ? <YouTubeVideo
 					videoId={selectedStream.youtubeVideoId}
 					containerClassName="embed-video"
 					className="embed-video-inner"
@@ -73,7 +75,7 @@ const StagePage = () => {
 							origin: window.location.origin,
 						}
 					}}
-				/>}
+				/> : <h1>No stream</h1>}
 			</Grid>
 			<Grid item xs sx={{px: 3}} className="sidebar">
 				<h1>
@@ -82,7 +84,7 @@ const StagePage = () => {
 				<LanguageSelect
 					value={selectedStream?.language.id ?? null}
 					onChange={(languageId) => setSelectedStream(stage?.streams?.find(stream => stream.language.id === languageId) ?? null)}
-					options={stage?.streams?.map(stream => stream.language)}
+					options={stage?.streams?.map(stream => stream.language) ?? []}
 				/>
 				{ stage?.schedule?.map(talk => <ScheduleItem open key={talk.id} talk={talk} />) }
 			</Grid>
