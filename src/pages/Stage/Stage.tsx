@@ -15,6 +15,15 @@ const StagePage = () => {
 			stage(filter: {slug: {eq: "${stageId}"}}) {
 				id
 				name
+				streams {
+					id
+					name
+					youtubeVideoId
+					language {
+						name
+						slug
+					}
+				}
 				schedule {
 					id
 					title
@@ -29,7 +38,7 @@ const StagePage = () => {
 						}
 					}
 				}
-			  }
+			}
 	  	}
 	`, {} as DatoStage)
 
@@ -59,6 +68,8 @@ const StagePage = () => {
 			</Grid>
 			<Grid item xs sx={{px: 3}} className="sidebar">
 				<h1>{stage.name}</h1>
+
+				{stage?.streams?.map((stream) => (<div key={stream.id}>{stream.language?.name} {stream.youtubeVideoId}</div>))}
 
 				{ stage?.schedule?.map(talk => <ScheduleItem open key={talk.id} talk={talk} />) }
 			</Grid>

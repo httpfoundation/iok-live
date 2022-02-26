@@ -17,9 +17,23 @@ export type DatoTalk = {
 	speaker?: DatoSpeaker[]
 }
 
+export type DatoLanguage = {
+	id: number
+	name: string
+	slug: string
+}
+
+export type DatoStream = {
+	id: number
+	name: string
+	youtubeVideoId: string
+	language: DatoLanguage
+}
+
 export type DatoStage = {
 	id: number
 	name: string
 	slug: string
 	schedule?: DatoTalk[]
+	streams?: DatoStream[]
 }
