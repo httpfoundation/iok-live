@@ -1,0 +1,13 @@
+{
+	"extends": ["react-app"],
+	
+	
+	"overrides": [
+		{
+			"files": ["**/*.ts?(x)"],
+			"rules": {
+				"semi": ["warn", "never"]
+			}
+		}
+	]
+}
