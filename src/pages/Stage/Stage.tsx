@@ -4,7 +4,7 @@ import "./Stage.scss"
 import { useParams } from "react-router-dom"
 import useQuery from "../../useQuery"
 import { DatoStage } from "../../types"
-import ScheduleItem from "../../components/ScheduleItem"
+import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 
 const StagePage = () => {
 
