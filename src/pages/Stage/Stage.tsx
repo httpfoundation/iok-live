@@ -3,14 +3,10 @@ import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
 import { useParams } from "react-router-dom"
 import useQuery from "../../useQuery"
-import { DatoLanguage, DatoStage, DatoStream } from "../../types"
+import { DatoStage, DatoStream } from "../../types"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import { useEffect, useState } from "react"
-import FormControl from "@mui/material/FormControl"
-import InputLabel from "@mui/material/InputLabel"
-import LanguageIcon from '@mui/icons-material/Language'
-import Select from "@mui/material/Select"
-import MenuItem from "@mui/material/MenuItem"
+import { LanguageSelect } from "../../components"
 
 const StagePage = () => {
 
@@ -91,31 +87,6 @@ const StagePage = () => {
 				{ stage?.schedule?.map(talk => <ScheduleItem open key={talk.id} talk={talk} />) }
 			</Grid>
 		</Grid>
-	)
-}
-
-const LanguageSelect = (props: {
-	options?: DatoLanguage[]
-	value: number | null
-	onChange: (language: number | null) => void
-}) => {
-	return (
-			<Select
-				value={props.value}
-				fullWidth
-				onChange={e => props.onChange(e.target.value as number)}
-				renderValue={(selected) => (
-					<span style={{paddingLeft: '32px', position: 'relative'}}>
-						<LanguageIcon sx={{position: 'absolute', left: 0, top: -3}} />
-						{props.options?.find(language => language.id === selected)?.name }
-					</span>
-
-				)}
-			>
-				{props.options?.map(option => (
-					<MenuItem key={option.id} value={option.id}>{option.name}</MenuItem>
-				))}
-			</Select>
 	)
 }
 
