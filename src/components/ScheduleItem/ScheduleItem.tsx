@@ -1,7 +1,8 @@
-import { DatoSpeaker, DatoTalk } from "../../types"
+import { DatoSpeaker } from "../../types"
 import "./ScheduleItem.scss"
-import { styled } from '@mui/system';
-import { ScheduleTimeCaption } from "..";
+import { styled } from '@mui/system'
+import { ScheduleTimeCaption } from ".."
+import { useTalk } from "../../Store"
 
 /* Egy napirendi pont komponense */
 
@@ -84,7 +85,7 @@ const SpeakersImages = (props: {speakers: DatoSpeaker[] | undefined}) => {
 	)
 }
 
-const Abstract = (props: {abstract: String}) => {
+const Abstract = (props: {abstract?: String }) => {
 	const { abstract } = props
 	return (
 		<Description>{abstract}</Description>
@@ -101,23 +102,27 @@ const ScheduleItemContent = styled('div')`
 
 
 const ScheduleItem = (props: {
-	open: boolean
-	talk: DatoTalk
+	open: boolean,
+	//talk: DatoTalk,
+	talkId: number
 }) => {
 	const double = false
 
-	const { talk } = props
+	//const { talk } = props
+
+	const talk = useTalk(props.talkId)
+	
 
 	return (
 		<div
 			className={`shcedule-item ${props.open ? "open" : ""} ${double ? "double-presenter" : ""}`}
 			//onClick={props.onClick}
 		>
-			<SpeakersImages speakers={props.talk.speaker} /> 
+			<SpeakersImages speakers={talk?.speakers} /> 
 			<ScheduleItemContent>
 				<ScheduleTimeCaption date={talk?.start} />
 				<TalkTitle>{talk?.title}</TalkTitle>
-				<Speakers speakers={talk?.speaker} />
+				<Speakers speakers={talk?.speakers} />
 				<Abstract abstract={talk?.description} />
 			</ScheduleItemContent>
 		</div>

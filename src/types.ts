@@ -4,9 +4,11 @@ export type DatoSpeaker = {
 	bio: string
 	title: string
 	company: string
+	slug: string
 	image?: {
 		url: string
 	}
+	talk: DatoTalk[]
 }
 
 export type DatoTalk = {
@@ -14,13 +16,20 @@ export type DatoTalk = {
 	title: string
 	start: Date
 	description: string
-	speaker?: DatoSpeaker[]
+	//speaker?: DatoSpeaker[]
+	speaker: {
+		id: number
+	}[]
+	stage?: DatoStage
 }
 
 export type DatoLanguage = {
 	id: number
 	name: string
 	slug: string
+	image?: {
+	url: string
+	}
 }
 
 export type DatoStream = {

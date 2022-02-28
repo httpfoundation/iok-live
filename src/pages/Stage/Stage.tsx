@@ -1,66 +1,31 @@
 import Grid from "@mui/material/Grid"
 import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
-import { useParams } from "react-router-dom"
-import useQuery from "../../useQuery"
-import { DatoLanguage, DatoStage, DatoStream } from "../../types"
+import { Link, useParams } from "react-router-dom"
+import {  DatoStream } from "../../types"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import { useEffect, useState } from "react"
-import FormControl from "@mui/material/FormControl"
-import InputLabel from "@mui/material/InputLabel"
-import LanguageIcon from '@mui/icons-material/Language'
-import Select from "@mui/material/Select"
-import MenuItem from "@mui/material/MenuItem"
+import { LanguageSelect } from "../../components"
+import { useStage } from "../../Store"
 
 const StagePage = () => {
 
 	const { stageId } = useParams()
-
-	const [stage] = useQuery<DatoStage>(`
-		{
-			stage(filter: {slug: {eq: "${stageId}"}}) {
-				id
-				name
-				streams {
-					id
-					name
-					youtubeVideoId
-					language {
-						id
-						name
-						slug
-					}
-				}
-				schedule {
-					id
-					title
-					start
-					speaker {
-						id
-						name
-						title
-						company
-						image {
-							url
-						}
-					}
-				}
-			}
-	  	}
-	`, {} as DatoStage)
-
-	useEffect(() => {
-		if (stage?.streams?.length) {
-			setSelectedStream(stage.streams[0])
-		}
-	}, [stage])
+	
+	const stage = useStage(stageId)
 
 	const [selectedStream, setSelectedStream] = useState<DatoStream| null>(null)
 
+	useEffect(() => {
+		// TODO: Keep language preference
+		if (!stage?.streams?.find(stream => stream.id === selectedStream?.id)) setSelectedStream(stage?.streams?.length ? stage?.streams[0] : null)
+	}, [selectedStream?.id, stage])
+
+
 	return (
 		<Grid container spacing={0} id="stage">
-			<Grid item xs={9} className="embed-video-row">
-				{ selectedStream?.youtubeVideoId && <YouTubeVideo
+			<Grid item xs={12} md={9} className="embed-video-row">
+				{ selectedStream?.youtubeVideoId ? <YouTubeVideo
 					videoId={selectedStream.youtubeVideoId}
 					containerClassName="embed-video"
 					className="embed-video-inner"
@@ -77,45 +42,20 @@ const StagePage = () => {
 							origin: window.location.origin,
 						}
 					}}
-				/>}
+				/> : <h1>No stream</h1>}
 			</Grid>
-			<Grid item xs sx={{px: 3}} className="sidebar">
+			<Grid item xs md sx={{px: 3}} className="sidebar">
 				<h1>
-					{stage.name}
+					{stage?.name}
 				</h1>
 				<LanguageSelect
 					value={selectedStream?.language.id ?? null}
 					onChange={(languageId) => setSelectedStream(stage?.streams?.find(stream => stream.language.id === languageId) ?? null)}
-					options={stage?.streams?.map(stream => stream.language)}
+					options={stage?.streams?.map(stream => stream.language) ?? []}
 				/>
-				{ stage?.schedule?.map(talk => <ScheduleItem open key={talk.id} talk={talk} />) }
+				{ stage?.schedule?.map(talk => <Link to={`/eloadasok/${talk.id}`}><ScheduleItem open key={talk.id} talkId={talk.id} /></Link>) }
 			</Grid>
 		</Grid>
-	)
-}
-
-const LanguageSelect = (props: {
-	options?: DatoLanguage[]
-	value: number | null
-	onChange: (language: number | null) => void
-}) => {
-	return (
-			<Select
-				value={props.value}
-				fullWidth
-				onChange={e => props.onChange(e.target.value as number)}
-				renderValue={(selected) => (
-					<span style={{paddingLeft: '32px', position: 'relative'}}>
-						<LanguageIcon sx={{position: 'absolute', left: 0, top: -3}} />
-						{props.options?.find(language => language.id === selected)?.name }
-					</span>
-
-				)}
-			>
-				{props.options?.map(option => (
-					<MenuItem key={option.id} value={option.id}>{option.name}</MenuItem>
-				))}
-			</Select>
 	)
 }
 
