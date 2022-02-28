@@ -4,6 +4,7 @@ import Talks from "../pages/Talk/TalkRouter"
 import StagePage from '../pages/Stage/Stage'
 import Home from "../pages/Home/Home"
 import Reception from "../pages/Reception/Reception"
+import BreakoutRoom from "../pages/BreakoutRoom/BreakoutRoom"
 
 
 const Router = () =>{
@@ -22,6 +23,8 @@ const Router = () =>{
 			{/* Talks / Presentations */}
 			<Route path="/presentations/*" element={<Talks />} />
 			<Route path="/eloadasok/*" element={<Talks />} />
+
+			<Route path="/itmp-klub-cafe" element={<BreakoutRoom />} />
 		</Routes>
 	)
 }
