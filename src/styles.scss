@@ -21,3 +21,17 @@ code {
 	padding: 7px;
 	display: block;
 }
+
+.wxc-meeting-info__title {
+	display: none;
+
+
+}
+
+.wxc-meeting-info {
+	//display: none;
+	&:after{
+		display: inline;
+		font-size: 2rem
+	}
+}
