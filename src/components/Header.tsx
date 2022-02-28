@@ -34,7 +34,7 @@ const Header = () => {
 	}, [location.pathname, tabs])
 
 
-	return (<AppBar position="fixed" sx={{
+	return (<AppBar position="fixed"  color="secondary" sx={{
 		zIndex: theme => theme.zIndex.drawer + 1
 	}}>
 		<Toolbar>

@@ -1,14 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 html, body {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	
 }
-* {
+/* * {
 	font-family: 'Roboto', sans-serif;
 	box-sizing: border-box;
 }
+ */
+* {
+	font-family: 'Spartan', sans-serif;
+	box-sizing: border-box;
+}
+
 .MuiTabs-indicator {
 	height: 4px !important;
 	border-top-left-radius: 4px;
@@ -34,4 +43,8 @@ code {
 		display: inline;
 		font-size: 2rem
 	}
+}
+
+.wxc-button--join .wxc-meeting-control__button-text {
+	display: none;
 }

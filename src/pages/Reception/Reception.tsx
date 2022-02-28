@@ -1,7 +1,10 @@
+import { Typography } from "@mui/material"
+import PageTitle from "../../components/PageTitle"
+
 const Reception = () => {
 	return (
 		<>
-			<h1>Recepció</h1>
+			<PageTitle>Recepció</PageTitle>
 		</>
 	)
 }

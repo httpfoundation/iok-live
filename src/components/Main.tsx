@@ -4,7 +4,7 @@ import Router from './Router'
 
 const Main = () => {
 	return (
-		<Box sx={{ mt: '64px', height: 'calc(100vh - 64px)', maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }} component="main">
+		<Box sx={{ p:2, mt: '64px', height: 'calc(100vh - 64px)', maxHeight: 'calc(100vh - 64px)', overflowY: 'auto' }} component="main">
 			<Router />
 		</Box>
 	)
