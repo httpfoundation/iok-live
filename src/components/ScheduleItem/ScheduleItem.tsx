@@ -1,9 +1,8 @@
-import { DatoSpeaker, DatoTalk } from "../../types"
+import { DatoSpeaker } from "../../types"
 import "./ScheduleItem.scss"
 import { styled } from '@mui/system'
 import { ScheduleTimeCaption } from ".."
-import { useMemo } from "react"
-import { useStore } from "../../Store"
+import { useTalk } from "../../Store"
 
 /* Egy napirendi pont komponense */
 
@@ -43,14 +42,15 @@ const Speakers = (props: {speakers: DatoSpeaker[] | undefined}) => {
 
 const ScheduleItem = (props: {
 	open: boolean
-	talk: DatoTalk
+	//talk: DatoTalk
+	talkId: number
 }) => {
 	const double = false
 
-	const { talk } = props
-	const store = useStore()
-	const speakerIds = useMemo(() => talk.speaker?.map(s => s.id), [talk.speaker])
-	const speakers = useMemo(() => store.presenters.filter(p => speakerIds.includes(p.id)), [store.presenters, speakerIds])	
+	//const { talk } = props
+
+	const talk = useTalk(props.talkId)
+	
 
 	return (
 		<div
@@ -58,7 +58,7 @@ const ScheduleItem = (props: {
 			//onClick={props.onClick}
 		>
 			<div className="images">
-				{speakers.map((speaker) => (
+				{talk.speakers?.map((speaker) => (
 					<div
 						key={speaker.id}
 						className="image"
@@ -69,7 +69,7 @@ const ScheduleItem = (props: {
 			<div className="content">
 				<ScheduleTimeCaption date={talk.start} />
 				<TalkTitle>{talk.title}</TalkTitle>
-				<Speakers speakers={speakers} />
+				<Speakers speakers={talk.speakers} />
 				<div className="description">
 					Lorem ipsum dolor sit amet consectetur adipisicing elit.
 					Rerum repellendus eos voluptas cupiditate quasi labore et

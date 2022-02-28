@@ -4,17 +4,15 @@ import "./Stage.scss"
 import { Link, useParams } from "react-router-dom"
 import {  DatoStream } from "../../types"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { LanguageSelect } from "../../components"
-import { useStore } from "../../Store"
+import { useStage } from "../../Store"
 
 const StagePage = () => {
 
 	const { stageId } = useParams()
 	
-	const store = useStore()
-	
-	const stage = useMemo(() => store.stages.find(s => s.slug === stageId), [stageId, store.stages])
+	const stage = useStage(stageId)
 
 	const [selectedStream, setSelectedStream] = useState<DatoStream| null>(null)
 
@@ -55,7 +53,7 @@ const StagePage = () => {
 					onChange={(languageId) => setSelectedStream(stage?.streams?.find(stream => stream.language.id === languageId) ?? null)}
 					options={stage?.streams?.map(stream => stream.language) ?? []}
 				/>
-				{ stage?.schedule?.map(talk => <Link to={`/eloadasok/${talk.id}`}><ScheduleItem open key={talk.id} talk={talk} /></Link>) }
+				{ stage?.schedule?.map(talk => <Link to={`/eloadasok/${talk.id}`}><ScheduleItem open key={talk.id} talkId={talk.id} /></Link>) }
 			</Grid>
 		</Grid>
 	)

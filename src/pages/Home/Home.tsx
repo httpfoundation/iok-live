@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
-import { useStore } from "../../Store"
+import { useStages } from "../../Store"
 
 const Home = () => {
 
-	const stages = useStore().stages
+	const stages = useStages()
 
 	return (
 		<>

@@ -5,13 +5,13 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { useStore } from "../Store"
+import { useStages } from "../Store"
 
 const Header = () => {
 
 	const [activeTab, setActiveTab] = useState<number|null>(0)
 
-	const stages = useStore().stages
+	const stages = useStages()
 
 	const tabs = useMemo(() => [
 		{label: 'Aula', to: '/'},

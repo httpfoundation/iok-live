@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
-import { useStore } from "../../Store"
+import { usePresenters } from "../../Store"
 
 export const AllPresenters = () => {
 
-	const presenters = useStore().presenters
+	const presenters = usePresenters()
 
 	return (
 		<>
