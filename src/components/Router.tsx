@@ -2,11 +2,17 @@ import { Routes, Route } from "react-router-dom"
 import Presenters from "../pages/Presenter/PresenterRouter"
 import Talks from "../pages/Talk/TalkRouter"
 import StagePage from '../pages/Stage/Stage'
+import Home from "../pages/Home/Home"
+import Reception from "../pages/Reception/Reception"
 
 
 const Router = () =>{
 	return (
 		<Routes>
+			{/* Home */}
+			<Route index element={<Home />} />
+			{/* Reception */}
+			<Route path="/recepcio" element={<Reception />} />
 			{/* Stage */}
 			<Route path={"/stage/:stageId"} element={<StagePage />} />
 			<Route path={"/szekcio/:stageId"} element={<StagePage />} />

@@ -14,9 +14,13 @@ const Header = () => {
 	const stages = useStore().stages
 
 	const tabs = useMemo(() => [
+		{label: 'Aula', to: '/'},
+		{label: 'Recepció', to: '/recepcio'},
 		{label: 'Előadók', to: '/eloadok'},
 		{label: 'Előadások', to: '/eloadasok'},
-		...stages.map(stage => ({label: stage.name, to: `/szekcio/${stage.slug}`}))
+
+		...stages.map(stage => ({label: stage.name, to: `/szekcio/${stage.slug}`})),
+		{label: 'ITMP Klub Cafe', to: '/itmp-klub-cafe'},
 	], [stages])
 
 	
