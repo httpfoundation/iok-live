@@ -1,2 +1,2 @@
 
-export {default as ScheduleTimeCaption } from './StartingTime/ScheduleTimeCaption';
+export {default as ScheduleTimeCaption } from './ScheduleTimeCaption/ScheduleTimeCaption';
