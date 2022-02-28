@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom"
 import { usePresenterWithTalksByStage } from "../../Store"
-import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
+//import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
+import {ScheduleItem} from "../../components"
 
 export const SinglePresenter = () => {
 
