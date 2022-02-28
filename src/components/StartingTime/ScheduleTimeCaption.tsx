@@ -1,4 +1,4 @@
-import { styled } from '@mui/system';
+import { styled } from '@mui/system'
 
 const TimeDiv = styled('div')`
 	transition: all 0.2s ease-out;
