@@ -1,5 +1,5 @@
 import { useMemo } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useStore } from "../../Store"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 
@@ -30,7 +30,9 @@ export const SinglePresenter = () => {
 				<div key={stage.id}>
 					<h2>Szekció: {stage.name}</h2>
 					{ stage.schedule?.map(talk => (
-						<ScheduleItem key={talk.id} open talk={talk} />
+						<Link to={`/eloadasok/${talk.id}`}>
+							<ScheduleItem key={talk.id} open talk={talk} />
+						</Link>
 					))}
 				</div>
 			))}

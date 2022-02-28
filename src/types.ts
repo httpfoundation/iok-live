@@ -20,6 +20,7 @@ export type DatoTalk = {
 	speaker: {
 		id: number
 	}[]
+	stage?: DatoStage
 }
 
 export type DatoLanguage = {

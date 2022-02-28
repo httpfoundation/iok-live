@@ -9,12 +9,13 @@ import { useStore } from "../Store"
 
 const Header = () => {
 
-	const [activeTab, setActiveTab] = useState(0)
+	const [activeTab, setActiveTab] = useState<number|null>(0)
 
 	const stages = useStore().stages
 
 	const tabs = useMemo(() => [
 		{label: 'Előadók', to: '/eloadok'},
+		{label: 'Előadások', to: '/eloadasok'},
 		...stages.map(stage => ({label: stage.name, to: `/szekcio/${stage.slug}`}))
 	], [stages])
 
@@ -25,7 +26,7 @@ const Header = () => {
 
 	useEffect(() => {
 		const index = tabs.findIndex(tab => tab.to === location.pathname)
-		setActiveTab(index === -1 ? 0 : index)
+		setActiveTab(index === -1 ? null : index)
 	}, [location.pathname, tabs])
 
 

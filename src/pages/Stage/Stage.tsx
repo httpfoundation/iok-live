@@ -1,7 +1,7 @@
 import Grid from "@mui/material/Grid"
 import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import {  DatoStream } from "../../types"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import { useEffect, useMemo, useState } from "react"
@@ -55,7 +55,7 @@ const StagePage = () => {
 					onChange={(languageId) => setSelectedStream(stage?.streams?.find(stream => stream.language.id === languageId) ?? null)}
 					options={stage?.streams?.map(stream => stream.language) ?? []}
 				/>
-				{ stage?.schedule?.map(talk => <ScheduleItem open key={talk.id} talk={talk} />) }
+				{ stage?.schedule?.map(talk => <Link to={`/eloadasok/${talk.id}`}><ScheduleItem open key={talk.id} talk={talk} /></Link>) }
 			</Grid>
 		</Grid>
 	)

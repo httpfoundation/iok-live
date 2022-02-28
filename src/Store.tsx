@@ -1,15 +1,17 @@
-import { createContext, useContext } from "react"
-import { DatoStage, DatoSpeaker } from "./types"
+import { createContext, useContext, useMemo } from "react"
+import { DatoStage, DatoSpeaker, DatoTalk } from "./types"
 import useQuery from "./useQuery"
 
 export interface IStore {
 	stages: DatoStage[],
 	presenters: DatoSpeaker[],
+	talks: DatoTalk[]
 }
 
 export const Store = createContext<IStore>({
 	stages: [],
 	presenters: [],
+	talks: []
 })
 
 export const StoreProvider = (props: { children: React.ReactElement }) => {
@@ -59,14 +61,28 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 	  	}
 	`, [])
 
+	const talks = useMemo(() => {
+		const talks: DatoTalk[] = []
+		stages.forEach(stage => {
+			const stageTalks = stage?.schedule?.map(talk => ({
+				...talk,
+				stage: {
+					...stage,
+					schedule: undefined
+				}
+			})) ?? []
+			talks.push(...stageTalks)
+		})
+		return talks
+	}, [stages])
+
 	const store = {
 		stages,
 		presenters,
+		talks
 	}
 
-	return (
-		<Store.Provider value={store}>{props.children}</Store.Provider>
-	)
+	return <Store.Provider value={store}>{props.children}</Store.Provider>
 }
 
 export const useStore = () => {
