@@ -2,55 +2,24 @@ import Grid from "@mui/material/Grid"
 import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
 import { useParams } from "react-router-dom"
-import useQuery from "../../useQuery"
-import { DatoStage, DatoStream } from "../../types"
+import {  DatoStream } from "../../types"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { LanguageSelect } from "../../components"
+import { useStore } from "../../Store"
 
 const StagePage = () => {
 
 	const { stageId } = useParams()
-
-	const [stage] = useQuery<DatoStage>(`
-		{
-			stage(filter: {slug: {eq: "${stageId}"}}) {
-				id
-				name
-				streams {
-					id
-					name
-					youtubeVideoId
-					language {
-						id
-						name
-						slug
-						image {
-							url
-						}
-					}
-				}
-				schedule {
-					id
-					title
-					start
-					speaker {
-						id
-						name
-						title
-						company
-						image {
-							url
-						}
-					}
-				}
-			}
-	  	}
-	`, {} as DatoStage)
+	
+	const store = useStore()
+	
+	const stage = useMemo(() => store.stages.find(s => s.slug === stageId), [stageId, store.stages])
 
 	const [selectedStream, setSelectedStream] = useState<DatoStream| null>(null)
 
 	useEffect(() => {
+		// TODO: Keep language preference
 		if (!stage?.streams?.find(stream => stream.id === selectedStream?.id)) setSelectedStream(stage?.streams?.length ? stage?.streams[0] : null)
 	}, [selectedStream?.id, stage])
 
@@ -79,7 +48,7 @@ const StagePage = () => {
 			</Grid>
 			<Grid item xs md sx={{px: 3}} className="sidebar">
 				<h1>
-					{stage.name}
+					{stage?.name}
 				</h1>
 				<LanguageSelect
 					value={selectedStream?.language.id ?? null}

@@ -5,17 +5,21 @@ import CssBaseline from '@mui/material/CssBaseline'
 import { BrowserRouter } from "react-router-dom"
 import Main from '../components/Main'
 import Header from '../components/Header'
+import { StoreProvider } from '../Store'
 
 
 const App = () => {
+
 	return (
 		<ThemeProvider theme={theme}>
-			<BrowserRouter>
-				<CssBaseline />
-				
-				<Header />
-				<Main />
-  			</BrowserRouter>
+			<StoreProvider>
+				<BrowserRouter>
+					<CssBaseline />
+					
+					<Header />
+					<Main />
+				</BrowserRouter>
+			</StoreProvider>
 		</ThemeProvider>
 	)
 }

@@ -3,26 +3,31 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import useQuery from '../useQuery'
-import { DatoStage } from '../types'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { useStore } from "../Store"
 
 const Header = () => {
 
 	const [activeTab, setActiveTab] = useState(0)
 
-	//const stages = useApi<Stage[]>(useCallback(() => Api.Event.id(1).Stage.findAll(), []), [])
+	const stages = useStore().stages
 
-	const [stages] = useQuery<DatoStage[]>(`
-		query {
-			allStages(orderBy: [order_ASC]) {
-				id
-				name
-				slug
-			}
-		}
-	`, [])
+	const tabs = useMemo(() => [
+		{label: 'Előadók', to: '/eloadok'},
+		...stages.map(stage => ({label: stage.name, to: `/szekcio/${stage.slug}`}))
+	], [stages])
+
+	
+	
+	/* Set active tab on initial load and on navigation based on current location */
+	const location = useLocation()
+
+	useEffect(() => {
+		const index = tabs.findIndex(tab => tab.to === location.pathname)
+		setActiveTab(index === -1 ? 0 : index)
+	}, [location.pathname, tabs])
+
 
 	return (<AppBar position="fixed" sx={{
 		zIndex: theme => theme.zIndex.drawer + 1
@@ -33,13 +38,8 @@ const Header = () => {
 				IOK 2022
 			</Typography>
 
-			<Tabs value={activeTab} onChange={(e,v) => setActiveTab(v)} sx={{ flexGrow: 1, height: 64 }} centered>
-				{/* Static tabs */}
-				<Tab label={"Előadók"} sx={{height: 64}} component={Link}  to={`/eloadok`} />
-
-
-				{/* Dynamic tabs for stages */}
-				{stages.map(stage => <Tab key={stage.id} label={stage.name} sx={{height: 64}} component={Link}  to={`/szekcio/${stage.slug}`} />)}
+			<Tabs value={activeTab} sx={{ flexGrow: 1, height: 64 }} centered>
+				{tabs.map((tab, index) => <Tab key={index} label={tab.label} sx={{height: 64}} component={Link}  to={tab.to} />)}
 			</Tabs>
 		</Toolbar>
 	</AppBar>)
