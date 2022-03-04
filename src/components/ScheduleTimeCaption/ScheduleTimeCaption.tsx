@@ -3,11 +3,11 @@ import { styled } from '@mui/system'
 const TimeDiv = styled('div')`
 	transition: all 0.2s ease-out;
 	font-size: 0.75rem;
-	font-weight: 600;
-	color: rgba(255, 255, 255, 0.5);
+	font-weight: 700;
+	color: rgba(0, 0, 0, 0.5);
 	svg {
 		transition: all 0.2s ease-out;
-		fill: rgba(255, 255, 255, 0.5);
+		fill: rgba(0, 0, 0, 0.5);
 		height: 15px;
 		transform: translateY(2.5px);
 		margin-right: 8px;

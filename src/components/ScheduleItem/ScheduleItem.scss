@@ -4,7 +4,7 @@
 	padding: 10px;
 	height: auto;
 	border-radius: 40px;
-	color: #fff;
+	color: rgb(0, 0, 0);
 	/*
 	@include mobile {
 		height: auto;
@@ -36,7 +36,7 @@
 		transition: all 0.2s ease-out;
 		display: inline-block;
 		padding-left: 20px;
-		width: calc(100% - 200px);
+		width: calc(100% - 70px);
 		/*
 		@include mobile {
 			width: calc(100% - 70px);
@@ -59,7 +59,7 @@
 		transition: all 0.2s ease-out;
 		font-size: 0.75rem;
 		font-weight: 500;
-		color: rgba(255, 255, 255, 0.5);
+		color: rgba(0, 0, 0, 0.5);
 	}
 
 	.description {
@@ -75,7 +75,7 @@
 	}
 
 	&:hover {
-		background-color: rgba(0, 0, 0, 0.6);
+		background-color: rgba(0, 0, 0, 0.1);
 	}
 	
 	&.open {

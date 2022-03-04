@@ -1,12 +1,12 @@
 import { PageContainer } from "../../components"
 import PageTitle from "../../components/PageTitle"
 
-const Reception = () => {
+const Sponsors = () => {
 	return (
 		<PageContainer>
-			<PageTitle>Recepció</PageTitle>
+			<PageTitle>Támogatóink</PageTitle>
 		</PageContainer>
 	)
 }
 
-export default Reception
+export default Sponsors

@@ -6,18 +6,24 @@ html, body {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	
+}
+* {
+	letter-spacing: normal;
+	line-height: 1.5;
 }
 /* * {
 	font-family: 'Roboto', sans-serif;
 	box-sizing: border-box;
 }
- */
+*/
 * {
 	font-family: 'Spartan', sans-serif;
 	box-sizing: border-box;
 }
-
+a {
+	text-decoration: none;
+	color: inherit;
+}
 .MuiTabs-indicator {
 	height: 4px !important;
 	border-top-left-radius: 4px;

@@ -1,39 +1,44 @@
 import { Box } from "@mui/material"
 import  Link  from "../../components/Link"
-import { PageTitle } from "../../components"
+import { PageContainer, PageTitle } from "../../components"
 import { usePresenters } from "../../Store"
+import "./Presenters.scss"
+
+const PresenterCard = (props) => {
+    return (
+		<div className="presenter-card" style={props.style ? props.style : {}}>
+			<div className="presenter-wrapper">
+				<div className="presenter-img" style={{ backgroundImage: "url('" + props.imageUrl + "')"}}></div>
+				<div className="presenter-name-mobile">
+					<div className="name">{props.name}</div>
+					<div className="title">{props.title}, {props.company}</div>
+				</div>
+			</div>
+		</div>
+    );
+};
 
 export const AllPresenters = () => {
 
 	const presenters = usePresenters()
 
 	return (
-		<>
+		<PageContainer>
 			<PageTitle>Előadóink</PageTitle>
 		
-			<div>
-				{presenters?.map(presenter => (
-					<div key={presenter.id}>
-						<Link to={`${presenter.slug}`}>
-							<Box p={2}
-								sx={{
-									width: 300,
-									'&:hover': {
-										backgroundColor: 'secondary.main',
-										opacity: [0.9, 0.8, 0.7],
-									},
-								}}
-							>
-								<img style={{ height: '270px', width: "270px" }} src={presenter.image?.url} alt={presenter.name} />
-								<div>
-									<span>{presenter.name}</span>
-									<span>{presenter.title}, {presenter.company}</span>
-								</div>
-							</Box>
-						</Link>
-					</div>
+			<div className="presenters-grid small">
+				{presenters?.map((presenter, index) => (
+					<Link to={`/eloadok/${presenter.slug}`}>
+						<PresenterCard
+								key={presenter.slug}
+								name={presenter.name}
+								title={presenter.title}
+								company={presenter.company}
+								imageUrl={presenter.image?.url}
+							/>
+					</Link>
 				))}
 			</div>
-		</>
+		</PageContainer>
 	)
 }

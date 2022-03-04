@@ -5,6 +5,7 @@ import StagePage from '../pages/Stage/Stage'
 import Home from "../pages/Home/Home"
 import Reception from "../pages/Reception/Reception"
 import BreakoutRoom from "../pages/BreakoutRoom/BreakoutRoom"
+import Sponsors from "../pages/Sponsors/Sponsors"
 
 
 const Router = () =>{
@@ -25,6 +26,7 @@ const Router = () =>{
 			<Route path="/eloadasok/*" element={<Talks />} />
 
 			<Route path="/itmp-klub-cafe" element={<BreakoutRoom />} />
+			<Route path="/tamogatok" element={<Sponsors />} />
 		</Routes>
 	)
 }

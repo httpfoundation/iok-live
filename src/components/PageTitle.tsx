@@ -1,9 +1,9 @@
-import { Typography } from "@mui/material"
+import { styled, Typography } from "@mui/material"
 
 const PageTitle = (props) => {
 	return (
 		<>
-			<Typography variant="h2">{props.children}</Typography>
+			<Typography variant="h1" sx={{textAlign: 'center', m: 4, fontSize: 45}}>{props.children}</Typography>
 		</>
 	)
 }

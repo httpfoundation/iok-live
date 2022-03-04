@@ -22,7 +22,7 @@ const LanguageSelect = (props: {
 	return (
 		<>
 			{options?.map(option => <Chip
-					sx={{mr: 1}}
+					sx={{mr: 1, fontSize: '0.8rem', fontFamily: 'sans-serif', fontWeight: value === option.id ? '700' : '600', '>span': {transform: "translateY(1px)"}}}
 					variant={value === option.id ? "filled" : "outlined"}
 					avatar={option.image?.url ? <Avatar alt={option.name} src={option.image?.url} /> : undefined}
 					key={option.id}

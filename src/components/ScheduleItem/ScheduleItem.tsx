@@ -1,5 +1,5 @@
 import { DatoSpeaker } from "../../types"
-import "./ScheduleItem.scss"
+//import "./ScheduleItem.scss"
 import { styled } from '@mui/system'
 import { ScheduleTimeCaption } from ".."
 import { useTalk } from "../../Store"
@@ -7,6 +7,7 @@ import { useTalk } from "../../Store"
 /* Egy napirendi pont komponense */
 
 const TalkTitle = styled('div')`
+		color: #000;
 		transition: all 0.2s ease-out;
 		font-size: 1.1rem;
 		font-weight: 700;
@@ -16,7 +17,7 @@ const SpeakerCaption = styled('div')`
 		transition: all 0.2s ease-out;
 		font-size: 0.75rem;
 		font-weight: 500;
-		color: rgba(255, 255, 255, 0.5);`
+		color: rgba(0, 0, 0, 0.5);`
 
 const Description = styled('div')`
 		transition: all 0.2s ease-out;
@@ -47,11 +48,7 @@ const Speakers = (props: {speakers: DatoSpeaker[] | undefined}) => {
 	)	
 }
 
-const SpeakerImage = (props: {speaker: DatoSpeaker, key: number, counter: number} ) => {
-	const speakerImageUrl = props.speaker.image?.url
-	const {counter} = props
-	console.log("tr", counter)
-	const SpeakerImageDiv = styled('div')`
+const SpeakerImage = styled('div')( (props: {counter: number, speaker: DatoSpeaker}) => `
 		width: 100%;
 		transition: all 0.2s ease-out;
 		background-size: cover;
@@ -59,13 +56,9 @@ const SpeakerImage = (props: {speaker: DatoSpeaker, key: number, counter: number
 		border-radius: 100%;
 		aspect-ratio: 1;
 		align-self: center;
-		background-image: url(${speakerImageUrl});
-		transform: translateY(${counter*(-7)}px);
-	`	
-	return (
-		<SpeakerImageDiv />
-	)
-}
+		background-image: url(${props.speaker.image?.url});
+		transform: translateY(${props.counter*(-7)}px);
+`)
 
 const SpeakersImages = (props: {speakers: DatoSpeaker[] | undefined}) => {
 	const { speakers } = props
@@ -96,9 +89,20 @@ const ScheduleItemContent = styled('div')`
 	transition: all 0.2s ease-out;
 	display: inline-block;
 	padding-left: 20px;
-	width: calc(100% - 200px);
+	width: calc(100% - 70px);
 	vertical-align: top;
-	`
+`
+
+const ScheduleItemContainer = styled('div')`
+	margin: 15px 0;
+	transition: all 0.2s ease-out;
+	padding: 10px;
+	border-radius: 40px;
+	cursor: pointer;
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.1);
+	}
+`
 
 
 const ScheduleItem = (props: {
@@ -106,18 +110,11 @@ const ScheduleItem = (props: {
 	//talk: DatoTalk,
 	talkId: number
 }) => {
-	const double = false
-
-	//const { talk } = props
-
 	const talk = useTalk(props.talkId)
 	
 
 	return (
-		<div
-			className={`shcedule-item ${props.open ? "open" : ""} ${double ? "double-presenter" : ""}`}
-			//onClick={props.onClick}
-		>
+		<ScheduleItemContainer>
 			<SpeakersImages speakers={talk?.speakers} /> 
 			<ScheduleItemContent>
 				<ScheduleTimeCaption date={talk?.start} />
@@ -125,7 +122,7 @@ const ScheduleItem = (props: {
 				<Speakers speakers={talk?.speakers} />
 				<Abstract abstract={talk?.description} />
 			</ScheduleItemContent>
-		</div>
+		</ScheduleItemContainer>
 	)
 }
 

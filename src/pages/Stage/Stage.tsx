@@ -14,12 +14,14 @@ const StagePage = () => {
 	
 	const stage = useStage(stageId)
 
-	const [selectedStream, setSelectedStream] = useState<DatoStream| null>(null)
+	const [selectedStreamId, setSelectedStreamId] = useState<number | null>(null)
 
 	useEffect(() => {
 		// TODO: Keep language preference
-		if (!stage?.streams?.find(stream => stream.id === selectedStream?.id)) setSelectedStream(stage?.streams?.length ? stage?.streams[0] : null)
-	}, [selectedStream?.id, stage])
+		if (!stage?.streams?.find(stream => stream.id === selectedStreamId)) setSelectedStreamId(stage?.streams?.length ? stage?.streams[0].id : null)
+	}, [stage])
+
+	const selectedStream = stage?.streams?.find(stream => stream.id === selectedStreamId)
 
 
 	return (
@@ -35,11 +37,12 @@ const StagePage = () => {
 							hl: 'hu',
 							//modestbranding: 1,
 							rel: 0,
-							color: 'red',
+							color: 'white',
 							controls: 1,
 							showinfo: 0,
 							loop: 1,
 							origin: window.location.origin,
+
 						}
 					}}
 				/> : <h1>No stream</h1>}
@@ -50,7 +53,7 @@ const StagePage = () => {
 				</h1>
 				<LanguageSelect
 					value={selectedStream?.language.id ?? null}
-					onChange={(languageId) => setSelectedStream(stage?.streams?.find(stream => stream.language.id === languageId) ?? null)}
+					onChange={(languageId) => setSelectedStreamId(stage?.streams?.find(stream => stream.language.id === languageId)?.id ?? null)}
 					options={stage?.streams?.map(stream => stream.language) ?? []}
 				/>
 				{ stage?.schedule?.map(talk => <Link to={`/eloadasok/${talk.id}`}><ScheduleItem open key={talk.id} talkId={talk.id} /></Link>) }
