@@ -3,7 +3,7 @@ import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
 import { Link, useParams } from "react-router-dom"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
-import { Suspense, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { LanguageSelect } from "../../components"
 import { useStage } from "../../Store"
 import { Box } from "@mui/system"
@@ -97,7 +97,7 @@ const StagePage = () => {
 							{ stage?.schedule?.map(talk => <Link to={`/eloadasok/${talk.id}`}><ScheduleItem open key={talk.id} talkId={talk.id} /></Link>) }
 						</Box>}
 						{ selectedTab === 2 && selectedStream && 
-						<Box sx={{position: "relative", flex: 1, height: '100%', overflowY: 'hidden'}}>
+						<Box sx={{position: "relative", flex: 1, height: '100%', overflowY: 'hidden', minHeight: '500px'}}>
 							<Box sx={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}><CircularProgress sx={{zIndex: 100}} color="secondary" /></Box>
 							<iframe key={selectedStream?.youtubeVideoId} title="chat" style={{position: 'relative', width: '100%', height: '100%'}} allowFullScreen frameBorder="0" src={`https://www.youtube.com/live_chat?v=${selectedStream?.youtubeVideoId}&embed_domain=${embedDomain}&dark_theme=0`}></iframe>
 						</Box>}
