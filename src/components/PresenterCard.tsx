@@ -19,7 +19,7 @@ const PresenterWrapper = styled('div')(({ theme }) => `
 const PresenterCardImage = styled('img')(({ theme }) => `
 	width: 100%;
 	height: auto;
-	aspact-ratio: 1;
+	aspect-ratio: 1;
 `)
 
 const PresenterDetails = styled('div')(({ theme }) => `
@@ -45,7 +45,7 @@ const PresenterCard = (props: {presenter: DatoSpeaker}) => {
 	return (
 		<Link to={`/eloadok/${presenter.slug}`}>
 		<PresenterWrapper>
-			<PresenterCardImage src={props.presenter.image?.url} />
+			<PresenterCardImage src={props.presenter.image?.url} alt={presenter.name} />
 			<PresenterDetails>
 				<PresenterName>{presenter.name}</PresenterName>
 				<PresenterTitle>{presenter.title}, {presenter.company}</PresenterTitle>
@@ -55,9 +55,16 @@ const PresenterCard = (props: {presenter: DatoSpeaker}) => {
 	)
 }
 
-export const PresenterGrid = styled('div')`
+export const PresenterGrid = styled('div')(({ theme }) => `
 	display: grid;
-	grid-template-columns: repeat(6, 1fr);
+	grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 30px;
-`
+	max-width: 100%;
+	${theme.breakpoints.up('sm')} {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+	${theme.breakpoints.up('lg')} {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+	}
+`)
 export default PresenterCard

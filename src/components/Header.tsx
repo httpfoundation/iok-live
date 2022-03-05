@@ -48,8 +48,8 @@ const Header = () => {
 				<List>
 					{menuItems.map((menuItem, index) => {
 
-						if (menuItem.divider && menuItem.label) return <ListSubheader>{menuItem.icon ?? null}{menuItem.label}</ListSubheader>
-						if (menuItem.divider) return <Divider />
+						if (menuItem.divider && menuItem.label) return <ListSubheader key={index}>{menuItem.icon ?? null}{menuItem.label}</ListSubheader>
+						if (menuItem.divider) return <Divider key={index} />
 						const selected = menuItem.to === location.pathname
 						return (
 							<ListItemButton selected={selected} key={index} component={Link} to={menuItem.to} onClick={() => setDrawerOpen(false)}>
