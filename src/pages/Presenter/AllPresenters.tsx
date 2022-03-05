@@ -1,21 +1,6 @@
-import  Link  from "../../components/Link"
 import { PageContainer, PageTitle } from "../../components"
 import { usePresenters } from "../../Store"
-import "./Presenters.scss"
-
-const PresenterCard = (props: {style?: any, imageUrl?: string, name: string, title: string, company: string}) => {
-    return (
-		<div className="presenter-card" style={props.style ? props.style : {}}>
-			<div className="presenter-wrapper">
-				<div className="presenter-img" style={{ backgroundImage: "url('" + props.imageUrl + "')"}}></div>
-				<div className="presenter-name-mobile">
-					<div className="name">{props.name}</div>
-					<div className="title">{props.title}, {props.company}</div>
-				</div>
-			</div>
-		</div>
-    )
-}
+import PresenterCard, { PresenterGrid } from "../../components/PresenterCard"
 
 export const AllPresenters = () => {
 
@@ -24,20 +9,12 @@ export const AllPresenters = () => {
 	return (
 		<PageContainer>
 			<PageTitle>Előadóink</PageTitle>
-		
-			<div className="presenters-grid small">
-				{presenters?.map((presenter, index) => (
-					<Link to={`/eloadok/${presenter.slug}`}>
-						<PresenterCard
-								key={presenter.slug}
-								name={presenter.name}
-								title={presenter.title}
-								company={presenter.company}
-								imageUrl={presenter.image?.url}
-							/>
-					</Link>
+
+			<PresenterGrid>
+				{presenters.map((presenter, index) => (
+					<PresenterCard presenter={presenter} key={index} />
 				))}
-			</div>
+			</PresenterGrid>
 		</PageContainer>
 	)
 }
