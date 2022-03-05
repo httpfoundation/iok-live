@@ -1,8 +1,7 @@
-import Grid from "@mui/material/Grid"
+import { Grid } from "@mui/material"
 import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
 import { Link, useParams } from "react-router-dom"
-import {  DatoStream } from "../../types"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import { useEffect, useState } from "react"
 import { LanguageSelect } from "../../components"
@@ -19,6 +18,7 @@ const StagePage = () => {
 	useEffect(() => {
 		// TODO: Keep language preference
 		if (!stage?.streams?.find(stream => stream.id === selectedStreamId)) setSelectedStreamId(stage?.streams?.length ? stage?.streams[0].id : null)
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [stage])
 
 	const selectedStream = stage?.streams?.find(stream => stream.id === selectedStreamId)

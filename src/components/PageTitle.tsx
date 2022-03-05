@@ -1,4 +1,4 @@
-import { styled, Typography } from "@mui/material"
+import { Typography } from "@mui/material"
 
 const PageTitle = (props) => {
 	return (

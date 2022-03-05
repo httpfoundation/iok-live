@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { useStages } from "../../Store"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import { PageContainer, PageTitle } from "../../components"
-import Container from "@mui/material/Container"
+import { Container } from "@mui/material"
 
 export const AllTalks = () => {
 

@@ -1,7 +1,4 @@
-import { Link as ReactRouterLink } from "react-router-dom"
 import { useStages } from "../../Store"
-import Typography from '@mui/material/Typography'
-import Link from '../../components/Link'
 import { PageContainer, PageTitle } from "../../components"
 
 const Home = () => {

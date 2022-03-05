@@ -1,4 +1,4 @@
-import Box from "@mui/material/Box"
+import { Box } from '@mui/material'
 
 const PageContainer = (props: { children: React.ReactElement|React.ReactElement[] }) => {
 	return (
