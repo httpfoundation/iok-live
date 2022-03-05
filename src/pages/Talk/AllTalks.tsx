@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useStages } from "../../Store"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import { PageContainer, PageTitle } from "../../components"
+import Container from "@mui/material/Container"
 
 export const AllTalks = () => {
 
@@ -10,7 +11,7 @@ export const AllTalks = () => {
 	return (
 		<PageContainer>
 			<PageTitle>Előadások</PageTitle>
-			<div>
+			<Container>
 				{stages?.map(stage => (
 					<div key={stage.id}>
 						<h2>Szekció: <Link to={`/szekcio/${stage.slug}`}>{stage.name}</Link></h2>
@@ -21,7 +22,7 @@ export const AllTalks = () => {
 						))}
 					</div>
 				))}
-			</div>
+			</Container>
 		</PageContainer>
 	)
 }

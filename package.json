@@ -23,6 +23,7 @@
     "https-browserify": "^1.0.0",
     "os-browserify": "^0.3.0",
     "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
     "prop-types": "15.7.2",
     "querystring-es3": "^0.2.1",
     "react": "17.0.2",
@@ -59,6 +60,8 @@
     ]
   },
   "devDependencies": {
+    "babel-plugin-import": "^1.13.3",
+    "customize-cra": "^1.0.0",
     "gh-pages": "^3.2.3",
     "react-app-rewired": "^2.2.1",
     "shx": "^0.3.4"

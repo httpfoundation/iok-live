@@ -55,8 +55,8 @@ const Header = () => {
 	const menuItems = useMemo<(({label: string, to: string, icon: React.ReactElement | null, divider?: false, live?: boolean}|{divider: true, label?: string})[])>(() => [
 		{label: 'Aula', to: '/', icon: <HomeIcon />},
 		{label: 'Recepció', to: '/recepcio', icon: <HomeIcon />},
-		{label: 'Előadók', to: '/eloadok', icon: <PeopleIcon />},
 		{label: 'Program', to: '/eloadasok', icon: <EventNoteIcon />},
+		{label: 'Előadók', to: '/eloadok', icon: <PeopleIcon />},
 		{label: 'ITMP Klub Cafe', to: '/itmp-klub-cafe', icon: <CoffeeIcon />},
 		{label: 'Támogatók', to: '/tamogatok', icon: <StarIcon />},
 		{divider: true},
@@ -80,7 +80,7 @@ const Header = () => {
 				<List>
 					{menuItems.map((menuItem, index) => {
 
-						if (menuItem.divider && menuItem.label) return <ListSubheader>{menuItem.label}</ListSubheader>
+						if (menuItem.divider && menuItem.label) return <ListSubheader><LiveTvIcon sx={{mr: 1, transform: 'translateY(4px)', color: 'rgba(0, 0, 0, 0.4)'}} />{menuItem.label}</ListSubheader>
 						if (menuItem.divider) return <Divider />
 						const selected = menuItem.to === location.pathname
 						return (

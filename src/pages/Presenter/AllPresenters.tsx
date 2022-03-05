@@ -15,8 +15,8 @@ const PresenterCard = (props) => {
 				</div>
 			</div>
 		</div>
-    );
-};
+    )
+}
 
 export const AllPresenters = () => {
 
