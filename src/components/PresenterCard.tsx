@@ -11,6 +11,7 @@ const PresenterWrapper = styled('div')(({ theme }) => `
 	overflow: hidden;
 	transition: all .2s ease-in-out;
 	cursor: pointer;
+	background-color: #fff;
 	&:hover {
 		transform: scale(1.08);
 	}

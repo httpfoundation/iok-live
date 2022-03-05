@@ -38,6 +38,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 					id
 					title
 					start
+					description
 					speaker {
 						id
 					}

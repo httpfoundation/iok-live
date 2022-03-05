@@ -12,7 +12,7 @@ export const theme = createTheme({
 		},
 		info: {
 		  main: '#14475c',
-		},
+		}
 	},
 	typography: {
 		//fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -21,7 +21,7 @@ export const theme = createTheme({
 		fontWeightLight: 300,
 		fontWeightRegular: 400,
 		fontWeightMedium: 500,
-		// PageTitle
+
 		h1: {
 			fontSize: '45px',
 			fontWeight: 700,
@@ -29,9 +29,6 @@ export const theme = createTheme({
 		h6: {
 			fontSize: '18px',
 			fontWeight: 400,
-		},
-		body1: {
-			fontWeight: 500,
 		}
 
 	},
