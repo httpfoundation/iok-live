@@ -1,7 +1,7 @@
 import { LiveTv as LiveTvIcon, AccessTime as TimeIcon } from "@mui/icons-material"
 import { Chip, Stack, Tooltip } from "@mui/material"
 import { Link, useParams } from "react-router-dom"
-import { PageContainer, PageTitle, Paragraph, ScheduleTimeCaption } from "../../components"
+import { PageContainer, PageTitle, Paragraph } from "../../components"
 import PresenterCard, { PresenterGrid } from "../../components/PresenterCard"
 import { useTalk } from "../../Store"
 

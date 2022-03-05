@@ -3,6 +3,7 @@ import { DatoSpeaker } from "../../types"
 import { styled } from '@mui/system'
 import { ScheduleTimeCaption } from ".."
 import { useTalk } from "../../Store"
+import { Link } from "react-router-dom"
 
 /* Egy napirendi pont komponense */
 
@@ -99,30 +100,34 @@ const ScheduleItemContainer = styled('div')`
 	padding: 10px;
 	border-radius: 40px;
 	cursor: pointer;
+	/* box-shadow: 0 0rem 1rem rgba(0,0,0,0.12); */
 	&:hover {
-		background-color: rgba(0, 0, 0, 0.1);
+		background-color: rgba(0, 0, 0, 0.07);
+		/* box-shadow: 0 0rem 1rem rgba(0,0,0,0.2);
+		transform: scale(1.03); */
 	}
 `
 
 
 const ScheduleItem = (props: {
 	open: boolean,
-	//talk: DatoTalk,
 	talkId: number
 }) => {
 	const talk = useTalk(props.talkId)
 	
 
 	return (
-		<ScheduleItemContainer>
-			<SpeakersImages speakers={talk?.speakers} /> 
-			<ScheduleItemContent>
-				<ScheduleTimeCaption date={talk?.start} />
-				<TalkTitle>{talk?.title}</TalkTitle>
-				<Speakers speakers={talk?.speakers} />
-				<Abstract abstract={talk?.description} />
-			</ScheduleItemContent>
-		</ScheduleItemContainer>
+		<Link to={`/eloadasok/${talk.id}`}>
+			<ScheduleItemContainer>
+				<SpeakersImages speakers={talk?.speakers} /> 
+				<ScheduleItemContent>
+					<ScheduleTimeCaption date={talk?.start} />
+					<TalkTitle>{talk?.title}</TalkTitle>
+					<Speakers speakers={talk?.speakers} />
+					<Abstract abstract={talk?.description} />
+				</ScheduleItemContent>
+			</ScheduleItemContainer>
+		</Link>
 	)
 }
 

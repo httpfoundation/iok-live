@@ -15,11 +15,7 @@ export const AllTalks = () => {
 				{stages?.map(stage => (
 					<div key={stage.id}>
 						<h2>Szekció: <Link to={`/szekcio/${stage.slug}`}>{stage.name}</Link></h2>
-						{ stage.schedule?.map((talk, index) => (
-							<Link to={`${talk.id}`} key={index}>
-								<ScheduleItem open talkId={talk.id} />
-							</Link>
-						))}
+						{ stage.schedule?.map((talk, index) => <ScheduleItem open talkId={talk.id} key={index} />)}
 					</div>
 				))}
 			</Container>
