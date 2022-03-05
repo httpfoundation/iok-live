@@ -21,13 +21,12 @@ export const theme = createTheme({
 		fontWeightLight: 300,
 		fontWeightRegular: 400,
 		fontWeightMedium: 500,
+		// PageTitle
 		h1: {
-			fontFamily: '"Spartan", sans-serif',
-			fontSize: '32px',
+			fontSize: '45px',
 			fontWeight: 700,
 		},
 		h6: {
-			fontFamily: '"Spartan", sans-serif',
 			fontSize: '18px',
 			fontWeight: 400,
 		},

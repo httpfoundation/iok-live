@@ -1,11 +1,11 @@
-import { Typography } from "@mui/material"
+import { Typography, TypographyProps } from "@mui/material"
+import { styled } from '@mui/material/styles'
+import React from "react"
 
-const PageTitle = (props) => {
-	return (
-		<>
-			<Typography variant="h1" sx={{textAlign: 'center', m: 4, fontSize: 45}}>{props.children}</Typography>
-		</>
-	)
-}
+const PageTitleStyled = styled(Typography)<TypographyProps>(({theme}) => `
+	text-align: center;
+	margin: ${theme.spacing(3)} 0;
+`)
 
+const PageTitle = (props: {children: React.ReactElement|string}) => <PageTitleStyled variant="h1">{props.children}</PageTitleStyled>
 export default PageTitle

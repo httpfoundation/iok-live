@@ -3,7 +3,7 @@ import { PageContainer, PageTitle } from "../../components"
 import { usePresenters } from "../../Store"
 import "./Presenters.scss"
 
-const PresenterCard = (props) => {
+const PresenterCard = (props: {style?: any, imageUrl?: string, name: string, title: string, company: string}) => {
     return (
 		<div className="presenter-card" style={props.style ? props.style : {}}>
 			<div className="presenter-wrapper">
