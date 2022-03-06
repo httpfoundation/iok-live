@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.13549e92.css",
-    "main.js": "/static/js/main.98a6269e.js",
+    "main.js": "/static/js/main.563cd98e.js",
     "static/js/953.91022935.chunk.js": "/static/js/953.91022935.chunk.js",
     "static/css/245.7bfb5ed4.chunk.css": "/static/css/245.7bfb5ed4.chunk.css",
     "static/js/245.1dd4380c.chunk.js": "/static/js/245.1dd4380c.chunk.js",
@@ -37,19 +37,18 @@
     "static/media/4a5e2b76.woff2": "/static/media/4a5e2b76.7cd4b91de4ff11c4f1d5.woff2",
     "static/media/521bbff9.woff2": "/static/media/521bbff9.2153ecb1d92dc56d6f94.woff2",
     "static/media/iokcafe.png": "/static/media/iokcafe.3c1cbe7341ccc96e9715.png",
-    "static/media/valami.png": "/static/media/valami.8d7ded48b216ec24e5d8.png",
     "static/media/nagyeloado.png": "/static/media/nagyeloado.94bd7ab6ef9ce3e5d797.png",
     "static/media/szekcio2.png": "/static/media/szekcio2.cb35daa7e91aa75abccf.png",
     "static/media/szekcio1.png": "/static/media/szekcio1.37c26cea879b0ea9e266.png",
     "index.html": "/index.html",
     "main.13549e92.css.map": "/static/css/main.13549e92.css.map",
-    "main.98a6269e.js.map": "/static/js/main.98a6269e.js.map",
+    "main.563cd98e.js.map": "/static/js/main.563cd98e.js.map",
     "953.91022935.chunk.js.map": "/static/js/953.91022935.chunk.js.map",
     "245.7bfb5ed4.chunk.css.map": "/static/css/245.7bfb5ed4.chunk.css.map",
     "245.1dd4380c.chunk.js.map": "/static/js/245.1dd4380c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.13549e92.css",
-    "static/js/main.98a6269e.js"
+    "static/js/main.563cd98e.js"
   ]
 }
