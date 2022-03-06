@@ -1,39 +1,36 @@
 import { PageContainer } from "../../components"
 import PageTitle from "../../components/PageTitle"
-import { Grid, Box } from "@mui/material"
+import { Grid, Box, Container } from "@mui/material"
 import {DashboardItem} from "../../components/Dashboard"
-import recepcio from "../../assets/images/recepcio.png"
-import valami from "../../assets/images/valami.png"
+import iokCafe from "../../assets/images/iokcafe.png"
 
 
 const Reception = () => {
 	return (
-		<PageContainer container>
-			<PageTitle>Recepció</PageTitle>
-			<DashBoard />
+		<PageContainer>
+            <Container>
+                <PageTitle>Recepció</PageTitle>
+                <DashBoard />
+            </Container>			
 		</PageContainer>
 	)
 }
 
 const DashBoard = () => {
+    const size="xl"
+    const xs = 12
+    const xl = 3
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} lg={3}>
-                    <DashboardItem caption="Köszöntő" img={valami} to="/eloadasok" xs={12} />
-					<DashboardItem caption="Programfüzet" img={valami} to="/eloadok" xs={12} />
-					<DashboardItem caption="Előadók" img={valami} to="/szekcio/digitalis-kultura" xs={12} />
-                </Grid>
-                <Grid item xs={12} lg={6} container direction="row" justifyContent="center" alignItems="center">
-					<DashboardItem caption="Recepció" img={recepcio} imgWidth="350px" to="#" xs={12} />
-				</Grid>
-                <Grid item xs={12} lg={3}>
-                    <DashboardItem caption="Támogatók" img={valami} to="/tamogatok" xs={12} />
-					<DashboardItem caption="Értékelő űrlap" img={valami} to="#" xs={12} />
-					<DashboardItem caption="Kapcsolat" img={valami} to="#" xs={12} />
-                </Grid>                
-            </Grid>
-        </Box>
+        <Grid container spacing={2}>
+            <DashboardItem caption="Köszöntő" img={iokCafe} to="#" xs={xs} xl={xl} size="xl" title="Köszöntő"/>
+            <DashboardItem caption="Programfüzet" img={iokCafe} to="/eloadasok" xs={xs} xl={xl} size={size} corner="bl"/>
+            <DashboardItem caption="Előadók" img={iokCafe} to="/eloadok" xs={xs} xl={xl} size={size} corner="br" />
+            <DashboardItem caption="Támogatók" img={iokCafe} to="/tamogatok" xs={xs} xl={xl} size={size} corner="bl"/>
+            <DashboardItem caption="Értékelő úrlap" img={iokCafe} to="#" xs={xs} xl={xl} size={size} corner="tr"/>
+            <DashboardItem xs={xs} xl={xl} empty/>
+            <DashboardItem caption="Kapcsolat" img={iokCafe} to="#" xs={xs} xl={xl} size={size} corner="tr"/>
+            <DashboardItem caption="Recepció" img={iokCafe} to="/" xs={xs} xl={xl} size={size} corner="tl"/>
+        </Grid>
     )
 }
 

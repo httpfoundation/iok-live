@@ -1,7 +1,6 @@
 //import { useStages } from "../../Store"
 import { PageContainer, PageTitle } from "../../components"
-import { useStages } from "../../Store";
-import { Grid, Box } from "@mui/material";
+import { Grid, Container } from "@mui/material"
 
 import recepcio from "../../assets/images/recepcio.png"
 import nagyEloado from "../../assets/images/nagyeloado.png"
@@ -13,12 +12,13 @@ import {DashboardItem} from "../../components/Dashboard"
 
 
 const Home = () => {
-    const stages = useStages()
 
     return (
-        <PageContainer container>
-            <PageTitle>Üdvözlünk az IOK 2022 rendezvényünkön!!</PageTitle>
-            <DashBoard />
+        <PageContainer >
+            <Container>
+                <PageTitle>Üdvözlünk az IOK 2022 rendezvényünkön!</PageTitle>
+                <DashBoard />
+            </Container>
         </PageContainer>
     );
 };
@@ -28,26 +28,26 @@ export default Home
 
 
 const DashBoard = () => {
+    const size="xl"
+    const xs = 12
+    const xl = 3
+    
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-                <Grid item xs={12} lg={3}>
-                    <DashboardItem caption="Nagyelőadó" img={nagyEloado} to="/szekcio/plenaris" xs={12} />
-					<DashboardItem caption="1. szekcióterem" img={szekcio1} to="/szekcio/szakkepzes-itmp-netacad" xs={12} />
-					<DashboardItem caption="2. szekcióterem" img={szekcio2} to="/szekcio/digitalis-kultura" xs={12} />
+            
+                <Grid container spacing={2}>
+                    <DashboardItem caption="Recepció" img={recepcio} to="/recepcio" xs={xs} xl={xl} size="xl" title="Recepció"/>
+                    <DashboardItem caption="Nagyelőadó" img={nagyEloado} to="/szekcio/plenaris" xs={xs} xl={xl} size={size} corner="bl"/>
+                    <DashboardItem caption="1. szekcióterem" img={szekcio1} to="/szekcio/szakkepzes-itmp-netacad" xs={xs} xl={xl} size={size} corner="br" />
+                    <DashboardItem caption="2. szekcióterem" img={szekcio2} to="/szekcio/digitalis-kultura" xs={xs} xl={xl} size={size} corner="bl"/>
+                    <DashboardItem caption="IOK Cafe" img={iokCafe} to="/itmp-klub-cafe" xs={xs} xl={xl} size={size} corner="tr"/>
+                    <DashboardItem xs={xs} xl={xl} empty/>
+                    <DashboardItem caption="3. szekcióterem" img={szekcio1} to="/szekcio/it-felsooktatas" xs={xs} xl={xl} size={size} corner="tr"/>
+                    <DashboardItem caption="4. szekcióterem" img={szekcio2} to="/szekcio/digitalis-kultura-also-tagozat" xs={xs} xl={xl} size={size} corner="tl"/>
                 </Grid>
-                <Grid item xs={12} lg={6} container direction="row" justifyContent="center" alignItems="center">
-					<DashboardItem caption="Recepció" img={recepcio} imgWidth="350px" to="/recepcio" xs={12} />
-				</Grid>
-                <Grid item xs={12} lg={3}>
-                    <DashboardItem caption="3. szekcióterem" img={szekcio1} to="/szekcio/it-felsooktatas" xs={12} />
-					<DashboardItem caption="4. szekcióterem" img={szekcio2} to="/szekcio/digitalis-kultura-also-tagozat" xs={12} />
-					<DashboardItem caption="IOK Cafe" img={iokCafe} to="/itmp-klub-cafe" xs={12} />
-                </Grid>                
-            </Grid>
-        </Box>
+        
+        
     )
-}
+}   
 
 
 

@@ -1,6 +1,7 @@
 import Link from "./Link";
 import { Grid, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import Bubble from "./Bubble/Bubble";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -11,21 +12,45 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-export const DashboardItem = (props: { img: any; caption: string; to: string, xs: number, imgWidth?: string }) => {
-    const { img, caption, to, imgWidth } = props;
+interface DashboardItemProps {
+	title?: string,
+	subtitle?: string,
+	corner?: ('bl' | 'br' | 'tl' | 'tr'),
+	size?: 'xs' | 'lg' | 'xl' | 'xxl',
+	color?: 'light' | 'primary',
+	shadow?: boolean,
+	smallText?: boolean,
+	darkText?: boolean,
+	icon?: boolean,
+	children?: React.ReactNode,
+	img?: any,
+	caption?: string,
+	to?: string, 
+	xs: number, 
+	xl?: number,
+	imgWidth?: string, 
+	empty?: boolean
+}
+
+export const DashboardItem = (props: DashboardItemProps) => {
+    const { img, caption, to, imgWidth, corner, size, xs, xl, empty } = props;
+	if (empty) return <Grid item xs={xs} xl={xl} display="flex" ></Grid>
     return (
-		<Grid item xs={12}>
-			<Item>
+		<Grid item xs={xs} xl={xl} display="flex" alignItems="center" justifyContent="center">
+			
+			<Bubble size={size} corner={corner}>
 				<Link to={to}>
 					<>
 						<DashboardImage src={img} alt={caption} width={imgWidth} />
 						<div>{caption}</div>
 					</>
 				</Link>
-			</Item>
+			
+			</Bubble>
 		</Grid>
     )
 }
+
 const DashboardImage= styled("img")((props: {width?: string}) => {
 	console.log("Imgprops", props)
 	return ({

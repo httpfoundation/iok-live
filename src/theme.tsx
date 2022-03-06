@@ -8,12 +8,18 @@ export const theme = createTheme({
 		  contrastText: '#fff',
 		},
 		secondary: {
-		  main: '#47ccd4',
+		  main: '#14475C',
+		  dark: '#14475C',
+		  light: '#d6f4f5',		  
 		  contrastText: '#fff',
 		},
 		info: {
-		  main: '#14475c',
-		}
+		  main: '#14475c'
+		},
+		text: {
+			primary: "rgba(0, 0, 0, 0.87)",
+			secondary: '#14475C'
+		},
 	},
 	typography: {
 		//fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -22,10 +28,14 @@ export const theme = createTheme({
 		fontWeightLight: 300,
 		fontWeightRegular: 400,
 		fontWeightMedium: 500,
-
+		
+		body1: {
+			color: '#14475C',
+		},
 		h1: {
 			fontSize: '45px',
 			fontWeight: 700,
+			color: '#14475C',
 		},
 		h6: {
 			fontSize: '18px',
