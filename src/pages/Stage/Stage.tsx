@@ -8,21 +8,35 @@ import { LanguageSelect } from "../../components"
 import { useStage } from "../../Store"
 import { Box } from "@mui/system"
 import ItmpImg from "../../assets/img/itmp-1.png"
+import { styled } from '@mui/material/styles'
+
 
 const NoStream = () => {
-	return <Box sx={{width: '100%', height: '100%', backgroundColor: '#14475C', color: '#fff', position: 'relative'}}>
-			<Box sx={{width: '100%', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center'}}>
-				<Zoom in>
-					<Box>
-						<img src={ItmpImg} alt="" style={{width: '400px'}}/>
-						<Typography sx={{textAlign: 'center', fontSize: '40px', fontWeight: 700, mt: 2}}>A közvetítés hamarosan kezdődik!</Typography>
-					</Box>
-				</Zoom>
+	return <Box sx={{width: '100%', height: '100%', bgcolor: "secondary.main", color: '#fff', py: 4, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+		<Zoom in>
+			<Box sx={{textAlign: 'center'}}>
+				<img src={ItmpImg} alt="" style={{width: '400px', maxWidth: 'min(calc(50vw * 9 / 16), 50vh)'}}/>
+				<Typography sx={{textAlign: 'center', fontSize: {xs: '26px', md:'40px'}, fontWeight: 700, mt: 2, color: '#fff'}}>A közvetítés hamarosan kezdődik!</Typography>
 			</Box>
+		</Zoom>
 	</Box>
 }
 
 const embedDomain = window.localStorage.dev === "true" ? "localhost" : window.origin.replace("https://", "")
+
+const VideoContainer = styled('div')(({theme}) => `
+
+	height: calc(100vw * 9 / 16);
+	${theme.breakpoints.up("lg")} {
+		height: 100%;
+	}
+	${theme.breakpoints.down("lg")} {
+		max-height: calc(100vw * 9 / 16);
+	}
+	overflow-y: hidden;
+	width: 100%;
+
+`)
 
 const StagePage = () => {
 
@@ -46,36 +60,38 @@ const StagePage = () => {
 	useEffect(() => setSelectedTab(0), [stageId])
 
 	return (
-		<Grid container spacing={0} id="stage">
-			<Grid item xs={12} md={9} className="embed-video-row" sx={{position: 'relative'}}>
-				<Box sx={{width: '100%', height: '100%', backgroundColor: '#000', zIndex: -1, position: 'absolute'}}>
+		<Grid container spacing={0} id="stage" sx={{height: '100%', overflowY: 'hidden', maxHeight: '100%'}}>
+			<Grid item xs={12} lg={9} sx={{position: 'relative', height: {md: '100%'}}}>
+				{/* <Box sx={{width: '100%', height: '100%', backgroundColor: '#000', zIndex: -1, position: 'absolute'}}>
 					<Box sx={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 100}}>
 						<CircularProgress size={60} sx={{zIndex: 100, color: '#fff'}} />
 					</Box>
-				</Box>
-				{ selectedStream?.youtubeVideoId && <YouTubeVideo
-					videoId={selectedStream.youtubeVideoId}
-					containerClassName="embed-video"
-					className="embed-video-inner"
-					opts={{
-						playerVars: {
-							autoplay: 1,
-							hl: 'hu',
-							//modestbranding: 1,
-							rel: 0,
-							color: 'white',
-							controls: 1,
-							showinfo: 0,
-							loop: 1,
-							origin: window.location.origin,
+				</Box> */}
+				
+					{ selectedStream?.youtubeVideoId && <VideoContainer><YouTubeVideo
+						videoId={selectedStream.youtubeVideoId}
+						containerClassName="embed-video"
+						className="embed-video-inner"
+						opts={{
+							playerVars: {
+								autoplay: 1,
+								hl: 'hu',
+								//modestbranding: 1,
+								rel: 0,
+								color: 'white',
+								controls: 1,
+								showinfo: 0,
+								loop: 1,
+								origin: window.location.origin,
 
-						}
-					}}
-				/> }
+							}
+						}}
+					/></VideoContainer> }
+				
 				{ stage?.name && !selectedStreamId && <NoStream /> }
 			</Grid>
-			<Grid item xs md sx={{}} className="sidebar">
-				<Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc(100%)', height: '100%'}}>
+			<Grid item xs={12} lg={3} sx={{height: {xs: 'calc(100% - (100vw * 9 / 16))', md: '100%'}}}>
+				<Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc(100%)', height: '100%',}}>
 					<AppBar component="div" position="static" color="default" sx={{px: 2}} elevation={1}>
 						<h1>
 							{stage?.name}

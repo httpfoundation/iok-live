@@ -63,13 +63,16 @@ const SpeakerImage = styled('div')( (props: {counter: number, speaker: DatoSpeak
 
 const SpeakersImages = (props: {speakers: DatoSpeaker[] | undefined}) => {
 	const { speakers } = props
-	const SpeakersImagesDiv = styled('div')`
+	const SpeakersImagesDiv = styled('div')(({theme}) =>`
 		width: 70px;
 		display: inline-block;
 		align-self: center;
 		vertical-align: middle;
 		transition: all 0.2s ease-out;
-	`
+		${theme.breakpoints.only("xs")} { 
+			display: none;
+		}
+	`)
 	return (
 		<SpeakersImagesDiv>
 			{speakers?.map((speaker, index) => (
@@ -86,13 +89,16 @@ const Abstract = (props: {abstract?: String }) => {
 	)
 }
 
-const ScheduleItemContent = styled('div')`
+const ScheduleItemContent = styled('div')(({theme}) =>`
 	transition: all 0.2s ease-out;
 	display: inline-block;
 	padding-left: 20px;
 	width: calc(100% - 70px);
+	${theme.breakpoints.only("xs")} { 
+		width: 100%;
+	}
 	vertical-align: top;
-`
+`)
 
 const ScheduleItemContainer = styled('div')`
 	margin: 15px 0;

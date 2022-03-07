@@ -44,7 +44,7 @@ const Header = () => {
 
 	return (<>
 		<Drawer anchor="right" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-			<Box sx={{ width: 370, pt: '64px' }} role="presentation">
+			<Box sx={{ width: 370, pt: '64px', maxWidth: 'calc(100vw - 20px)' }} role="presentation">
 				<List>
 					{menuItems.map((menuItem, index) => {
 

@@ -14,11 +14,9 @@ import {DashboardItem} from "../../components/Dashboard"
 const Home = () => {
 
     return (
-        <PageContainer >
-            <Container>
-                <PageTitle>Üdvözlünk az IOK 2022 rendezvényünkön!</PageTitle>
-                <DashBoard />
-            </Container>
+        <PageContainer container>
+            <PageTitle>Üdvözlünk az IOK 2022 rendezvényünkön!</PageTitle>
+            <DashBoard />
         </PageContainer>
     );
 };

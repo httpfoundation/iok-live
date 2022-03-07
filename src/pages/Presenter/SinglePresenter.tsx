@@ -13,7 +13,6 @@ const PresenterImage = styled('img')`
 `
 
 const SectionTitle = styled(Typography)`
-	font-size: 1.2rem;
 	font-weight: 700;
 	margin: 1rem 0;
 `
@@ -27,19 +26,19 @@ export const SinglePresenter = () => {
 	return (
 		<PageContainer container>
 			<Grid container spacing={4} sx={{mb: 4}}>
-				<Grid item xs={4}>
+				<Grid item xs={12} md={4}>
 					<PresenterImage src={presenter?.image?.url} alt={presenter?.name} />
 				</Grid>
-				<Grid item xs={8}>
+				<Grid item xs={12} md={8} sx={{display: "flex", flexDirection: "column", justifyContent: "flex-end", pb: 1}}>
 					<PageTitle align="left">{presenter?.name}</PageTitle>
 					<PageSubtitle>{presenter?.title}, {presenter?.company}</PageSubtitle>
-					<Paragraph>
-						{presenter?.bio}
-					</Paragraph>
+					{presenter?.bio && <Paragraph>
+						{presenter.bio}
+					</Paragraph>}
 				</Grid>
 			</Grid>
 			{ presenter.talksByStage?.map(stage => <>
-				<SectionTitle variant="h3">"{stage?.name}" szekció</SectionTitle>
+				<SectionTitle variant="h5">"{stage?.name}" szekció</SectionTitle>
 				{ stage.schedule?.map(talk => <ScheduleItem key={talk.id} open talkId={talk.id} />)}
 				</>
 			) }
