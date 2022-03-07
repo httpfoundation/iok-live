@@ -30,8 +30,9 @@ interface BubbleWrapperProps {
 const Bubble = (props: BubbleProps) => {
 	const { size, corner } = props
 	//"lg" is the default size
-	const width = (size === "xs") ? "150px" : (size === "xl") ? "250px" : (size === "xxl") ? "350px" : "210px"
-	const borderRadius = (size === "xs") ? "90px" : (size === "xl") ? "150px" : (size === "xxl") ? "210px" : "125px"
+ 	const width = (size === "xs") ? "150px" : (size === "lg") ? "180px" : (size === "xl") ? "200px" : "350px"
+	const borderRadius = (size === "xs") ? "90px" : (size === "xl") ? "250px" : (size === "xxl") ? "300px" : "125px"
+	console.log("width", width)
 	const bubbleWrapperProps = {
 		width,
 		borderBottomRightRadius: (corner==="br") ? "0" : borderRadius,
@@ -54,23 +55,27 @@ const Bubble = (props: BubbleProps) => {
 }
 
 
-const BubbleWrapper = styled("div", { shouldForwardProp: (propName) => propName !== "bubbleWrapperProps" })<BubbleWrapperProps>(({ theme, bubbleWrapperProps } ) => `
-	border: 2px solid ${theme.palette.secondary.main};
-	display: inline-block;
-	position: relative;
-	aspect-ratio: 1;
-	background-color: ${theme.palette.secondary.dark};
-	transition: transform .2s;
-	/* ...bubbleWrapperProps */
-	width: ${bubbleWrapperProps.width};
-	border-bottom-right-radius: ${bubbleWrapperProps.borderBottomRightRadius};
-	border-bottom-left-radius: ${bubbleWrapperProps.borderBottomLeftRadius};
-	border-top-right-radius: ${bubbleWrapperProps.borderTopRightRadius};
-	border-top-left-radius: ${bubbleWrapperProps.borderTopLeftRadius};
-	&:hover {
-		transform: scale(1.1)
-	}
-`)
+const BubbleWrapper = styled("div", 
+			{
+				shouldForwardProp: (prop) => 
+					prop!=='bubbleWrapperProps' 
+			})	
+			<BubbleWrapperProps>
+	(( {theme, bubbleWrapperProps} ) => (
+		{
+			border: `2px solid ${theme.palette.secondary.main}`,
+			display: "inlineBlock",
+			position: "relative",
+			aspectRatio: "1",
+			backgroundColor: theme.palette.secondary.dark,
+			transition: "transform .2s",
+			...bubbleWrapperProps,
+			"&:hover": {
+				transform: "scale(1.1)"
+			}
+		}
+	))
+
 
 const BubbleContent = styled('div') 
 	(( {theme} ) => (

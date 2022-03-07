@@ -1,7 +1,9 @@
 import Link from "./Link";
-import { Grid, Paper } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import Bubble from "./Bubble/Bubble";
+import { Grid, Paper, Typography } from "@mui/material"
+import { styled } from "@mui/material/styles"
+import Bubble from "./Bubble/Bubble"
+
+
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -28,21 +30,23 @@ interface DashboardItemProps {
 	to?: string, 
 	xs: number, 
 	xl?: number,
+	lg?: number,
 	imgWidth?: string, 
 	empty?: boolean
 }
 
 export const DashboardItem = (props: DashboardItemProps) => {
-    const { img, caption, to, imgWidth, corner, size, xs, xl, empty } = props;
-	if (empty) return <Grid item xs={xs} xl={xl} display="flex" ></Grid>
+
+    const { img, caption, to, imgWidth, corner, size, xs, xl, lg, empty } = props;
+	if (empty) return <Grid item xs={xs} xl={xl} lg={lg} display="flex" ></Grid>
     return (
-		<Grid item xs={xs} xl={xl} display="flex" alignItems="center" justifyContent="center">
+		<Grid item xs={xs} xl={xl} lg={lg} display="flex" alignItems="center" justifyContent="center" textAlign="center">
 			
 			<Bubble size={size} corner={corner}>
 				<Link to={to}>
 					<>
 						<DashboardImage src={img} alt={caption} width={imgWidth} />
-						<div>{caption}</div>
+						<Typography sx={{color:"white"}}>{caption}</Typography>
 					</>
 				</Link>
 			
@@ -51,10 +55,16 @@ export const DashboardItem = (props: DashboardItemProps) => {
     )
 }
 
-const DashboardImage= styled("img")((props: {width?: string}) => {
-	console.log("Imgprops", props)
-	return ({
-		width: (props.width) ? props.width : "150px"
+const DashboardImage = styled("img", {shouldForwardProp: (prop) => prop!=='width' })<{width?: Object}>
+	( ({theme, width}) => {
+		if (width) return width
+		else return (
+			{
+				width: "150px",
+				[theme.breakpoints.down("xl")]: {
+					width: "100px",
+				},
+			
+			}
+		)	
 	})
-}	
-)

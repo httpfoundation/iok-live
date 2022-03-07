@@ -9,11 +9,6 @@ const PageContainer = (props: { children: React.ReactNode, container?: boolean, 
 	)
 }
 
-/* const Box = styles(MuiBox)`
-
-` */
-
-
 export default PageContainer
 
 
