@@ -1,21 +1,23 @@
 import { createContext, useContext, useMemo } from "react"
-import { DatoStage, DatoSpeaker, DatoTalk } from "./types"
+import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom } from "./types"
 import useQuery from "./useQuery"
 
 export interface IStore {
 	stages: DatoStage[],
 	presenters: DatoSpeaker[],
-	talks: DatoTalk[]
+	talks: DatoTalk[],
+	breakoutRooms: DatoBreakoutRoom[]
 }
 
 export const Store = createContext<IStore>({
 	stages: [],
 	presenters: [],
-	talks: []
+	talks: [],
+	breakoutRooms: []
 })
 
 export const StoreProvider = (props: { children: React.ReactElement }) => {
-	const [stages] = useQuery<DatoStage[]>(`
+	const [data] = useQuery<DatoComplex>(`
 		{
 			allStages(orderBy: [order_ASC]) {
 				id
@@ -44,8 +46,20 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 					}
 				}
 			}
+			allBreakoutrooms {
+				description {
+				  value
+				}
+				title
+				meetingDestination
+			}
 	  	}
-	`, [])
+	`, {allStages: [], allBreakoutrooms: []})
+
+		console.log("data", data)
+	
+	const {allStages : stages, allBreakoutrooms: breakoutRooms} = data
+
 
 	const [presenters] = useQuery<DatoSpeaker[]>(`
 		{
@@ -77,10 +91,13 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 		return talks
 	}, [stages])
 
+	
+
 	const store = {
 		stages,
 		presenters,
-		talks
+		talks,
+		breakoutRooms
 	}
 
 	return <Store.Provider value={store}>{props.children}</Store.Provider>
@@ -122,6 +139,12 @@ export const useStage = (stageSlug?: string) => {
 	const store = useStore()
 	return store.stages.find(stage => stage.slug === stageSlug)
 }
+
+export const useBreakoutRooms = (stageSlug?: string) => {
+	const store = useStore()
+	return store.breakoutRooms
+}
+
 
 export const useTalk = (talkId?: string|number) => {
 	const store = useStore()

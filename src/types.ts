@@ -46,3 +46,15 @@ export type DatoStage = {
 	schedule?: DatoTalk[]
 	streams?: DatoStream[]
 }
+
+export type DatoBreakoutRoom = {
+	id: number
+	name: string
+	slug: string
+	meetingDestination?: string
+}
+
+export type DatoComplex = {
+		allStages: DatoStage[]
+		allBreakoutrooms: DatoBreakoutRoom[]
+}

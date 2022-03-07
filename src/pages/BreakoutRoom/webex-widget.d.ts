@@ -19,7 +19,7 @@ declare module '@webex/widgets' {
 	export type WebexMeetingsWidgetProps = {
 		style: Record<string, any>
 		accessToken: string
-		meetingDestination: string
+		meetingDestination?: string
 		controls: (inMeeting: boolean) => MeetingControl[]
 	}
 	export function WebexMeetingsWidget(props: WebexMeetingsWidgetProps): JSX.Element
