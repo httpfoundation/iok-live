@@ -32,17 +32,18 @@ interface DashboardItemProps {
 	xl?: number,
 	lg?: number,
 	imgWidth?: string, 
-	empty?: boolean
+	empty?: boolean,
+	light?: boolean
 }
 
 export const DashboardItem = (props: DashboardItemProps) => {
 
-    const { img, caption, to, imgWidth, corner, size, xs, xl, lg, empty } = props;
+    const { img, caption, to, imgWidth, corner, size, xs, xl, lg, empty, light } = props;
 	if (empty) return <Grid item xs={xs} xl={xl} lg={lg} display="flex" ></Grid>
     return (
 		<Grid item xs={xs} xl={xl} lg={lg} display="flex" alignItems="center" justifyContent="center" textAlign="center">
 			
-			<Bubble size={size} corner={corner}>
+			<Bubble size={size} corner={corner} light={light}>
 				<Link to={to}>
 					<>
 						<DashboardImage src={img} alt={caption} width={imgWidth} />

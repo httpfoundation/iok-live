@@ -5,6 +5,8 @@ import { Home as HomeIcon, Menu as MenuIcon, People as PeopleIcon, Coffee as Cof
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useStages } from "../Store"
+import iokLogo from "../assets/images/iok2022_logo_w_httpw_sm.png"
+import {styled} from "@mui/system"
 
 type MenuItem = {
 	label: string,
@@ -74,7 +76,7 @@ const Header = () => {
 		}}>
 			<Toolbar>
 				<Typography variant="h6" noWrap sx={{flex: 1, transform: 'translateY(2px)'}}>
-					<Link to="/"><b>IOK</b> 2022</Link>
+					<Link to="/"><Logo src={iokLogo} />	</Link>
 				</Typography>
 
 				<IconButton size="large" edge="start" color="inherit" aria-label="menu" onClick={() => setDrawerOpen(!drawerOpen)}>
@@ -94,5 +96,9 @@ const Header = () => {
 		}
 	</>)
 }
+
+const Logo = styled('img')`
+	padding-top:5px;
+`
 
 export default Header

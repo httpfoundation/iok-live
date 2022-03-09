@@ -38,12 +38,12 @@ const DashBoard = () => {
 
     
     return (
-                 <Grid container direction={"row"} spacing={5} sx={{maxHeight: "calc(100vh - 162px)"}} display="flex" alignItems="center" justifyContent="center">
-                    <DashboardItem caption="Recepció" img={recepcio} to="/recepcio" xs={xs} xl={xl} lg={lg} size={size} title="Recepció"/>
+                 <Grid container direction={"row"} spacing={5} sx={{maxHeight: "calc(100vh - 162px)"}} display="flex" alignItems="center" justifyContent="center" >
+                    <DashboardItem caption="Recepció" img={recepcio} to="/recepcio" xs={xs} xl={xl} lg={lg} size={size} title="Recepció" light />
                     <DashboardItem caption="Nagyelőadó" img={nagyEloado} to="/szekcio/plenaris" xs={xs} xl={xl} lg={lg} size={size} corner="bl"/>
                     <DashboardItem caption="1. szekcióterem" img={szekcio1} to="/szekcio/szakkepzes-itmp-netacad" xs={xs} xl={xl} lg={lg} size={size} corner="br" />
                     <DashboardItem caption="2. szekcióterem" img={szekcio2} to="/szekcio/digitalis-kultura" xs={xs} xl={xl} lg={lg} size={size} corner="bl"/>
-                    <DashboardItem caption="IOK Cafe" img={iokCafe} to="/itmp-klub-cafe" xs={xs} xl={xl} lg={lg} size={size} corner="tr"/>
+                    <DashboardItem caption="IOK Cafe" img={iokCafe} to="/itmp-klub-cafe" xs={xs} xl={xl} lg={lg} size={size} light/>
                     <DashboardItem xs={xs} xl={xl} lg={lg} empty/>
                     <DashboardItem caption="3. szekcióterem" img={szekcio1} to="/szekcio/it-felsooktatas" xs={xs} xl={xl} lg={lg} size={size} corner="tr"/>
                     <DashboardItem caption="4. szekcióterem" img={szekcio2} to="/szekcio/digitalis-kultura-also-tagozat" xs={xs} xl={xl} lg={lg} size={size} corner="tl"/>

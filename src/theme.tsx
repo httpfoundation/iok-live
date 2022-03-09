@@ -14,7 +14,7 @@ let theme = createTheme({
 		  contrastText: '#fff',
 		},
 		info: {
-		  main: '#14475c'
+		  main: '#f18c4e'
 		},
 		text: {
 			primary: "rgba(0, 0, 0, 0.87)",
