@@ -1,9 +1,78 @@
 import { PageContainer } from "../../components"
 import PageTitle from "../../components/PageTitle"
-import {DashboardItem} from "../../components/Dashboard"
 import iokCafe from "../../assets/images/iokcafe.png"
-import { Grid, Container, Box, useMediaQuery } from "@mui/material"
-import { useTheme } from '@mui/material/styles'
+import {  Container, } from "@mui/material"
+
+import Dashboard from "../../components/Dashboard"
+import { DashboardItemType } from "../../types"
+
+const receptionDashboardItems : DashboardItemType[] = [
+    {
+        caption: "Köszöntő szép szavak",
+        title: "Üdvözlő szép szavak az elnök úrtól",
+        img: iokCafe,
+        corner: "none",
+        light: true,
+        link: "#"
+    },
+    {
+        caption: "Programfüzet",
+        title: "Minden részlet, amit érdemes tudni a szakmai programról",
+        img: iokCafe,
+        corner: "br",
+        light: false,
+        link: "/eloadasok"
+    },
+    {
+        caption: "Előadói tabló",
+        title: "Szakképzési, ITMP és NetAcad szekció előadásai a 1. teremben",
+        img: iokCafe,
+        corner: "br",
+        light: false,
+        link: "/eloadok"
+    },
+    {
+        caption: "Támogatói szórólap",
+        title: "Digitális kultúra szekció előadásai a 2. teremben",
+        img: iokCafe,
+        corner: "bl",
+        light: false,
+        link: "/tamogatok"
+    },
+    {
+        caption: "Értékelő űrlap",
+        title: "Résztvevők egymás közötti élő beszélgetése öt tematikus asztalnál az IOK kávézójában",
+        img: iokCafe,
+        corner: "none",
+        light: true,
+        link: "#"
+    },
+    {
+        caption: "HTTP szervezőcsapat",
+        title: "Résztvevők egymás közötti élő beszélgetése öt tematikus asztalnál az IOK kávézójában",
+        img: iokCafe,
+        corner: "none",
+        light: true,
+        link: "#"
+    },
+    {
+        caption: "3. terem",
+        title: "IT felsőoktatás szekció előadásai a 3. teremben",
+        img: iokCafe,
+        corner: "tr",
+        light: false,
+        link: "/szekcio/digitalis-kultura"
+    },
+    {
+        caption: "Visszatérés az Aulába",
+        title: "Aula: minden IOK-s dolog kiindulópontja",
+        img: iokCafe,
+        corner: "tl",
+        light: false,
+        link: "/"
+    },
+        
+]
 
 
 const Reception = () => {
@@ -11,13 +80,13 @@ const Reception = () => {
 		<PageContainer>
             <Container>
                 <PageTitle>Recepció</PageTitle>
-                <DashBoard />
+                <Dashboard items={receptionDashboardItems} />
             </Container>			
 		</PageContainer>
 	)
 }
 
-const DashBoard = () => {
+/* const DashBoard = () => {
     const theme = useTheme()
 	const upperThanLg = useMediaQuery(theme.breakpoints.up('lg'))    
     const upperThanXl = useMediaQuery(theme.breakpoints.up('xl')) 
@@ -37,6 +106,6 @@ const DashBoard = () => {
             <DashboardItem caption="Recepció" img={iokCafe} to="/" xs={xs} xl={xl} size={size} corner="tl"/>
         </Grid>
     )
-}
+} */
 
 export default Reception

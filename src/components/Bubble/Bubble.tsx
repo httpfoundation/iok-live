@@ -7,7 +7,7 @@ import { styled } from '@mui/material/styles'
 interface BubbleProps {
 	title?: string,
 	subtitle?: string,
-	corner?: ('bl' | 'br' | 'tl' | 'tr'),
+	corner?: 'bl' | 'br' | 'tl' | 'tr' | 'none',
 	size?: 'xs' | 'lg' | 'xl' | 'xxl',
 	color?: 'light' | 'primary',
 	shadow?: boolean,

@@ -58,3 +58,12 @@ export type DatoComplex = {
 		allStages: DatoStage[]
 		allBreakoutrooms: DatoBreakoutRoom[]
 }
+
+export type DashboardItemType = {
+    caption: string
+    title: string
+    corner: 'bl' | 'br' | 'tl' | 'tr' | 'none'
+    light: boolean
+    img: string
+    link: string
+}

@@ -31,7 +31,7 @@ const Header = () => {
 		{label: 'Recepció', to: '/recepcio', icon: <HomeIcon />},
 		{label: 'Program', to: '/eloadasok', icon: <EventNoteIcon />},
 		{label: 'Előadók', to: '/eloadok', icon: <PeopleIcon />},
-		{label: 'ITMP Klub Cafe', to: '/itmp-klub-cafe', icon: <CoffeeIcon />},
+		{label: 'ITMP Klub Cafe', to: '/iok-cafe', icon: <CoffeeIcon />},
 		{label: 'Támogatók', to: '/tamogatok', icon: <StarIcon />},
 		{divider: true},
 		{label: 'Szekciók', divider: true, icon: <LiveTvIcon sx={{mr: 1, transform: 'translateY(5px)', color: 'rgba(0, 0, 0, 0.4)'}} />},
@@ -99,6 +99,10 @@ const Header = () => {
 
 const Logo = styled('img')`
 	padding-top:5px;
+	height: 38px;
+	width: 207px
+	
+
 `
 
 export default Header

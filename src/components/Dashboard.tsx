@@ -1,23 +1,13 @@
 import Link from "./Link";
-import { Grid, Paper, Typography } from "@mui/material"
-import { styled } from "@mui/material/styles"
+import { Grid, Typography, useMediaQuery } from "@mui/material"
+import { styled, useTheme } from "@mui/material/styles"
 import Bubble from "./Bubble/Bubble"
-
-
-
-
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-}));
+import { DashboardItemType } from "../types"
 
 interface DashboardItemProps {
 	title?: string,
 	subtitle?: string,
-	corner?: ('bl' | 'br' | 'tl' | 'tr'),
+	corner?: 'bl' | 'br' | 'tl' | 'tr' | 'none',
 	size?: 'xs' | 'lg' | 'xl' | 'xxl',
 	color?: 'light' | 'primary',
 	shadow?: boolean,
@@ -34,6 +24,48 @@ interface DashboardItemProps {
 	imgWidth?: string, 
 	empty?: boolean,
 	light?: boolean
+}
+
+
+
+
+const Dashboard = (props : {items: DashboardItemType[]}) => {
+    const {items} = props
+    const theme = useTheme();
+    const upperThanLg = useMediaQuery(theme.breakpoints.up("lg"));
+    const upperThanXl = useMediaQuery(theme.breakpoints.up("xl"));
+    const size = upperThanXl ? "xxl" : upperThanLg ? "xl" : "lg";
+    const xs = 12
+    const xl = 3
+    const lg = 3
+
+    return (
+        <Grid
+            container
+            direction={"row"}
+            spacing={5}
+            sx={{ maxHeight: "calc(100vh - 162px)" }}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+        >
+            {items.map((item) => {
+                const {caption, title, corner, light, img, link} = item
+                return  <DashboardItem
+                    caption={caption}
+                    img={img}
+                    to={link}
+                    xs={xs}
+                    xl={xl}
+                    lg={lg}
+                    size={size}
+                    title={title}
+                    light={light}
+                    corner={corner}
+                />
+            })}
+        </Grid>
+    )
 }
 
 export const DashboardItem = (props: DashboardItemProps) => {
@@ -69,3 +101,5 @@ const DashboardImage = styled("img", {shouldForwardProp: (prop) => prop!=='width
 			}
 		)	
 	})
+
+export default Dashboard
