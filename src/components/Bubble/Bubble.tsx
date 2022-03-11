@@ -34,7 +34,6 @@ const Bubble = (props: BubbleProps) => {
 	//"lg" is the default size
  	const width = (size === "xs") ? "150px" : (size === "lg") ? "180px" : (size === "xl") ? "200px" : "350px"
 	const borderRadius = (size === "xs") ? "90px" : (size === "xl") ? "250px" : (size === "xxl") ? "300px" : "125px"
-	console.log("width", width)
 	const bubbleWrapperProps = {
 		width,
 		borderBottomRightRadius: (corner==="br") ? "0" : borderRadius,

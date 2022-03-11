@@ -10,6 +10,7 @@ html, body {
 }
 #root {
 	height: 100%;
+	background-color: #D7F4F5;
 }
 * {
 	letter-spacing: normal;
@@ -43,8 +44,6 @@ code {
 
 .wxc-meeting-info__title {
 	display: none;
-
-
 }
 
 .wxc-meeting-info {
@@ -54,7 +53,6 @@ code {
 		font-size: 2rem
 	}
 }
-
 .wxc-button--join .wxc-meeting-control__button-text {
 	display: none;
 }
@@ -87,4 +85,9 @@ code {
 
 .MuiFormControlLabel-label {
 	transform: translateY(2px);
+}
+
+.MuiTextField-root input {
+	transform: translateY(4px);
+	font-size: 1rem;
 }

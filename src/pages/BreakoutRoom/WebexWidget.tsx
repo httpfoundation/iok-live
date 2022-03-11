@@ -1,6 +1,6 @@
 import { WebexMeetingsWidget } from '@webex/widgets'
 import '@webex/widgets/dist/css/webex-widgets.css'
-import { useBreakoutRooms } from '../../Store'
+import { useBreakoutRooms, useRegistration } from '../../Store'
 
 enum MeetingControl {
 	JOIN = 'join-meeting',
@@ -24,11 +24,15 @@ export const WebexWidget = () => {
 	const {meetingDestination }= breakoutRooms[0] ?? {meetingDestination: ""}
 	console.log("meetingDestination", meetingDestination)
 
+	//alert(meetingDestination)
+
+	const [registration] = useRegistration()
+
 	return (
 		<>
 		<style>
 			{`.wxc-meeting-info:after {
-					content: "ITMP Klub Cafe2";
+				content: "IOK Cafe";
 			 }
 			 .wxc-button--join:after {
 				content: "Jövök én is beszélgetni!";
@@ -36,13 +40,15 @@ export const WebexWidget = () => {
 			 }	
 			`}
 		</style>
-		<WebexMeetingsWidget
-			style={{width: "100%", height: "100%"}}
-			accessToken="ZDQzZDgwYjctYjIzMi00NWYzLTg0NWMtOTMwNDQ3ZGMzNzgyMTQxMmQwYmQtZWJh_PF84_ff3fdc6f-3153-45d3-a0cc-4be98bfd8371"
-			meetingDestination={meetingDestination}
-			controls={(inMeeting: boolean) => inMeeting ? inMeetingControls : outOfMeetingControls}
-			/* zoltan.sisak@httpf.webex.com" */
-		/>
+		{ 
+			registration?.webex_access_token &&
+			<WebexMeetingsWidget
+				style={{width: "100%", height: "100%"}}
+				accessToken={registration.webex_access_token}
+				meetingDestination={meetingDestination}
+				controls={(inMeeting: boolean) => inMeeting ? inMeetingControls : outOfMeetingControls}
+			/>
+			}
 		</>
 	)
 }

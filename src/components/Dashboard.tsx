@@ -49,7 +49,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
             alignItems="center"
             justifyContent="center"
         >
-            {items.map((item) => {
+            {items.map((item, key) => {
                 const {caption, title, corner, light, img, link} = item
                 return  <DashboardItem
                     caption={caption}
@@ -62,6 +62,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
                     title={title}
                     light={light}
                     corner={corner}
+					key={key}
                 />
             })}
         </Grid>

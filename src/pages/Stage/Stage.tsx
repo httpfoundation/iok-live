@@ -11,7 +11,7 @@ import ItmpImg from "../../assets/img/itmp-1.png"
 import { styled } from '@mui/material/styles'
 import { PageHeaderTitle } from "../../components/PageContainer"
 import { DatoTalk } from "../../types"
-import { client } from "../../useQuery"
+import { useDatoClient } from "../../useQuery"
 
 
 const NoStream = () => {
@@ -38,6 +38,8 @@ const Questions = (props: {schedule?: DatoTalk[], stageId?: number}) => {
 	const speakerIds = useMemo(() => talk?.speaker?.map(s => s.id), [talk?.speaker])
 	const speakers = useMemo(() => store.presenters.filter(p => speakerIds?.includes(p.id)), [store.presenters, speakerIds])
 
+	const client = useDatoClient()
+
 	const sendQuestion = async () => {
 		const data = {
 			stage: String(props.stageId),
@@ -51,7 +53,7 @@ const Questions = (props: {schedule?: DatoTalk[], stageId?: number}) => {
 			itemType: 
 		}) */
 		try {
-			client.items.create({
+			client?.items.create({
 				itemType: '1917974',
 				...data
 			})

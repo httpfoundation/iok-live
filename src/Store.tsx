@@ -1,4 +1,5 @@
-import { createContext, useContext, useMemo, useState } from "react"
+import { createContext, useContext, useEffect, useMemo, useState } from "react"
+import { useSearchParams } from "react-router-dom"
 import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom } from "./types"
 import useQuery from "./useQuery"
 
@@ -9,6 +10,8 @@ export interface IStore {
 	breakoutRooms: DatoBreakoutRoom[],
 	pageTitle: string, 
 	setPageTitle: (title: string) => void,
+	registration: RegistrationData|null,
+	registrationLoading: boolean,
 }
 
 export const Store = createContext<IStore>({
@@ -18,7 +21,42 @@ export const Store = createContext<IStore>({
 	breakoutRooms: [],
 	pageTitle: "IOK 2022",
 	setPageTitle: (t: string) => {},
+	registration: null,
+	registrationLoading: true,
 })
+
+type RegistrationData = {
+	id: number
+	name: string
+	dato_token: string
+	webex_access_token: string
+}
+
+const useRegistrationData = (regId: string|null) : [RegistrationData|null, boolean] => {
+	const [registrationData, setRegistrationData] = useState<RegistrationData|null>(null)
+	const [loading, setLoading] = useState(true)
+
+	useEffect(() => {
+		(async () => {
+			if (regId && String(regId) !== String(JSON.parse(window.localStorage.getItem("iok_registration_data") as string)?.id)) {
+				console.log('FETCH REGISTRATION DATA')
+				window.localStorage.removeItem("iok_registration_data")
+				const res = await fetch("https://wy8qg2hpoh.execute-api.eu-west-1.amazonaws.com/default/iokRegistrationData?id=" + regId)
+				const data = await res.json()
+				if (data.id) {
+					setRegistrationData(data)
+					window.localStorage.setItem("iok_registration_data", JSON.stringify(data))
+					window.history.replaceState(null, '', window.location.href.replace(window.location.search, ""))
+				}
+			} else if (window.localStorage.getItem("iok_registration_data")) {
+				setRegistrationData(JSON.parse(window.localStorage.getItem("iok_registration_data") as string))
+			}
+			setLoading(false)
+		})()
+	}, [regId])
+
+	return [registrationData, loading]
+}
 
 export const StoreProvider = (props: { children: React.ReactElement }) => {
 	const [data] = useQuery<DatoComplex>(`
@@ -94,14 +132,19 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 
 	const [pageTitle, setPageTitle] = useState("IOK 2022")
 
+	const regId = (new URLSearchParams(window.location.search)).get('q') || null
+	const [registration, registrationLoading] = useRegistrationData(regId)
+
 	const store:IStore = useMemo(() => ({
 		stages,
 		presenters,
 		talks,
 		breakoutRooms,
 		pageTitle,
-		setPageTitle
-	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle])
+		setPageTitle,
+		registration,
+		registrationLoading,
+	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle, registration, registrationLoading])
 
 	return <Store.Provider value={store}>{props.children}</Store.Provider>
 }
@@ -167,6 +210,11 @@ export const useSetPageTitle = () => {
 export const usePageTitle = () => {
 	const store = useStore()
 	return store.pageTitle
+}
+
+export const useRegistration = (): [RegistrationData|null, boolean] => {
+	const store = useStore()
+	return [store.registration, store.registrationLoading]
 }
 
 export default Store
