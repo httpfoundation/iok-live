@@ -4,7 +4,7 @@ import { Home as HomeIcon, Menu as MenuIcon, People as PeopleIcon, Coffee as Cof
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { useStages } from "../Store"
+import { useStages, usePageTitle } from "../Store"
 
 type MenuItem = {
 	label: string,
@@ -25,17 +25,24 @@ const Header = () => {
 	const stages = useStages()
 
 	const menuItems = useMemo<(MenuItem | DividerMenuItem)[]>(() => [
-		{label: 'Aula', to: '/', icon: <HomeIcon />},
-		{label: 'Recepció', to: '/recepcio', icon: <HomeIcon />},
+		//{label: 'Aula', to: '/', icon: <HomeIcon />},
+		//{label: 'Recepció', to: '/recepcio', icon: <HomeIcon />},
+		{label: 'Köszöntő', to: '/koszonto', icon: <EventNoteIcon />},
 		{label: 'Program', to: '/eloadasok', icon: <EventNoteIcon />},
 		{label: 'Előadók', to: '/eloadok', icon: <PeopleIcon />},
-		{label: 'ITMP Klub Cafe', to: '/itmp-klub-cafe', icon: <CoffeeIcon />},
-		{label: 'Támogatók', to: '/tamogatok', icon: <StarIcon />},
 		{divider: true},
 		{label: 'Szekciók', divider: true, icon: <LiveTvIcon sx={{mr: 1, transform: 'translateY(5px)', color: 'rgba(0, 0, 0, 0.4)'}} />},
 		...stages.map(stage => ({label: stage.name, to: `/szekcio/${stage.slug}`})),
 		{divider: true},
+		{label: 'ITMP Klub Cafe', to: '/itmp-klub-cafe', icon: <CoffeeIcon />},
+		{label: 'Támogatók', to: '/tamogatok', icon: <StarIcon />},
+		{label: 'Értékelő űrlap', to: '/ertekeles', icon: <StarIcon />},
 	], [stages])
+
+	const pageTitle = usePageTitle()
+	useEffect(() => {
+		document.title = pageTitle ? "IOK 2022 | " + pageTitle : "IOK 2022"
+	}, [pageTitle])
 	
 	
 	const location = useLocation()
@@ -73,10 +80,12 @@ const Header = () => {
 			zIndex: theme => theme.zIndex.drawer + 1
 		}}>
 			<Toolbar>
-				<Typography variant="h6" noWrap sx={{flex: 1, transform: 'translateY(2px)'}}>
+				<Typography variant="h6" noWrap sx={{flex: '0 0 auto', transform: 'translateY(2px)'}}>
 					<Link to="/"><b>IOK</b> 2022</Link>
 				</Typography>
-
+				<Typography variant="h6" noWrap sx={{flex: 1, transform: 'translateY(2px)'}} align="center">
+					{pageTitle}
+				</Typography>
 				<IconButton size="large" edge="start" color="inherit" aria-label="menu" onClick={() => setDrawerOpen(!drawerOpen)}>
            			<MenuIcon />
           		</IconButton>

@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from "react"
+import { createContext, useContext, useMemo, useState } from "react"
 import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom } from "./types"
 import useQuery from "./useQuery"
 
@@ -6,14 +6,18 @@ export interface IStore {
 	stages: DatoStage[],
 	presenters: DatoSpeaker[],
 	talks: DatoTalk[],
-	breakoutRooms: DatoBreakoutRoom[]
+	breakoutRooms: DatoBreakoutRoom[],
+	pageTitle: string, 
+	setPageTitle: (title: string) => void,
 }
 
 export const Store = createContext<IStore>({
 	stages: [],
 	presenters: [],
 	talks: [],
-	breakoutRooms: []
+	breakoutRooms: [],
+	pageTitle: "IOK 2022",
+	setPageTitle: (t: string) => {},
 })
 
 export const StoreProvider = (props: { children: React.ReactElement }) => {
@@ -56,10 +60,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 	  	}
 	`, {allStages: [], allBreakoutrooms: []})
 
-		console.log("data", data)
-	
 	const {allStages : stages, allBreakoutrooms: breakoutRooms} = data
-
 
 	const [presenters] = useQuery<DatoSpeaker[]>(`
 		{
@@ -91,14 +92,16 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 		return talks
 	}, [stages])
 
-	
+	const [pageTitle, setPageTitle] = useState("IOK 2022")
 
-	const store = {
+	const store:IStore = useMemo(() => ({
 		stages,
 		presenters,
 		talks,
-		breakoutRooms
-	}
+		breakoutRooms,
+		pageTitle,
+		setPageTitle
+	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle])
 
 	return <Store.Provider value={store}>{props.children}</Store.Provider>
 }
@@ -156,5 +159,14 @@ export const useTalk = (talkId?: string|number) => {
 	return useMemo(() => ({...talk, speakers}), [talk, speakers])
 }
 
+export const useSetPageTitle = () => {
+	const store = useStore()
+	return store.setPageTitle
+}
+
+export const usePageTitle = () => {
+	const store = useStore()
+	return store.pageTitle
+}
 
 export default Store
