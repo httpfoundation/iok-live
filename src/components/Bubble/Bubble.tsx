@@ -7,14 +7,15 @@ import { styled } from '@mui/material/styles'
 interface BubbleProps {
 	title?: string,
 	subtitle?: string,
-	corner?: ('bl' | 'br' | 'tl' | 'tr'),
+	corner?: 'bl' | 'br' | 'tl' | 'tr' | 'none',
 	size?: 'xs' | 'lg' | 'xl' | 'xxl',
 	color?: 'light' | 'primary',
 	shadow?: boolean,
 	smallText?: boolean,
 	darkText?: boolean,
 	icon?: boolean,
-	children?: React.ReactNode
+	children?: React.ReactNode,
+	light? : boolean
 }
 
 interface BubbleWrapperProps {
@@ -24,6 +25,7 @@ interface BubbleWrapperProps {
 		borderBottomLeftRadius: string
 		borderTopRightRadius: string
 		borderTopLeftRadius: string
+		light? : boolean
 	}
 }
 
@@ -39,6 +41,7 @@ const Bubble = (props: BubbleProps) => {
 		borderBottomLeftRadius: (corner==="bl") ? "0" : borderRadius,
 		borderTopRightRadius: (corner==="tr") ? "0" : borderRadius,
 		borderTopLeftRadius: (corner==="tl") ? "0" : borderRadius,
+		light: props.light
 	}
 
 	
@@ -63,11 +66,11 @@ const BubbleWrapper = styled("div",
 			<BubbleWrapperProps>
 	(( {theme, bubbleWrapperProps} ) => (
 		{
-			border: `2px solid ${theme.palette.secondary.main}`,
+			//border: `2px solid ${theme.palette.secondary.main}`,
 			display: "inlineBlock",
 			position: "relative",
 			aspectRatio: "1",
-			backgroundColor: theme.palette.secondary.dark,
+			backgroundColor: (bubbleWrapperProps.light) ? theme.palette.info.main :theme.palette.secondary.dark,
 			transition: "transform .2s",
 			...bubbleWrapperProps,
 			"&:hover": {

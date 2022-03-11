@@ -5,6 +5,8 @@ import { Home as HomeIcon, Menu as MenuIcon, People as PeopleIcon, Coffee as Cof
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useStages, usePageTitle } from "../Store"
+import iokLogo from "../assets/images/iok2022_logo_w_httpw_sm.png"
+import {styled} from "@mui/system"
 
 type MenuItem = {
 	label: string,
@@ -80,9 +82,9 @@ const Header = () => {
 			zIndex: theme => theme.zIndex.drawer + 1
 		}}>
 			<Toolbar>
-				<Typography variant="h6" noWrap sx={{flex: '0 0 auto', transform: 'translateY(2px)'}}>
-					<Link to="/"><b>IOK</b> 2022</Link>
-				</Typography>
+				<Box sx={{flex: '0 0 auto', transform: 'translateY(2px)'}}>
+					<Link to="/"><Logo src={iokLogo} />	</Link>
+				</Box>
 				<Typography variant="h6" noWrap sx={{flex: 1, transform: 'translateY(2px)'}} align="center">
 					{pageTitle}
 				</Typography>
@@ -103,5 +105,13 @@ const Header = () => {
 		}
 	</>)
 }
+
+const Logo = styled('img')`
+	padding-top:5px;
+	height: 38px;
+	width: 207px
+	
+
+`
 
 export default Header
