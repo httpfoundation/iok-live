@@ -1,8 +1,3 @@
-
-
-
-
-
 declare module '@webex/widgets' {
 	export enum MeetingControl {
 		JOIN = 'join-meeting',

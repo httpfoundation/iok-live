@@ -38,7 +38,7 @@ export const WebexWidget = () => {
 		</style>
 		<WebexMeetingsWidget
 			style={{width: "100%", height: "100%"}}
-			accessToken="ZmZlMzFlOWMtYTEyMS00YjdjLWI3OTMtNDMzNGNlYWE2NmNmMDVjYzVlOWItNjZj_PF84_ff3fdc6f-3153-45d3-a0cc-4be98bfd8371"
+			accessToken="ZDQzZDgwYjctYjIzMi00NWYzLTg0NWMtOTMwNDQ3ZGMzNzgyMTQxMmQwYmQtZWJh_PF84_ff3fdc6f-3153-45d3-a0cc-4be98bfd8371"
 			meetingDestination={meetingDestination}
 			controls={(inMeeting: boolean) => inMeeting ? inMeetingControls : outOfMeetingControls}
 			/* zoltan.sisak@httpf.webex.com" */
