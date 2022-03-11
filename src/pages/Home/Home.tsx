@@ -44,7 +44,7 @@ const homeDashboardItems : DashboardItemType[] = [
         img: szekcio2,
         corner: "bl",
         light: false,
-        link: "/szekcio/plenaris"
+        link: "/szekcio/digitalis-kultura"
     },
     {
         caption: "IOK Cafe",
@@ -68,7 +68,7 @@ const homeDashboardItems : DashboardItemType[] = [
         img: szekcio1,
         corner: "tr",
         light: false,
-        link: "/szekcio/digitalis-kultura"
+        link: "/szekcio/it-felsooktatas"
     },
     {
         caption: "4. terem",
@@ -76,7 +76,7 @@ const homeDashboardItems : DashboardItemType[] = [
         img: szekcio2,
         corner: "tl",
         light: false,
-        link: "/szekcio/digitalis-kultura"
+        link: "/szekcio/digitalis-kultura-also-tagozat"
     },
         
 ];
