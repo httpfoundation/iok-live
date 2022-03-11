@@ -80,3 +80,11 @@ code {
 		font-weight: 700;
 	}
 }
+
+.MuiButton-root {
+	text-transform: none !important;;
+}
+
+.MuiFormControlLabel-label {
+	transform: translateY(2px);
+}

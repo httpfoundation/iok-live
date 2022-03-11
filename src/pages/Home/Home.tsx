@@ -83,7 +83,7 @@ const homeDashboardItems : DashboardItemType[] = [
 
 const Home = () => {
     return (
-        <PageContainer container>
+        <PageContainer container title="Aula">
             <PageTitle>Üdvözlünk az IOK 2022 rendezvényünkön!</PageTitle>
             <Dashboard items={homeDashboardItems} />
         </PageContainer>
