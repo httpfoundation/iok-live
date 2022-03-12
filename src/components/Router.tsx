@@ -40,7 +40,7 @@ const Router = () =>{
 			<Route path="/presentations/*" element={<Talks />} />
 			<Route path="/eloadasok/*" element={<Talks />} />
 
-			<Route path="/iok-cafe" element={<BreakoutRoom />} />
+			<Route path="/iok-cafe/*" element={<BreakoutRoom />} />
 			<Route path="/tamogatok" element={<Sponsors />} />
 		</Routes>
 		</>

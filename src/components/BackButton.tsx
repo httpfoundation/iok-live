@@ -6,6 +6,6 @@ import { Box } from "@mui/system"
 
 const BackButton = () => {
 	const navigate = useNavigate()
-	return <Button size="large" sx={{position: 'absolute', left: '20px', top: '40px'}} variant="outlined" color="primary" onClick={() => navigate(-1)} startIcon={<KeyboardBackspaceIcon />}><Box sx={{transform: 'translateY(2px)'}}>Vissza</Box></Button>
+	return <Button sx={{width: '120px', mt: 2}} size="large" variant="outlined" color="primary" onClick={() => navigate(-1)} startIcon={<KeyboardBackspaceIcon />}><Box sx={{transform: 'translateY(2px)', display: 'inline'}}>Vissza</Box></Button>
 }
 export default BackButton

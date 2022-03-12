@@ -15,37 +15,46 @@ enum MeetingControl {
 	SWITCH_SPEAKER = 'switch-speaker',
 }
 
-export const WebexWidget = () => {
+type WebexWidgetProps = {
+	title?: string,
+	destination: string | null
+}
+
+export const WebexWidget = (props: WebexWidgetProps) => {
 
 	const inMeetingControls: MeetingControl[] = [MeetingControl.EXIT, MeetingControl.AUDIO, MeetingControl.VIDEO, MeetingControl.SETTINGS]
 	//const outOfMeetingControls: MeetingControl[] = [MeetingControl.AUDIO, MeetingControl.VIDEO, MeetingControl.SETTINGS, MeetingControl.JOIN]
 	const outOfMeetingControls: MeetingControl[] = [MeetingControl.AUDIO, MeetingControl.VIDEO, MeetingControl.JOIN]
 	const breakoutRooms = useBreakoutRooms()
-	const {meetingDestination }= breakoutRooms[0] ?? {meetingDestination: ""}
-	console.log("meetingDestination", meetingDestination)
+	//const {meetingDestination }= breakoutRooms[0] ?? {meetingDestination: ""}
+	//console.log("meetingDestination", meetingDestination)
 
 	//alert(meetingDestination)
 
 	const [registration] = useRegistration()
 
+	if (!props.destination) return null
+
 	return (
 		<>
 		<style>
 			{`.wxc-meeting-info:after {
-				content: "IOK Cafe";
+				content: "${props.title || ""}";
 			 }
 			 .wxc-button--join:after {
-				content: "Jövök én is beszélgetni!";
-				font-family: Arial, sans-serif;
+				content: "Csatlakozás a beszélgetéshez";
+				font-family: 'Spartan', sans-serif;
+				padding: 0 8px;
+				transform: translateY(2px);
 			 }	
 			`}
 		</style>
 		{ 
 			registration?.webex_access_token &&
 			<WebexMeetingsWidget
-				style={{width: "100%", height: "100%"}}
+				style={{width: "100%", height: "100%", maxHeight: '100%'}}
 				accessToken={registration.webex_access_token}
-				meetingDestination={meetingDestination}
+				meetingDestination={props.destination}
 				controls={(inMeeting: boolean) => inMeeting ? inMeetingControls : outOfMeetingControls}
 			/>
 			}
