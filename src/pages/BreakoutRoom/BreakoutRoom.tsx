@@ -55,6 +55,8 @@ const BreakoutRoom = () => {
 				setMeetingDestinationLoading(false)
 				setMeetingDestination(data.meetingLink)
 			})
+		} else {
+			setMeetingDestination(null)
 		}
 	}, [selectedRoom])
 
@@ -86,7 +88,7 @@ const BreakoutRoom = () => {
 					<Grid item xs={12} lg={3}>
 						<Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc(100%)', height: '100%', position: 'relative'}}>
 							<AppBar component="div" position="static" color="default" sx={{px: 2, bgcolor: "#ace8ea"}} elevation={1}>
-								<BackButton />
+								<BackButton onClick={() => setSelectedRoom(null)} />
 								<h1>
 									{selectedRoom?.title}
 								</h1>
