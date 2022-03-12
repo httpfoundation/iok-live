@@ -65,5 +65,6 @@ export type DashboardItemType = {
     corner: 'bl' | 'br' | 'tl' | 'tr' | 'none'
     light: boolean
     img: string
-    link: string
+    link?: string
+	onClick?: () => void
 }

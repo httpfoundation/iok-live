@@ -3,6 +3,7 @@
 */
 
 import { styled } from '@mui/material/styles'
+import { Link } from 'react-router-dom'
 
 interface BubbleProps {
 	title?: string,
@@ -15,7 +16,9 @@ interface BubbleProps {
 	darkText?: boolean,
 	icon?: boolean,
 	children?: React.ReactNode,
-	light? : boolean
+	light? : boolean,
+	to?: string,
+	onClick?: () => void,
 }
 
 interface BubbleWrapperProps {
@@ -27,6 +30,18 @@ interface BubbleWrapperProps {
 		borderTopLeftRadius: string
 		light? : boolean
 	}
+}
+
+const LinkOrOnClick = (props: {to?: string, onClick?: () => void, children: React.ReactElement}) => {
+	const {to, onClick} = props
+	const style = {display: 'block', width: '100%', height: '100%', cursor:'pointer'}
+	if (to) {
+		return <Link style={style} to={to}>{props.children}</Link>
+	}
+	if (onClick) {
+		return <div style={style} onClick={onClick}>{props.children}</div>
+	}
+	return <div>{props.children}</div>
 }
 
 const Bubble = (props: BubbleProps) => {
@@ -46,12 +61,14 @@ const Bubble = (props: BubbleProps) => {
 	
 	return (
 		<BubbleWrapper bubbleWrapperProps={bubbleWrapperProps}>
-			<BubbleContent>
-				<BubbleTitle>
-					{props.title}
-				</BubbleTitle>
-					{props.children}
-			</BubbleContent>
+			<LinkOrOnClick to={props.to} onClick={props.onClick}>
+				<BubbleContent>
+					<BubbleTitle>
+						{props.title}
+					</BubbleTitle>
+						{props.children}
+				</BubbleContent>
+			</LinkOrOnClick>
 		</BubbleWrapper>
 	)
 }

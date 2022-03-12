@@ -3,6 +3,7 @@ import { Grid, Typography, useMediaQuery } from "@mui/material"
 import { styled, useTheme } from "@mui/material/styles"
 import Bubble from "./Bubble/Bubble"
 import { DashboardItemType } from "../types"
+import React from "react";
 
 interface DashboardItemProps {
 	title?: string,
@@ -23,7 +24,8 @@ interface DashboardItemProps {
 	lg?: number,
 	imgWidth?: string, 
 	empty?: boolean,
-	light?: boolean
+	light?: boolean,
+	onClick?: () => void,
 }
 
 
@@ -50,7 +52,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
             justifyContent="center"
         >
             {items.map((item, key) => {
-                const {caption, title, corner, light, img, link} = item
+                const {caption, title, corner, light, img, link, onClick} = item
                 return  <DashboardItem
                     caption={caption}
                     img={img}
@@ -62,6 +64,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
                     title={title}
                     light={light}
                     corner={corner}
+					onClick={onClick}
 					key={key}
                 />
             })}
@@ -69,22 +72,23 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
     )
 }
 
+
+
 export const DashboardItem = (props: DashboardItemProps) => {
 
-    const { img, caption, to, imgWidth, corner, size, xs, xl, lg, empty, light } = props;
+    const { img, caption, to, imgWidth, corner, size, xs, xl, lg, empty, light, onClick } = props;
 	if (empty) return <Grid item xs={xs} xl={xl} lg={lg} display="flex" ></Grid>
+	
+
     return (
-		<Grid item xs={xs} xl={xl} lg={lg} display="flex" alignItems="center" justifyContent="center" textAlign="center">
+		<Grid item xs={xs} xl={xl} lg={lg} display="flex" alignItems="center" justifyContent="center" textAlign="center" >
 			
-			<Bubble size={size} corner={corner} light={light}>
-				<Link to={to}>
-					<>
-						<DashboardImage src={img} alt={caption} width={imgWidth} />
-						<Typography sx={{color:"white"}}>{caption}</Typography>
-					</>
-				</Link>
-			
-			</Bubble>
+				<Bubble size={size} corner={corner} light={light} to={to} onClick={onClick}>
+						<>
+							<DashboardImage src={img} alt={caption} width={imgWidth} />
+							<Typography sx={{color:"white"}}>{caption}</Typography>				
+						</>
+				</Bubble>
 		</Grid>
     )
 }
