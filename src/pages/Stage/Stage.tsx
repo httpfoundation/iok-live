@@ -128,9 +128,9 @@ const StagePage = () => {
 	
 	const selectedStream = stage?.streams?.find(stream => stream.id === selectedStreamId)
 	
-	const [selectedTab, setSelectedTab] = useState<number>(1)
+	const [selectedTab, setSelectedTab] = useState<number>(0)
 	
-	useEffect(() => setSelectedTab(1), [stageSlug])
+	useEffect(() => setSelectedTab(0), [stageSlug])
 
 	return (
 		<>

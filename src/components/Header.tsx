@@ -4,7 +4,7 @@ import { Home as HomeIcon, Menu as MenuIcon, People as PeopleIcon, Coffee as Cof
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { useStages, usePageTitle } from "../Store"
+import { useStages, usePageTitle, useRegistration } from "../Store"
 import iokLogo from "../assets/images/iok2022_logo_w_httpw_sm.png"
 import {styled} from "@mui/system"
 
@@ -23,7 +23,7 @@ type DividerMenuItem = {
 const Header = () => {
 
 	const [drawerOpen, setDrawerOpen] = useState(false)
-
+	const [registration, loading] = useRegistration()
 	const stages = useStages()
 
 	const menuItems = useMemo<(MenuItem | DividerMenuItem)[]>(() => [
@@ -87,6 +87,9 @@ const Header = () => {
 				</Box>
 				<Typography variant="h6" noWrap sx={{flex: 1, transform: 'translateY(2px)'}} align="center">
 					{pageTitle}
+				</Typography>
+				<Typography variant="h6" noWrap sx={{flex: '0 0 auto', transform: 'translateY(2px)', mr: 2}} align="center">
+					{registration?.name}
 				</Typography>
 				<IconButton size="large" edge="start" color="inherit" aria-label="menu" onClick={() => setDrawerOpen(!drawerOpen)}>
            			<MenuIcon />

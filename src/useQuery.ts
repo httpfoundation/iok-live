@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useQuerySubscription } from "react-datocms"
 import { SiteClient } from "datocms-client"
 import { useRegistration } from "./Store"
-
-//const token = "696914918819c8ed705237629cfe47"
 
 export type QueryError = {
 	code: string
@@ -13,11 +11,14 @@ export type QueryError = {
 
 const useQuery = <T>(query: string, initialValue: T) : [T, QueryError | null] => {
 	const [result, setResult] = useState<T>(initialValue)
-	const [registration] = useRegistration()
+
+	const token = JSON.parse(window.localStorage.getItem("iok_registration_data") || "{}")?.dato_token
+
 	const { data, error } = useQuerySubscription({
 		query,
-		enabled: true,
-		token: registration?.dato_token || ""
+		enabled: Boolean(token),
+		token,
+
 	})
 	useEffect(() => {
 		if (data) setResult(Object.keys(data).length === 1 ? data[Object.keys(data)[0]] : data)
