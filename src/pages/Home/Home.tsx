@@ -10,6 +10,7 @@ import szekcio2 from "../../assets/images/szekcio2.png";
 import iokCafe from "../../assets/images/iokcafe.png";
 
 import Dashboard from "../../components/Dashboard"
+import Welcome from "../Welcome";
 
 
 
@@ -60,7 +61,7 @@ const homeDashboardItems : DashboardItemType[] = [
         img: iokCafe,
         corner: "none",
         light: true,
-        link: "uzenofal"
+        link: "/uzenofal"
     },
     {
         caption: "3. terem",
@@ -82,15 +83,19 @@ const homeDashboardItems : DashboardItemType[] = [
 ];
 
 const Home = () => {
+    
+	
     return (
-        <PageContainer container title="Aula">
-            <PageTitle>Üdvözlünk az IOK 2022 rendezvényünkön!</PageTitle>
-            <Dashboard items={homeDashboardItems} />
-        </PageContainer>
-    );
-};
 
-export default Home;
+            <PageContainer container title="Aula">
+                <PageTitle>Üdvözlünk az IOK 2022 rendezvényünkön!</PageTitle>
+                <Dashboard items={homeDashboardItems} />
+            </PageContainer>
+        
+    )
+}
+
+export default Home
 
 
 

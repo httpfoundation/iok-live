@@ -13,7 +13,7 @@ const receptionDashboardItems : DashboardItemType[] = [
         img: iokCafe,
         corner: "none",
         light: true,
-        link: "#"
+        link: "/koszonto"
     },
     {
         caption: "Programfüzet",
@@ -53,15 +53,15 @@ const receptionDashboardItems : DashboardItemType[] = [
         img: iokCafe,
         corner: "none",
         light: true,
-        link: "#"
+        link: "/http-csapat"
     },
     {
-        caption: "3. terem",
-        title: "IT felsőoktatás szekció előadásai a 3. teremben",
+        caption: "Útmutató",
+        title: "IOK Virtuális Konferenciaközpont használati útmutató",
         img: iokCafe,
         corner: "tr",
         light: false,
-        link: "/szekcio/digitalis-kultura"
+        link: "/utmutato"
     },
     {
         caption: "Visszatérés az Aulába",

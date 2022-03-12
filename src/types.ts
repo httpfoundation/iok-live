@@ -54,9 +54,15 @@ export type DatoBreakoutRoom = {
 	meetingDestination?: string
 }
 
+export type DatoLiveStaticElement = {
+	welcome?: any
+	httpCsapat?: any
+}
+
 export type DatoComplex = {
 		allStages: DatoStage[]
 		allBreakoutrooms: DatoBreakoutRoom[]
+		liveStaticElement: DatoLiveStaticElement
 }
 
 export type DashboardItemType = {

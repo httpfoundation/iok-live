@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom } from "./types"
+import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom, DatoLiveStaticElement } from "./types"
 import useQuery from "./useQuery"
 
 export interface IStore {
@@ -12,6 +12,7 @@ export interface IStore {
 	setPageTitle: (title: string) => void,
 	registration: RegistrationData|null,
 	registrationLoading: boolean,
+	liveStaticElements: DatoLiveStaticElement
 }
 
 export const Store = createContext<IStore>({
@@ -23,6 +24,7 @@ export const Store = createContext<IStore>({
 	setPageTitle: (t: string) => {},
 	registration: null,
 	registrationLoading: true,
+	liveStaticElements: {}
 })
 
 type RegistrationData = {
@@ -95,10 +97,18 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				title
 				meetingDestination
 			}
+			liveStaticElement {
+				welcome {
+				  value
+				}
+				httpCsapat {
+					value
+				}
+			}
 	  	}
-	`, {allStages: [], allBreakoutrooms: []})
+	`, {allStages: [], allBreakoutrooms: [], liveStaticElement: {}})
 
-	const {allStages : stages, allBreakoutrooms: breakoutRooms} = data
+	const {allStages : stages, allBreakoutrooms: breakoutRooms, liveStaticElement: liveStaticElements} = data
 
 	const [presenters] = useQuery<DatoSpeaker[]>(`
 		{
@@ -144,13 +154,15 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 		setPageTitle,
 		registration,
 		registrationLoading,
-	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle, registration, registrationLoading])
+		liveStaticElements
+	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle, registration, registrationLoading, liveStaticElements])
 
 	return <Store.Provider value={store}>{props.children}</Store.Provider>
 }
 
 export const useStore = () => {
 	const store = useContext(Store)
+	console.log(store)
 	return store
 }
 
@@ -180,6 +192,12 @@ export const useStages = () => {
 	const store = useStore()
 	return store.stages
 }
+
+export const useLiveStaticElements = () => {
+	const store = useStore()
+	return store.liveStaticElements
+}
+
 
 export const useStage = (stageSlug?: string) => {
 	const store = useStore()
