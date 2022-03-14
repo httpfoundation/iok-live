@@ -12,6 +12,7 @@ export interface IStore {
 	setPageTitle: (title: string) => void,
 	registration: RegistrationData|null,
 	registrationLoading: boolean,
+	registrationError: boolean,
 	liveStaticElements: DatoLiveStaticElement
 }
 
@@ -24,6 +25,7 @@ export const Store = createContext<IStore>({
 	setPageTitle: (t: string) => {},
 	registration: null,
 	registrationLoading: true,
+	registrationError: false,
 	liveStaticElements: {}
 })
 
@@ -34,9 +36,10 @@ type RegistrationData = {
 	webex_access_token: string
 }
 
-const useRegistrationData = (regId: string|null) : [RegistrationData|null, boolean] => {
+const useRegistrationData = (regId: string|null) : [RegistrationData|null, boolean, boolean] => {
 	const [registrationData, setRegistrationData] = useState<RegistrationData|null>(null)
 	const [loading, setLoading] = useState(true)
+	const [error, setError] = useState(false)
 
 	useEffect(() => {
 		(async () => {
@@ -49,6 +52,8 @@ const useRegistrationData = (regId: string|null) : [RegistrationData|null, boole
 					setRegistrationData(data)
 					window.localStorage.setItem("iok_registration_data", JSON.stringify(data))
 					window.history.replaceState(null, '', window.location.href.replace(window.location.search, ""))
+				} else {
+					setError(true)
 				}
 			} else if (window.localStorage.getItem("iok_registration_data")) {
 				setRegistrationData(JSON.parse(window.localStorage.getItem("iok_registration_data") as string))
@@ -57,7 +62,7 @@ const useRegistrationData = (regId: string|null) : [RegistrationData|null, boole
 		})()
 	}, [regId])
 
-	return [registrationData, loading]
+	return [registrationData, loading, error]
 }
 
 export const StoreProvider = (props: { children: React.ReactElement }) => {
@@ -144,7 +149,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 	const [pageTitle, setPageTitle] = useState("IOK 2022")
 
 	const regId = (new URLSearchParams(window.location.search)).get('q') || null
-	const [registration, registrationLoading] = useRegistrationData(regId)
+	const [registration, registrationLoading, registrationError] = useRegistrationData(regId)
 
 	const store:IStore = useMemo(() => ({
 		stages,
@@ -155,8 +160,9 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 		setPageTitle,
 		registration,
 		registrationLoading,
+		registrationError,
 		liveStaticElements
-	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle, registration, registrationLoading, liveStaticElements])
+	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle, registration, registrationLoading, registrationError, liveStaticElements])
 
 	return <Store.Provider value={store}>{props.children}</Store.Provider>
 }
@@ -201,7 +207,8 @@ export const useLiveStaticElements = () => {
 
 export const useStage = (stageSlug?: string) => {
 	const store = useStore()
-	return store.stages.find(stage => stage.slug === stageSlug)
+	const index = store.stages.findIndex(stage => stage.slug === stageSlug)
+	return {...store.stages[index], prevStage: index > 0 ? store.stages[index - 1] : null, nextStage: index < store.stages.length - 1 ? store.stages[index + 1] : null}
 }
 
 export const useBreakoutRooms = (stageSlug?: string) => {
@@ -230,9 +237,9 @@ export const usePageTitle = () => {
 	return store.pageTitle
 }
 
-export const useRegistration = (): [RegistrationData|null, boolean] => {
+export const useRegistration = (): [RegistrationData|null, boolean, boolean] => {
 	const store = useStore()
-	return [store.registration, store.registrationLoading]
+	return [store.registration, store.registrationLoading, store.registrationError]
 }
 
 export default Store

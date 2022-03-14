@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, Typography, Drawer, List, ListItemText, ListItemIcon, ListItemButton, ListSubheader, Box, IconButton, Avatar, Divider, Fab, Tooltip, Zoom } from '@mui/material'
 
-import { Home as HomeIcon, Menu as MenuIcon, People as PeopleIcon, Coffee as CoffeeIcon, Star as StarIcon, EventNote as EventNoteIcon, LiveTv as LiveTvIcon } from '@mui/icons-material'
+import { Home as HomeIcon, Menu as MenuIcon, People as PeopleIcon, Coffee as CoffeeIcon, Star as StarIcon, EventNote as EventNoteIcon, LiveTv as LiveTvIcon, Logout as LogoutIcon } from '@mui/icons-material'
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -35,10 +35,11 @@ const Header = () => {
 		{divider: true},
 		{label: 'Szekciók', divider: true, icon: <LiveTvIcon sx={{mr: 1, transform: 'translateY(5px)', color: 'rgba(0, 0, 0, 0.4)'}} />},
 		...stages.map(stage => ({label: stage.name, to: `/szekcio/${stage.slug}`})),
-		{divider: true},
 		{label: 'IOK Cafe', to: '/iok-cafe', icon: <CoffeeIcon />},
 		{label: 'Támogatók', to: '/tamogatok', icon: <StarIcon />},
 		{label: 'Értékelő űrlap', to: '/ertekeles', icon: <StarIcon />},
+		{divider: true},
+		{label: 'Kijelentkezés', to: '/kijelentkezes', icon: <LogoutIcon />},
 	], [stages])
 
 	const pageTitle = usePageTitle()
@@ -86,9 +87,9 @@ const Header = () => {
 					<Link to="/"><Logo src={iokLogo} />	</Link>
 				</Box>
 				<Typography variant="h6" noWrap sx={{flex: 1, transform: 'translateY(2px)'}} align="center">
-					{pageTitle}
+					{/* {pageTitle} */}
 				</Typography>
-				<Typography variant="h6" noWrap sx={{flex: '0 0 auto', transform: 'translateY(2px)', mr: 2}} align="center">
+				<Typography variant="h6" noWrap sx={{flex: '0 0 auto', transform: 'translateY(2px)', mr: 2, display: {xs: 'none', md: 'block'}}} align="center">
 					{registration?.name}
 				</Typography>
 				<IconButton size="large" edge="start" color="inherit" aria-label="menu" onClick={() => setDrawerOpen(!drawerOpen)}>
@@ -98,8 +99,8 @@ const Header = () => {
 		</AppBar>
 		{location.pathname !== "/" && (
 			<Zoom in>
-				<Tooltip title="Vissza az aulába" placement="left" arrow>
-					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: 30, top: 80, zIndex: 9999}} component={Link} to="/" >
+				<Tooltip title="Vissza az aulába" placement="bottom" arrow>
+					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: 30, top: 80, zIndex: 800}} component={Link} to="/" >
 						<HomeIcon />
 					</Fab>
 				</Tooltip>

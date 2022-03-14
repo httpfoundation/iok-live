@@ -1,17 +1,18 @@
-import { AppBar, Grid, Tab, Tabs, Typography, Zoom, CircularProgress, TextField, Alert, FormControlLabel, Checkbox, Button, InputLabel, Select, MenuItem, FormControl, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from "@mui/material"
+import { AppBar, Grid, Tab, Tabs, Typography, Zoom, CircularProgress, TextField, Alert, FormControlLabel, Checkbox, Button, InputLabel, Select, MenuItem, FormControl, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Tooltip, Fab } from "@mui/material"
 import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
 import { Link, useParams } from "react-router-dom"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import { useEffect, useMemo, useState } from "react"
 import { LanguageSelect, PageTitle } from "../../components"
-import { useRegistration, useStage, useStore } from "../../Store"
+import { useRegistration, useStage, useStages, useStore } from "../../Store"
 import { Box } from "@mui/system"
 import ItmpImg from "../../assets/img/itmp-1.png"
 import { styled } from '@mui/material/styles'
 import { PageHeaderTitle } from "../../components/PageContainer"
 import { DatoTalk } from "../../types"
 import { useDatoClient } from "../../useQuery"
+import {ArrowBackIosNew as ArrowLeftIcon, ArrowForwardIos as ArrowRightIcon } from '@mui/icons-material'
 
 
 const NoStream = () => {
@@ -19,7 +20,7 @@ const NoStream = () => {
 		<Zoom in>
 			<Box sx={{textAlign: 'center'}}>
 				<img src={ItmpImg} alt="" style={{width: '400px', maxWidth: 'min(calc(50vw * 9 / 16), 50vh)'}}/>
-				<Typography sx={{textAlign: 'center', fontSize: {xs: '26px', md:'40px'}, fontWeight: 700, mt: 2, color: '#fff'}}>A közvetítés hamarosan kezdődik!</Typography>
+				<Typography sx={{textAlign: 'center', fontSize: {xs: '26px', lg:'40px'}, fontWeight: 700, mt: 2, color: '#fff'}}>A közvetítés hamarosan kezdődik!</Typography>
 			</Box>
 		</Zoom>
 	</Box>
@@ -49,7 +50,7 @@ const Questions = (props: {schedule?: DatoTalk[], stageId?: number}) => {
 			talk: String(targetTalk),
 			speaker: String(targetSpeaker) || null,
 			content,
-			registration: anonymus ? null : window.localStorage.registration ?? null
+			registration: anonymus ? null : String(registration?.id) ?? null
 		}
 		console.log(data)
 		/* client.items.create({
@@ -135,6 +136,8 @@ const VideoContainer = styled('div')(({theme}) => `
 const StagePage = () => {
 
 	const { stageId: stageSlug } = useParams()
+
+	const stages = useStages()
 	
 	const stage = useStage(stageSlug)
 
@@ -150,17 +153,32 @@ const StagePage = () => {
 	const selectedStream = stage?.streams?.find(stream => stream.id === selectedStreamId)
 	
 	const [selectedTab, setSelectedTab] = useState<number>(0)
-	
+
+	const fabs = [
+		{title: `${stage.nextStage?.name || ""}`, to: `/szekcio/${stage?.nextStage?.slug}`, icon: <ArrowRightIcon sx={{transform: 'translateX(2px)'}} />, disabled: !stage?.nextStage},
+		{title: `${stage.prevStage?.name || ""}`, to: `/szekcio/${stage?.prevStage?.slug}`, icon: <ArrowLeftIcon sx={{transform: 'translateX(-2px)'}} />, disabled: !stage?.prevStage},
+	]
+
 	useEffect(() => setSelectedTab(0), [stageSlug])
 
 	return (
 		<>
 			<Box sx={{height: '100%', 'display': 'flex', flexDirection: 'column'}}>
+<<<<<<< HEAD
 				<Box sx={{bgcolor: "#ace8ea"}}>
 					<PageTitle>{stage?.pageTitle}</PageTitle>
+=======
+				{ fabs.map((fab, index) => <Tooltip title={fab.title} placement="bottom" arrow>
+					<Fab disabled={fab.disabled} color="secondary" aria-label="home" sx={{position: 'absolute', right: 100 + (index*70), top: 80, zIndex: 9999}} component={Link} to={fab.to} >
+						{fab.icon}
+					</Fab>
+				</Tooltip>)}
+				<Box sx={{bgcolor: "#ace8ea", mb: '-8px'}}>
+					<PageTitle>{stage?.name}</PageTitle>
+>>>>>>> f1636553681b3210a0351a478547a25ba54600f6
 				</Box>
 				<Grid container spacing={0} id="stage" sx={{height: '100%', overflowY: 'hidden', maxHeight: '100%'}}>
-					<Grid item xs={12} lg={9} sx={{position: 'relative', height: {md: '100%'}}}>
+					<Grid item xs={12} lg={9} sx={{position: 'relative', height: {lg: '100%'}}}>
 						{/* <Box sx={{width: '100%', height: '100%', backgroundColor: '#000', zIndex: -1, position: 'absolute'}}>
 							<Box sx={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 100}}>
 								<CircularProgress size={60} sx={{zIndex: 100, color: '#fff'}} />
@@ -189,7 +207,7 @@ const StagePage = () => {
 						
 						{ stage?.name && !selectedStreamId && <NoStream /> }
 					</Grid>
-					<Grid item xs={12} lg={3} sx={{height: {xs: 'calc(100% - (100vw * 9 / 16))', md: '100%'}}}>
+					<Grid item xs={12} lg={3} sx={{height: {xs: 'calc(100% - (100vw * 9 / 16))', lg: '100%'}}}>
 						<Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc(100%)', height: '100%'}}>
 							<AppBar component="div" position="static" color="default" sx={{px: 2, bgcolor: "#ace8ea", pt: 4, borderTop: '1px solid #939393'}} elevation={1}>
 								<div>

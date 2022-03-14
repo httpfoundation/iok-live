@@ -10,6 +10,7 @@ import { useEffect, useState } from "react"
 import Welcome from "../pages/Welcome"
 import About from "../pages/About"
 import MessageBoard from "../pages/MessageBoard"
+import Logout from "./Logout"
 
 
 const ScrollToTop = () => {
@@ -54,6 +55,7 @@ const Router = () =>{
 			<Route path="/uzenofal/*" element={<MessageBoard />} />
 			<Route path="/iok-cafe/*" element={<BreakoutRoom />} />
 			<Route path="/tamogatok" element={<Sponsors />} />
+			<Route path="/kijelentkezes" element={<Logout />} />
 		</Routes>
 		</>
 	)
