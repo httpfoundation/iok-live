@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import { MessageNotifications } from '../pages/MessageBoard'
 
 import Router from './Router'
 
@@ -9,6 +10,7 @@ const Main = () => {
 				}, backgroundColor: "secondary.light" }} 
 				component="main" id="main">
 			<Router />
+			<MessageNotifications />
 		</Box>
 	)
 }

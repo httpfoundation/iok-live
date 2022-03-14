@@ -64,7 +64,7 @@ const BreakoutRoom = () => {
 	const navigate = useNavigate()
 
 	const dashboardItems: WebexRoomDashboardItem[] = rooms.map(room => ({
-		caption: room.title,
+		caption: room.title.replace("IOK Cafe", ""),
 		title: "",
 		light: true,
 		img: iokCafe,

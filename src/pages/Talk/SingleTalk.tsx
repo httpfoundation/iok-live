@@ -15,8 +15,8 @@ export const SingleTalk = () => {
 
 	return (
 		<PageContainer container>
-			<PageTitle >Előadás</PageTitle>
-			<TalkTitle variant="h2">{talk?.title}</TalkTitle>
+			<PageTitle >{talk?.title}</PageTitle>
+			{/* <TalkTitle variant="h2"></TalkTitle> */}
 			<Stack direction="row" spacing={2} >
 			<Chip label={talk.start && new Date(talk.start).toLocaleString('hu-hu', { minute: 'numeric', hour: 'numeric' })} icon={<TimeIcon />} sx={{}}/>
 			<Tooltip title="Közvetítés megtekintése" placement="right" arrow>
@@ -24,7 +24,7 @@ export const SingleTalk = () => {
 			</Tooltip>
 			</Stack>
 			<Paragraph>{talk.description}</Paragraph>
-			<PresenterGrid>
+			<PresenterGrid columns={{lg: Math.max(4, talk.speakers.length)}}>
 				{ talk.speakers.map((speaker, index)=> (
 					<PresenterCard presenter={speaker} key={index} />
 				))}
