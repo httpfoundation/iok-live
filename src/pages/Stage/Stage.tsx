@@ -78,7 +78,7 @@ const StagePage = () => {
 					</Fab>
 				</Tooltip>)}
 				<Box sx={{bgcolor: "#ace8ea", mb: '-8px'}}>
-					<PageTitle>{stage?.name}</PageTitle>
+					<PageTitle>{stage?.pageTitle}</PageTitle>
 				</Box>
 				<Grid container spacing={0} id="stage" sx={{height: '100%', overflowY: 'hidden', maxHeight: '100%'}}>
 					<Grid item xs={12} lg={9} sx={{position: 'relative', height: {lg: '100%'}}}>

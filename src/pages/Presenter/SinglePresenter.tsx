@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom"
 import { usePresenterWithTalksByStage } from "../../Store"
 //import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import {PageContainer, PageTitle, Paragraph, ScheduleItem} from "../../components"
-import { Grid, Typography } from "@mui/material"
+import { Grid, Typography, TypographyProps } from "@mui/material"
 import { PageSubtitle } from "../../components"
 import { styled } from '@mui/material/styles'
 
@@ -26,12 +26,13 @@ export const SinglePresenter = () => {
 
 	return (
 		<PageContainer container>
+			<PageTitle >Előadó</PageTitle>
 			<Grid container spacing={4} sx={{mb: 4}}>
 				<Grid item xs={12} md={4}>
 					<PresenterImage src={presenter?.image?.url} alt={presenter?.name} />
 				</Grid>
 				<Grid item xs={12} md={8} sx={{display: "flex", flexDirection: "column", justifyContent: "flex-end", pb: 1}}>
-					<PageTitle align="left">{presenter?.name}</PageTitle>
+					<TalkTitle align="left">{presenter?.name}</TalkTitle>
 					<PageSubtitle>{presenter?.title}, {presenter?.company}</PageSubtitle>
 					{presenter?.bio && <Paragraph>
 						{presenter.bio}
@@ -46,5 +47,10 @@ export const SinglePresenter = () => {
 		</PageContainer>
 	)
 }
+
+const TalkTitle = styled("h2")<TypographyProps>(({theme}) => `
+	text-align: "left";
+	margin: -${theme.spacing(2)} 0 ${theme.spacing(2)} 0;
+`)
 
 export default SinglePresenter

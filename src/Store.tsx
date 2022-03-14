@@ -71,6 +71,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 			allStages(orderBy: [order_ASC]) {
 				id
 				name
+				pageTitle
 				slug
 				streams {
 					id

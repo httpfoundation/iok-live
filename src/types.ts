@@ -42,6 +42,7 @@ export type DatoStream = {
 export type DatoStage = {
 	id: number
 	name: string
+	pageTitle: string
 	slug: string
 	schedule?: DatoTalk[]
 	streams?: DatoStream[]

@@ -86,7 +86,7 @@ export const DashboardItem = (props: DashboardItemProps) => {
 				<Bubble size={size} corner={corner} light={light} to={to} onClick={onClick}>
 						<>
 							<DashboardImage src={img} alt={caption} width={imgWidth} />
-							<Typography sx={{color:"white"}}>{caption}</Typography>				
+							<Typography sx={{color:"white", minHeight:"38px", fontWeight:"600"}}>{caption}</Typography>				
 						</>
 				</Bubble>
 		</Grid>
@@ -98,7 +98,7 @@ const DashboardImage = styled("img", {shouldForwardProp: (prop) => prop!=='width
 		if (width) return width
 		else return (
 			{
-				width: "150px",
+				width: "130px",
 				[theme.breakpoints.down("xl")]: {
 					width: "100px",
 				},
