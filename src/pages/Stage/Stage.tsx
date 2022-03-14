@@ -1,18 +1,17 @@
-import { AppBar, Grid, Tab, Tabs, Typography, Zoom, CircularProgress, TextField, Alert, FormControlLabel, Checkbox, Button, InputLabel, Select, MenuItem, FormControl, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Tooltip, Fab } from "@mui/material"
+import { AppBar, Grid, Tab, Tabs, Typography, Zoom, CircularProgress, Alert, Tooltip, Fab } from "@mui/material"
 import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
 import { Link, useParams } from "react-router-dom"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { LanguageSelect, PageTitle } from "../../components"
-import { useRegistration, useStage, useStages, useStore } from "../../Store"
+import { useStage, useStages } from "../../Store"
 import { Box } from "@mui/system"
 import ItmpImg from "../../assets/img/itmp-1.png"
 import { styled } from '@mui/material/styles'
 import { PageHeaderTitle } from "../../components/PageContainer"
-import { DatoTalk } from "../../types"
-import { useDatoClient } from "../../useQuery"
 import {ArrowBackIosNew as ArrowLeftIcon, ArrowForwardIos as ArrowRightIcon } from '@mui/icons-material'
+import { Questions } from "./Questions"
 
 
 const NoStream = () => {
@@ -24,97 +23,6 @@ const NoStream = () => {
 			</Box>
 		</Zoom>
 	</Box>
-}
-
-const Questions = (props: {schedule?: DatoTalk[], stageId?: number}) => {
-
-	const store = useStore()
-
-	const [anonymus, setAnonymus] = useState(false)
-	const [targetTalk, setTargetTalk] = useState<number>(0)
-	const [targetSpeaker, setTargetSpeaker] = useState<number>(0)
-	const [content, setContent] = useState('')
-	const [success, setSuccess] = useState(false)
-
-	const talk = useMemo(() => store.talks.find(t => String(t.id) === String(targetTalk)), [targetTalk, store.talks])
-	const speakerIds = useMemo(() => talk?.speaker?.map(s => s.id), [talk?.speaker])
-	const speakers = useMemo(() => store.presenters.filter(p => speakerIds?.includes(p.id)), [store.presenters, speakerIds])
-	
-	const client = useDatoClient()
-	
-	const [registration] = useRegistration()
-
-	const sendQuestion = async () => {
-		const data = {
-			stage: String(props.stageId),
-			talk: String(targetTalk),
-			speaker: String(targetSpeaker) || null,
-			content,
-			registration: anonymus ? null : String(registration?.id) ?? null
-		}
-		console.log(data)
-		/* client.items.create({
-			itemType: 
-		}) */
-		try {
-			await client?.items.create({
-				itemType: '1917974',
-				...data
-			})
-			setContent('')
-			setTargetSpeaker(0)
-			setTargetTalk(0)
-			setSuccess(true)
-		} catch (e) {
-			console.log(e)
-			alert("Hiba történt a kérdés elküldése közben. Kérlek próbáld újra később.")
-		}
-
-		
-	}
-
-	useEffect(() => {
-		if (talk && speakers.length === 1) setTargetSpeaker(speakers[0].id)
-	}, [talk, speakers])
-
-	if (!props.stageId) return null
-
-	return <>
-		<Box sx={{p: 2}}>
-			<TextField fullWidth label="Név" color="secondary" sx={{mb: 0}} value={!anonymus ? registration?.name : "≪ Névtelen ≫"} disabled />
-			<FormControlLabel control={<Checkbox color="secondary" value={anonymus} onChange={(e, c) => setAnonymus(c)} />} label="Névtelen kérdés" sx={{my: '5px'}} />
-			<FormControl fullWidth sx={{my: 1}}>
-				<InputLabel color="secondary">Előadás</InputLabel>
-				<Select value={targetTalk} label="Előadás" onChange={(e) => setTargetTalk(Number(e.target.value))} color="secondary">
-					{ props.schedule?.filter(talk => talk.speaker.length).map(talk => <MenuItem key={talk.id} value={talk.id}>{talk.title}</MenuItem>) }
-				</Select>
-			</FormControl>
-			<FormControl fullWidth sx={{mt: 1}}>
-				<InputLabel color="secondary">Címzett előadó</InputLabel>
-				<Select value={targetSpeaker} label="Címzett előadó" onChange={(e) => setTargetSpeaker((e.target.value || -1) as number)} color="secondary">
-					<MenuItem value={-1}>Nincs</MenuItem>
-					{ speakers.map(speaker => <MenuItem key={speaker.id} value={speaker.id}>{speaker.name}</MenuItem>) }
-				</Select>
-			</FormControl>
-			<TextField fullWidth multiline minRows={6} maxRows={10} label="Kérdés" color="secondary" sx={{mt: 2}} value={content} onChange={e => setContent(e.target.value)} />
-
-			<Button variant="contained" color="secondary" sx={{mt: 2}} onClick={sendQuestion}>Küldés</Button>
-			
-		</Box>
-		<Dialog open={success}>
-			<DialogTitle>Kérdés sikeresen elküldve</DialogTitle>
-			<DialogContent>
-				<DialogContentText>
-					Köszönjük a kérdésedet.
-				</DialogContentText>
-			</DialogContent>
-			<DialogActions>
-				<Button onClick={() => setSuccess(false)} color="secondary" variant="contained">
-					Bezárás
-				</Button>
-			</DialogActions>
-		</Dialog>
-	</>
 }
 
 const embedDomain = window.localStorage.dev === "true" ? "localhost" : window.origin.replace("https://", "")
