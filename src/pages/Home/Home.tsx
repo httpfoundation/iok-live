@@ -87,8 +87,8 @@ const Home = () => {
 	
     return (
 
-            <PageContainer container title="Aula">
-                <PageTitle>Üdvözlünk az IOK 2022 rendezvényünkön!</PageTitle>
+            <PageContainer container>
+                <PageTitle>IOK 2022 Aula</PageTitle>
                 <Dashboard items={homeDashboardItems} />
             </PageContainer>
         

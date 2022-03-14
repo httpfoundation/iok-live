@@ -157,7 +157,7 @@ const StagePage = () => {
 		<>
 			<Box sx={{height: '100%', 'display': 'flex', flexDirection: 'column'}}>
 				<Box sx={{bgcolor: "#ace8ea"}}>
-					<PageTitle>{stage?.name}</PageTitle>
+					<PageTitle>{stage?.pageTitle}</PageTitle>
 				</Box>
 				<Grid container spacing={0} id="stage" sx={{height: '100%', overflowY: 'hidden', maxHeight: '100%'}}>
 					<Grid item xs={12} lg={9} sx={{position: 'relative', height: {md: '100%'}}}>

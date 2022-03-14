@@ -25,6 +25,7 @@ let theme = createTheme({
 		//fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
 		fontFamily: '"Spartan", sans-serif',
 		fontSize: 13.5,
+		
 		fontWeightLight: 300,
 		fontWeightRegular: 400,
 		fontWeightMedium: 500,
@@ -32,10 +33,15 @@ let theme = createTheme({
 			color: '#14475C',
 		},
 		h1: {
-			fontSize: '45px',
+			fontSize: '2.8rem',
 			fontWeight: 700,
 			color: '#14475C',
 		},
+		h2: {
+			fontSize: '1.7rem',
+			fontWeight: 700,
+			color: '#14475C',
+		},		
 		h6: {
 			fontSize: '18px',
 			fontWeight: 400,
@@ -44,6 +50,22 @@ let theme = createTheme({
 	},
 })
 
-theme = responsiveFontSizes(theme)
+//theme = responsiveFontSizes(theme)
+
+theme.typography.h1 = {
+	fontSize: '2.0rem',
+	/*'@media (max-width:800px)': {
+	  fontSize: '1.5rem',
+	}, */
+
+	[theme.breakpoints.up('xl')]: {
+		fontSize: '2.8rem',
+	  },
+  }
+
+theme.typography.body1 = {
+	fontSize: "0.8rem",
+
+}
 
 export default theme
