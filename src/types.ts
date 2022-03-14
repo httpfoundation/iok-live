@@ -78,6 +78,7 @@ export type DatoStaff = {
 }
 
 export type DatoMessage = {
+	id: number
 	title: string
 	message: StructuredTextDocument
 	level: 1 | 2 | 3
