@@ -46,9 +46,9 @@ const LinkOrOnClick = (props: {to?: string, onClick?: () => void, children: Reac
 
 const Bubble = (props: BubbleProps) => {
 	const { size, corner } = props
-	//"lg" is the default size
- 	const width = (size === "xs") ? "150px" : (size === "lg") ? "180px" : (size === "xl") ? "200px" : "350px"
-	const borderRadius = (size === "xs") ? "90px" : (size === "xl") ? "250px" : (size === "xxl") ? "300px" : "125px"
+	//"xl" is the default size
+ 	const width = (size === "xs") ? "350px" : (size === "lg") ? "200px" :  "450px"
+	const borderRadius = (size === "xs") ? "250px" : (size === "lg") ? "140px" : "350px" 
 	const bubbleWrapperProps = {
 		width,
 		borderBottomRightRadius: (corner==="br") ? "0" : borderRadius,
