@@ -1,3 +1,5 @@
+import { StructuredTextDocument } from "react-datocms"
+
 export type DatoSpeaker = {
 	id: number
 	name: string
@@ -61,9 +63,25 @@ export type DatoLiveStaticElement = {
 }
 
 export type DatoComplex = {
-		allStages: DatoStage[]
-		allBreakoutrooms: DatoBreakoutRoom[]
-		liveStaticElement: DatoLiveStaticElement
+	allStages: DatoStage[]
+	allBreakoutrooms: DatoBreakoutRoom[]
+	liveStaticElement: DatoLiveStaticElement
+	allSpeakers: DatoSpeaker[]
+	allMessages: DatoMessage[]
+}
+
+export type DatoStaff = {
+	name: string
+	image: {
+		url: string
+	}
+}
+
+export type DatoMessage = {
+	title: string
+	message: StructuredTextDocument
+	level: 1 | 2 | 3
+	staff?: DatoStaff
 }
 
 export type DashboardItemType = {

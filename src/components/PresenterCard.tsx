@@ -56,16 +56,16 @@ const PresenterCard = (props: {presenter: DatoSpeaker}) => {
 	)
 }
 
-export const PresenterGrid = styled('div')(({ theme }) => `
+export const PresenterGrid = styled('div')<{columns?: {xs?: number, sm?: number, lg?: number}}>(({ theme, columns }) => `
 	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
+	grid-template-columns: repeat(${columns?.xs || 2}, minmax(0, 1fr));
     gap: 30px;
 	max-width: 100%;
 	${theme.breakpoints.up('sm')} {
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-template-columns: repeat(${columns?.sm || 4}, minmax(0, 1fr));
 	}
 	${theme.breakpoints.up('lg')} {
-		grid-template-columns: repeat(6, minmax(0, 1fr));
+		grid-template-columns: repeat(${columns?.lg || 6}, minmax(0, 1fr));
 	}
 `)
 export default PresenterCard

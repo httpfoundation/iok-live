@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom, DatoLiveStaticElement } from "./types"
+import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom, DatoLiveStaticElement, DatoMessage } from "./types"
 import useQuery from "./useQuery"
 
 export interface IStore {
@@ -14,6 +14,7 @@ export interface IStore {
 	registrationLoading: boolean,
 	registrationError: boolean,
 	liveStaticElements: DatoLiveStaticElement
+	messages: DatoMessage[]
 }
 
 export const Store = createContext<IStore>({
@@ -26,7 +27,8 @@ export const Store = createContext<IStore>({
 	registration: null,
 	registrationLoading: true,
 	registrationError: false,
-	liveStaticElements: {}
+	liveStaticElements: {},
+	messages: []
 })
 
 type RegistrationData = {
@@ -111,13 +113,6 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 					value
 				}
 			}
-	  	}
-	`, {allStages: [], allBreakoutrooms: [], liveStaticElement: {}})
-
-	const {allStages : stages, allBreakoutrooms: breakoutRooms, liveStaticElement: liveStaticElements} = data
-
-	const [presenters] = useQuery<DatoSpeaker[]>(`
-		{
 			allSpeakers(first: 100) {
 				id
 				name
@@ -128,8 +123,25 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 					url
 				}
 			}
+			allMessages(first: 100) {
+				id
+				createdAt
+				title
+				message {
+					value
+				}
+				level
+				staff {
+					name
+					image {
+						url
+					}
+				}
+			}
 	  	}
-	`, [])
+	`, {allStages: [], allBreakoutrooms: [], liveStaticElement: {}, allSpeakers: [], allMessages: []})
+
+	const {allStages : stages, allBreakoutrooms: breakoutRooms, liveStaticElement: liveStaticElements, allSpeakers: presenters, allMessages: messages} = data
 
 	const talks = useMemo(() => {
 		const talks: DatoTalk[] = []
@@ -161,8 +173,9 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 		registration,
 		registrationLoading,
 		registrationError,
-		liveStaticElements
-	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle, registration, registrationLoading, registrationError, liveStaticElements])
+		liveStaticElements,
+		messages
+	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle, registration, registrationLoading, registrationError, liveStaticElements, messages])
 
 	return <Store.Provider value={store}>{props.children}</Store.Provider>
 }
@@ -240,6 +253,11 @@ export const usePageTitle = () => {
 export const useRegistration = (): [RegistrationData|null, boolean, boolean] => {
 	const store = useStore()
 	return [store.registration, store.registrationLoading, store.registrationError]
+}
+
+export const useMessages = () => {
+	const store = useStore()
+	return store.messages
 }
 
 export default Store
