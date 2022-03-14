@@ -164,18 +164,13 @@ const StagePage = () => {
 	return (
 		<>
 			<Box sx={{height: '100%', 'display': 'flex', flexDirection: 'column'}}>
-<<<<<<< HEAD
-				<Box sx={{bgcolor: "#ace8ea"}}>
-					<PageTitle>{stage?.pageTitle}</PageTitle>
-=======
 				{ fabs.map((fab, index) => <Tooltip title={fab.title} placement="bottom" arrow>
 					<Fab disabled={fab.disabled} color="secondary" aria-label="home" sx={{position: 'absolute', right: 100 + (index*70), top: 80, zIndex: 9999}} component={Link} to={fab.to} >
 						{fab.icon}
 					</Fab>
 				</Tooltip>)}
 				<Box sx={{bgcolor: "#ace8ea", mb: '-8px'}}>
-					<PageTitle>{stage?.name}</PageTitle>
->>>>>>> f1636553681b3210a0351a478547a25ba54600f6
+					<PageTitle>{stage?.pageTitle}</PageTitle>
 				</Box>
 				<Grid container spacing={0} id="stage" sx={{height: '100%', overflowY: 'hidden', maxHeight: '100%'}}>
 					<Grid item xs={12} lg={9} sx={{position: 'relative', height: {lg: '100%'}}}>
