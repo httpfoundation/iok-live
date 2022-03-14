@@ -29,6 +29,13 @@ a {
 	text-decoration: none;
 	color: inherit;
 }
+p a{
+	color: #00A0E9;
+	&:hover {
+		color: #00A0E9;
+		text-decoration: underline;
+	}
+}
 .MuiTabs-indicator {
 	height: 4px !important;
 	border-top-left-radius: 4px;

@@ -99,7 +99,7 @@ const Header = () => {
 		{location.pathname !== "/" && (
 			<Zoom in>
 				<Tooltip title="Vissza az aulába" placement="left" arrow>
-					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: 30, bottom: 30}} component={Link} to="/" >
+					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: 30, top: 80, zIndex: 9999}} component={Link} to="/" >
 						<HomeIcon />
 					</Fab>
 				</Tooltip>

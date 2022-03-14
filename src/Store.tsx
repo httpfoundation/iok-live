@@ -162,7 +162,6 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 
 export const useStore = () => {
 	const store = useContext(Store)
-	console.log(store)
 	return store
 }
 

@@ -87,11 +87,13 @@ const BubbleWrapper = styled("div",
 			position: "relative",
 			aspectRatio: "1",
 			backgroundColor: (bubbleWrapperProps.light) ? theme.palette.info.main :theme.palette.secondary.dark,
-			transition: "transform .2s",
+			transition: "transform .2s, box-shadow .2s",
 			...bubbleWrapperProps,
 			"&:hover": {
-				transform: "scale(1.1)"
-			}
+				transform: "scale(1.1)",
+				boxShadow: '0 .2rem 1.5rem rgba(0,0,0,.15)!important'
+			},
+			boxShadow: '0 .5rem 1rem rgba(0,0,0,.15)!important'
 		}
 	))
 

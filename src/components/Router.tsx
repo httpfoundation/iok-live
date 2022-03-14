@@ -30,7 +30,6 @@ const Router = () =>{
 	useEffect(() => {
 		setIsWelcomeVisited(window.localStorage.getItem("welcome")==="true")
 	}, [pathname])
-	console.log("isWelcomeVisited", isWelcomeVisited)
 	return (
 		<>
 		<ScrollToTop />
