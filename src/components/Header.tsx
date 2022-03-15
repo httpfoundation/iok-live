@@ -107,11 +107,11 @@ const Header = () => {
 				</Tooltip>
 			</Zoom>
 		)}
-		{location.pathname !== "/" && location.pathname !== "/recepcio" && (
+		{location.pathname !== "/recepcio" && (
 
 			<Zoom in>
 				<Tooltip title="Recepció" placement="bottom" arrow>
-					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: 100, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} component={Link} to="/recepcio" >
+					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: location.pathname !== "/" ? 100 : 30, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} component={Link} to="/recepcio" >
 						<InfoIcon />
 					</Fab>
 				</Tooltip>

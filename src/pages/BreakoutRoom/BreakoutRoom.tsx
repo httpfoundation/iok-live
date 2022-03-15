@@ -6,7 +6,7 @@ import { useRegistration } from '../../Store'
 import { DashboardItemType } from "../../types"
 
 import iokCafe from "../../assets/images/iokcafe.png"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { StructuredText } from 'react-datocms'
 import { useLiveStaticElements } from "../../Store"
 
@@ -70,6 +70,11 @@ const BreakoutRoom = () => {
 	}, [selectedRoom])
 
 	const navigate = useNavigate()
+	const location = useLocation()
+
+	useEffect(() => {
+		if (!location.pathname.includes("webex")) setMeetingDestination(null)
+	}, [location.pathname])
 
 	const dashboardItems: WebexRoomDashboardItem[] = rooms.map(room => ({
 		caption: room.title.replace("IOK Cafe - ", ""),
