@@ -36,6 +36,8 @@ type RegistrationData = {
 	name: string
 	dato_token: string
 	webex_access_token: string
+	onsite: boolean
+	stage: number | null
 }
 
 const useRegistrationData = (regId: string|null) : [RegistrationData|null, boolean, boolean] => {
@@ -122,6 +124,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				title
 				company
 				slug
+				bio
 				image {
 					url
 				}
@@ -242,7 +245,6 @@ export const useTalk = (talkId?: string|number) => {
 
 	return useMemo(() => ({...talk, speakers}), [talk, speakers])
 }
-
 export const useSetPageTitle = () => {
 	const store = useStore()
 	return store.setPageTitle

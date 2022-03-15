@@ -26,6 +26,7 @@ const NoStream = () => {
 }
 
 const embedDomain = window.localStorage.dev === "true" ? "localhost" : window.origin.replace("https://", "")
+console.log(embedDomain)
 
 const VideoContainer = styled('div')(({theme}) => `
 
@@ -71,16 +72,16 @@ const StagePage = () => {
 
 	return (
 		<>
-			<Box sx={{height: '100%', 'display': 'flex', flexDirection: 'column'}}>
+			<Box sx={{height: {xs: 'auto', lg: '100%'}, minHeight: '100%', 'display': 'flex', flexDirection: 'column'}}>
 				{ fabs.map((fab, index) => <Tooltip title={fab.title} placement="bottom" arrow key={index}>
-					<Fab disabled={fab.disabled} color="secondary" aria-label="home" sx={{position: 'absolute', right: 100 + (index*70), top: 80, zIndex: 900}} component={Link} to={fab.to} >
+					<Fab disabled={fab.disabled} color="secondary" aria-label="home" sx={{position: 'absolute', right: 170 + (index*70), top: 80, zIndex: 900, display: {lg: 'flex', xs: 'none'}}} component={Link} to={fab.to} >
 						{fab.icon}
 					</Fab>
 				</Tooltip>)}
 				<Box sx={{bgcolor: "#ace8ea", mb: '-8px'}}>
 					<PageTitle>{stage?.pageTitle}</PageTitle>
 				</Box>
-				<Grid container spacing={0} id="stage" sx={{height: '100%', overflowY: 'hidden', maxHeight: '100%'}}>
+				<Grid container spacing={0} id="stage" sx={{height: '100%', overflowY: {xs: 'auto', lg:'hidden'}, maxHeight: '100%'}}>
 					<Grid item xs={12} lg={9} sx={{position: 'relative', height: {lg: '100%'}}}>
 						{/* <Box sx={{width: '100%', height: '100%', backgroundColor: '#000', zIndex: -1, position: 'absolute'}}>
 							<Box sx={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 100}}>
@@ -110,7 +111,7 @@ const StagePage = () => {
 						
 						{ stage?.name && !selectedStreamId && <NoStream /> }
 					</Grid>
-					<Grid item xs={12} lg={3} sx={{height: {xs: 'calc(100% - (100vw * 9 / 16))', lg: '100%'}}}>
+					<Grid item xs={12} lg={3} sx={{height: {xs: 'calc(100% - (100vw * 9 / 16))', lg: '100%'}, minHeight: {xs: '300px', lg: 0}}}>
 						<Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc(100%)', height: '100%'}}>
 							<AppBar component="div" position="static" color="default" sx={{px: 2, bgcolor: "##f3f3f3", pt: 2}} elevation={1}>
 								<div>
@@ -126,8 +127,8 @@ const StagePage = () => {
 									<Tab label="Chat" disabled={!selectedStream} />
 								</Tabs>
 							</AppBar>
-							<Box sx={{flex: 1, overflow: "auto", px: 1}}>
-								{ selectedTab === 0 && <>{ stage?.schedule?.map(talk => <Link to={`/eloadasok/${talk.id}`}><ScheduleItem open key={talk.id} talkId={talk.id} /></Link>) }</> }							
+							<Box sx={{flex: 1, overflow: "auto"}}>
+								{ selectedTab === 0 && <Box sx={{px: 1}}>{ stage?.schedule?.map(talk => <Link to={`/eloadasok/${talk.id}`}><ScheduleItem open key={talk.id} talkId={talk.id} /></Link>) }</Box> }							
 								{ selectedTab === 1 && <Questions schedule={stage?.schedule} stageId={stage?.id} /> }
 								{ selectedTab === 2 && selectedStream && 
 								<Box sx={{position: "relative", flex: 1, height: '100%', overflowY: 'hidden', minHeight: '500px'}}>

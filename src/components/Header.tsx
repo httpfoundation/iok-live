@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, Typography, Drawer, List, ListItemText, ListItemIcon, ListItemButton, ListSubheader, Box, IconButton, Avatar, Divider, Fab, Tooltip, Zoom } from '@mui/material'
 
-import { Home as HomeIcon, Menu as MenuIcon, People as PeopleIcon, Coffee as CoffeeIcon, Star as StarIcon, EventNote as EventNoteIcon, LiveTv as LiveTvIcon, Logout as LogoutIcon } from '@mui/icons-material'
+import { Home as HomeIcon, Menu as MenuIcon, People as PeopleIcon, Coffee as CoffeeIcon, Star as StarIcon, EventNote as EventNoteIcon, LiveTv as LiveTvIcon, Logout as LogoutIcon, Info as InfoIcon } from '@mui/icons-material'
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
@@ -101,8 +101,18 @@ const Header = () => {
 		{location.pathname !== "/" && (
 			<Zoom in>
 				<Tooltip title="Vissza az aulába" placement="bottom" arrow>
-					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: 30, top: 80, zIndex: 800}} component={Link} to="/" >
+					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: 30, top: {lg: 80, xs: 'unset'}, bottom: {lg: 'unset', xs: 10}, zIndex: 800}} component={Link} to="/" >
 						<HomeIcon />
+					</Fab>
+				</Tooltip>
+			</Zoom>
+		)}
+		{location.pathname !== "/recepcio" && (
+
+			<Zoom in>
+				<Tooltip title="Recepció" placement="bottom" arrow>
+					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: location.pathname !== "/" ? 100 : 30, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} component={Link} to="/recepcio" >
+						<InfoIcon />
 					</Fab>
 				</Tooltip>
 			</Zoom>

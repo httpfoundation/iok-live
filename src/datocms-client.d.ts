@@ -3,6 +3,7 @@ declare module 'datocms-client' {
 		constructor(token: string)
 		items: {
 			create: (data: ({ itemType: string} & Record<string, any>)) => Promise<any>
+			all: (data: any) => Promise<any>
 		}
 	}
 }

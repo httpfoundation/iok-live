@@ -9,9 +9,10 @@ import iokCafe0 from "../../assets/images/iokcafe.png"
 import iokCafe1 from "../../assets/images/iokcafe2.png"
 import iokCafe2 from "../../assets/images/iokcafe3.png"
 import iokCafe3 from "../../assets/images/iokcafe4.png"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { StructuredText } from 'react-datocms'
 import { useLiveStaticElements } from "../../Store"
+
 
 
 
@@ -73,6 +74,11 @@ const BreakoutRoom = () => {
 	}, [selectedRoom])
 
 	const navigate = useNavigate()
+	const location = useLocation()
+
+	useEffect(() => {
+		if (!location.pathname.includes("webex")) setMeetingDestination(null)
+	}, [location.pathname])
 
 	const iokCafeImages = [iokCafe0, iokCafe1, iokCafe2, iokCafe3]
 
