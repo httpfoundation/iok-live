@@ -60,6 +60,7 @@ export type DatoBreakoutRoom = {
 export type DatoLiveStaticElement = {
 	welcome?: any
 	httpCsapat?: any
+	iokCafe?: any
 }
 
 export type DatoComplex = {

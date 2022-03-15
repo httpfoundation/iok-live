@@ -22,7 +22,6 @@ export const SinglePresenter = () => {
 	const { presenterSlug } = useParams()
 
 	const presenter = usePresenterWithTalksByStage(presenterSlug ?? null)
-	console.log(presenter)
 
 	return (
 		<PageContainer container>

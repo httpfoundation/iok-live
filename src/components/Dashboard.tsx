@@ -1,10 +1,9 @@
-import Link from "./Link";
-import { Grid, Typography, useMediaQuery, Box } from "@mui/material"
+import { Grid, useMediaQuery, Box } from "@mui/material"
 import { styled, useTheme } from "@mui/material/styles"
 import Bubble from "./Bubble/Bubble"
 import { DashboardItemType } from "../types"
 import React from "react"
-import Fade from "react-reveal/Fade"
+
 
 interface DashboardItemProps {
 	title?: string,
@@ -26,7 +25,9 @@ interface DashboardItemProps {
 	imgWidth?: string, 
 	empty?: boolean,
 	light?: boolean,
+	timeout?: number
 	onClick?: () => void,
+
 }
 
 
@@ -71,6 +72,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 							corner={corner}
 							onClick={onClick}
 							key={key}
+							timeout = {1000} 
 						/>
 					)
 					
@@ -84,7 +86,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 
 export const DashboardItem = (props: DashboardItemProps) => {
 
-    const { img, caption, to, imgWidth, corner, size, xs, xl, lg, empty, light, onClick } = props;
+    const { img, caption, to, imgWidth, corner, size, xs, xl, lg, empty, light, timeout, onClick } = props;
 	if (empty) return <Grid item xs={xs} xl={xl} lg={lg} display="flex" ></Grid>
 	
 
@@ -92,12 +94,9 @@ export const DashboardItem = (props: DashboardItemProps) => {
 		<Grid item xs={xs} xl={xl} lg={lg} display="flex" alignItems="center" justifyContent="center" textAlign="center" >
 			
 			
-				<Bubble size={size} corner={corner} light={light} to={to} onClick={onClick}>
+				<Bubble size={size} corner={corner} light={light} to={to} onClick={onClick} caption={caption} timeout={timeout}>
 						<>
-						{/* <Fade bottom delay={350}> */}
 							<DashboardImage src={img} alt={caption} width={imgWidth} size={size}/>
-							<Typography sx={{color:"white", minHeight:"38px", fontWeight:"600"}}>{caption}</Typography>				
-						{/* </Fade> */}
 						</>
 				</Bubble>
 		</Grid>

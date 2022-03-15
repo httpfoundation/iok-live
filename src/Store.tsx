@@ -112,6 +112,9 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				httpCsapat {
 					value
 				}
+				iokCafe {
+					value
+				}
 			}
 			allSpeakers(first: 100) {
 				id

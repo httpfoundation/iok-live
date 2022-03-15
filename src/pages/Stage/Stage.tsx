@@ -72,7 +72,7 @@ const StagePage = () => {
 	return (
 		<>
 			<Box sx={{height: '100%', 'display': 'flex', flexDirection: 'column'}}>
-				{ fabs.map((fab, index) => <Tooltip title={fab.title} placement="bottom" arrow>
+				{ fabs.map((fab, index) => <Tooltip title={fab.title} placement="bottom" arrow key={index}>
 					<Fab disabled={fab.disabled} color="secondary" aria-label="home" sx={{position: 'absolute', right: 100 + (index*70), top: 80, zIndex: 900}} component={Link} to={fab.to} >
 						{fab.icon}
 					</Fab>
