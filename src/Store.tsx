@@ -242,7 +242,6 @@ export const useTalk = (talkId?: string|number) => {
 
 	return useMemo(() => ({...talk, speakers}), [talk, speakers])
 }
-
 export const useSetPageTitle = () => {
 	const store = useStore()
 	return store.setPageTitle
