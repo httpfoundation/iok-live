@@ -27,8 +27,7 @@ const Header = () => {
 	const stages = useStages()
 
 	const menuItems = useMemo<(MenuItem | DividerMenuItem)[]>(() => [
-		//{label: 'Aula', to: '/', icon: <HomeIcon />},
-		//{label: 'Recepció', to: '/recepcio', icon: <HomeIcon />},
+
 		{label: 'Köszöntő', to: '/koszonto', icon: <EventNoteIcon />},
 		{label: 'Program', to: '/eloadasok', icon: <EventNoteIcon />},
 		{label: 'Előadók', to: '/eloadok', icon: <PeopleIcon />},
@@ -110,7 +109,7 @@ const Header = () => {
 		{location.pathname !== "/recepcio" && (
 
 			<Zoom in>
-				<Tooltip title="Recepció" placement="bottom" arrow>
+				<Tooltip title="Tovább az információs pulthoz" placement="bottom" arrow>
 					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: location.pathname !== "/" ? 100 : 30, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} component={Link} to="/recepcio" >
 						<InfoIcon />
 					</Fab>

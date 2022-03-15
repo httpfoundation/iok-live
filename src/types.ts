@@ -57,11 +57,6 @@ export type DatoBreakoutRoom = {
 	meetingDestination?: string
 }
 
-export type DatoLiveStaticElement = {
-	welcome?: any
-	httpCsapat?: any
-	iokCafe?: any
-}
 
 export type DatoComplex = {
 	allStages: DatoStage[]
@@ -96,3 +91,12 @@ export type DashboardItemType = {
     link?: string
 	onClick?: () => void
 }
+
+export type DatoLiveStaticElement = {
+		welcome?: any
+		httpCsapat?: any
+		iokCafe?: any,
+		iokCafeInfo?: any,
+		iokCafeHandout?: any
+		httpMemberPlus?: any
+	}

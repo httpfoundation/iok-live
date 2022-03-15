@@ -79,7 +79,7 @@ const Bubble = (props: BubbleProps) => {
 								
 							
 							{/* 	{props.children} */}
-								<BubbleCaption sx={{color:"primary.contrastText", minHeight:"38px", fontWeight:"500", margin:"auto", width:"70%"}}>
+								<BubbleCaption sx={{color:"primary.contrastText", minHeight:"38px", fontWeight:"500", margin:"auto", width:"85%"}}>
 									{caption}
 								</BubbleCaption>					
 							</BubbleContent>

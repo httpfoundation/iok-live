@@ -32,6 +32,7 @@ type WebexRoomDashboardItem = DashboardItemType
 const BreakoutRoom = () => {
 	const [registration] = useRegistration()
 	const {iokCafe: iokCafeInfoText} = useLiveStaticElements()
+	const {iokCafeHandout} = useLiveStaticElements()
 	const [rooms, setRooms] = useState<WebexRoom[]>([])
 	const [error, setError] = useState(false)
 	const [selectedRoom, setSelectedRoom] = useState<WebexRoom|null>(null)
@@ -124,9 +125,9 @@ const BreakoutRoom = () => {
 									{selectedRoom?.title}
 								</h1>
 							</AppBar> */}
-							<Typography variant="body1" sx={{p: 3}}>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium veritatis illo earum asperiores minus dolor? Laudantium inventore magnam laborum velit quia sapiente maxime, accusamus nesciunt animi illum fuga, rerum numquam exercitationem dolores. Ut, illo? Rerum minus nam atque at esse.
-							</Typography>
+							<Box sx={{p: 3, fontSize: "0.85rem"}}>
+								<StructuredText data={iokCafeHandout}/>
+							</Box>
 						</Box>
 					</Grid>
 				</Grid>

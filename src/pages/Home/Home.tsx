@@ -20,24 +20,24 @@ import Welcome from "../Welcome";
 const homeDashboardItems : DashboardItemType[] = [
 
     {
-        caption: "Nagyterem",
-        title: "Délelőtti plenáris előadások a nagyteremben",
+        caption: "Nagyelőadó",
+        title: "Délelőtti plenáris előadások a nagyelőadóban",
         img: nagyEloado,
         corner: "br",
         light: false,
         link: "/szekcio/plenaris"
     },
     {
-        caption: "1. terem",
-        title: "Szakképzési, ITMP és NetAcad szekció előadásai a 1. teremben",
+        caption: "1. szekcióterem",
+        title: "Szakképzési, ITMP és NetAcad szekció előadásai a 1. szekcióteremben",
         img: szekcio1,
         corner: "none",
         light: false,
         link: "/szekcio/szakkepzes-itmp-netacad"
     },
     {
-        caption: "2. terem",
-        title: "Digitális kultúra szekció előadásai a 2. teremben",
+        caption: "2. szekcióterem",
+        title: "Digitális kultúra szekció előadásai a 2. szekcióteremben",
         img: szekcio2,
         corner: "none",
         light: false,
@@ -61,16 +61,16 @@ const homeDashboardItems : DashboardItemType[] = [
         link: "/recepcio"
     },
     {
-        caption: "3. terem",
-        title: "IT felsőoktatás szekció előadásai a 3. teremben",
+        caption: "3. szekcióterem",
+        title: "IT felsőoktatás szekció előadásai a 3.szekcióteremben",
         img: szekcio3,
         corner: "none",
         light: false,
         link: "/szekcio/it-felsooktatas"
     },
     {
-        caption: "4. terem",
-        title: "Digitális kultúra az alsótagozatban előadások a 4. teremben",
+        caption: "4. szekcióterem",
+        title: "Digitális kultúra az alsótagozatban előadások a 4. szekcióteremben",
         img: szekcio4,
         corner: "none",
         light: false,
@@ -78,7 +78,7 @@ const homeDashboardItems : DashboardItemType[] = [
     },
     {
         caption: "Üzenőfal",
-        title: "Résztvevők egymás közötti élő beszélgetése öt tematikus asztalnál az IOK kávézójában",
+        title: "Üzenőfal fontos üzenetekkel és felhívásokkal a szervezőktől",
         img: messageBoard,
         corner: "tl",
         light: true,

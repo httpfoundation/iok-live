@@ -117,7 +117,15 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				iokCafe {
 					value
 				}
-			}
+				iokCafeInfo {
+					value
+				}
+				iokCafeHandout {
+					value
+				}
+				httpMemberPlus {
+					value
+				}}
 			allSpeakers(first: 100) {
 				id
 				name
