@@ -124,6 +124,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				title
 				company
 				slug
+				bio
 				image {
 					url
 				}
