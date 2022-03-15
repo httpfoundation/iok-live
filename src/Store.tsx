@@ -36,6 +36,8 @@ type RegistrationData = {
 	name: string
 	dato_token: string
 	webex_access_token: string
+	onsite: boolean
+	stage: number | null
 }
 
 const useRegistrationData = (regId: string|null) : [RegistrationData|null, boolean, boolean] => {

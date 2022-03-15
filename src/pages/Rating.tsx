@@ -6,7 +6,7 @@ import {  Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogConte
 import { Box } from "@mui/system"
 import { DatoTalk } from "../types"
 import { Star as StarFilled, StarOutline as Star } from "@mui/icons-material"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { useDatoClient } from "../useQuery"
 import recepcio from "../assets/images/recepcio.png";
 
@@ -85,6 +85,8 @@ const Rating = () => {
 		}
 	}
 
+	const shownStages = useMemo(() => registration?.stage ? stages.filter(s => Number(s.id) === registration.stage || s.name.includes("Plenáris")) : stages, [stages, registration])
+
 	return (
  		<PageContainer container>
 
@@ -126,7 +128,7 @@ const Rating = () => {
 				{ loading || ratingsSent || !stages.length ? null : (
 				<Box sx={{width: '600px', maxWidth: '100%', mx: 'auto'}}>
 					{
-						stages.map((stage, index) => {
+						shownStages.map((stage, index) => {
 							return (<Paper sx={{px: 2, mb: 2, pb: 1, pt: 2}}>
 								<Typography variant="h6" fontWeight={700} align="center" sx={{mt: 0.5}}>{stage.pageTitle}</Typography>
 								<Divider sx={{mt: 2, mb: 4}} />
