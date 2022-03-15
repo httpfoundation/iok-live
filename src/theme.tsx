@@ -31,6 +31,7 @@ let theme = createTheme({
 		fontWeightMedium: 500,
 		body1: {
 			color: '#14475C',
+			fontSize: "0.95rem"
 		},
 		h1: {
 			fontSize: '2.8rem',
@@ -50,7 +51,7 @@ let theme = createTheme({
 	},
 })
 
-//theme = responsiveFontSizes(theme)
+
 
 theme.typography.h1 = {
 	fontSize: '2.0rem',
@@ -63,9 +64,17 @@ theme.typography.h1 = {
 	  },
   }
 
-theme.typography.body1 = {
-	fontSize: "0.8rem",
+  theme.typography.body1 = {
+	fontSize: '0.8rem',
+	/*'@media (max-width:800px)': {
+	  fontSize: '1.5rem',
+	}, */
 
-}
+	[theme.breakpoints.up('xl')]: {
+		fontSize: '0.9rem',
+	  },
+  }
+
+// theme = responsiveFontSizes(theme)
 
 export default theme

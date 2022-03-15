@@ -72,7 +72,7 @@ const StagePage = () => {
 	return (
 		<>
 			<Box sx={{height: '100%', 'display': 'flex', flexDirection: 'column'}}>
-				{ fabs.map((fab, index) => <Tooltip title={fab.title} placement="bottom" arrow>
+				{ fabs.map((fab, index) => <Tooltip title={fab.title} placement="bottom" arrow key={index}>
 					<Fab disabled={fab.disabled} color="secondary" aria-label="home" sx={{position: 'absolute', right: 100 + (index*70), top: 80, zIndex: 900}} component={Link} to={fab.to} >
 						{fab.icon}
 					</Fab>
@@ -112,7 +112,7 @@ const StagePage = () => {
 					</Grid>
 					<Grid item xs={12} lg={3} sx={{height: {xs: 'calc(100% - (100vw * 9 / 16))', lg: '100%'}}}>
 						<Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc(100%)', height: '100%'}}>
-							<AppBar component="div" position="static" color="default" sx={{px: 2, bgcolor: "#ace8ea", pt: 4, borderTop: '1px solid #939393'}} elevation={1}>
+							<AppBar component="div" position="static" color="default" sx={{px: 2, bgcolor: "##f3f3f3", pt: 2}} elevation={1}>
 								<div>
 									<LanguageSelect
 										value={selectedStream?.language.id ?? null}
@@ -120,7 +120,7 @@ const StagePage = () => {
 										options={stage?.streams?.map(stream => stream.language) ?? []}
 									/>
 								</div>
-								<Tabs textColor="secondary" indicatorColor="secondary" value={selectedTab} onChange={(e, v) => setSelectedTab(v)} centered sx={{mt: stage?.streams?.length ? 2 : 0}}>
+								<Tabs textColor="secondary" indicatorColor="secondary" value={selectedTab} onChange={(e, v) => setSelectedTab(v)} centered sx={{mt: stage?.streams?.length ? 1 : 0}}>
 									<Tab label="Program" />
 									<Tab label="Kérdések" />
 									<Tab label="Chat" disabled={!selectedStream} />

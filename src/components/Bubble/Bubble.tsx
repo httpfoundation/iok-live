@@ -3,11 +3,11 @@
 */
 
 import { styled } from '@mui/material/styles'
+import {Typography} from '@mui/material'
 import { Link } from 'react-router-dom'
+import {Fade as Grow} from '@mui/material'
 
 interface BubbleProps {
-	title?: string,
-	subtitle?: string,
 	corner?: 'bl' | 'br' | 'tl' | 'tr' | 'none',
 	size?: 'xs' | 'lg' | 'xl' | 'xxl',
 	color?: 'light' | 'primary',
@@ -18,6 +18,8 @@ interface BubbleProps {
 	children?: React.ReactNode,
 	light? : boolean,
 	to?: string,
+	caption?: string,
+	timeout?: number,
 	onClick?: () => void,
 }
 
@@ -29,6 +31,7 @@ interface BubbleWrapperProps {
 		borderTopRightRadius: string
 		borderTopLeftRadius: string
 		light? : boolean
+		caption?: string
 	}
 }
 
@@ -45,10 +48,10 @@ const LinkOrOnClick = (props: {to?: string, onClick?: () => void, children: Reac
 }
 
 const Bubble = (props: BubbleProps) => {
-	const { size, corner } = props
-	//"lg" is the default size
- 	const width = (size === "xs") ? "150px" : (size === "lg") ? "180px" : (size === "xl") ? "200px" : "350px"
-	const borderRadius = (size === "xs") ? "90px" : (size === "xl") ? "250px" : (size === "xxl") ? "300px" : "125px"
+	const { size, corner, timeout, caption } = props
+	//"xl" is the default size
+ 	const width = (size === "xs") ? "350px" : (size === "lg") ? "200px" :  "450px"
+	const borderRadius = (size === "xs") ? "250px" : (size === "lg") ? "140px" : "350px" 
 	const bubbleWrapperProps = {
 		width,
 		borderBottomRightRadius: (corner==="br") ? "0" : borderRadius,
@@ -57,18 +60,20 @@ const Bubble = (props: BubbleProps) => {
 		borderTopLeftRadius: (corner==="tl") ? "0" : borderRadius,
 		light: props.light
 	}
-
-	
 	return (
+		
 		<BubbleWrapper bubbleWrapperProps={bubbleWrapperProps}>
-			<LinkOrOnClick to={props.to} onClick={props.onClick}>
-				<BubbleContent>
-					<BubbleTitle>
-						{props.title}
-					</BubbleTitle>
+				<LinkOrOnClick to={props.to} onClick={props.onClick}>
+			<Grow in style={{ transformOrigin: '0 0 0' }}
+					{...{timeout : timeout}} >
+					<BubbleContent>
 						{props.children}
-				</BubbleContent>
-			</LinkOrOnClick>
+						<BubbleCaption sx={{color:"primary.contrastText", minHeight:"38px", fontWeight:"500", margin:"auto", width:"70%"}}>
+							{caption}
+						</BubbleCaption>					
+					</BubbleContent>
+			</Grow>
+				</LinkOrOnClick>
 		</BubbleWrapper>
 	)
 }
@@ -87,7 +92,7 @@ const BubbleWrapper = styled("div",
 			position: "relative",
 			aspectRatio: "1",
 			backgroundColor: (bubbleWrapperProps.light) ? theme.palette.info.main :theme.palette.secondary.dark,
-			transition: "transform .2s, box-shadow .2s",
+			transition: "transform 0.2s, box-shadow 0.2s ",
 			...bubbleWrapperProps,
 			"&:hover": {
 				transform: "scale(1.1)",
@@ -110,15 +115,11 @@ const BubbleContent = styled('div')
 		}
 	))
 
-const BubbleTitle = styled('div')
+const BubbleCaption = styled(Typography)
 (( {theme} ) => (
 	{
 		color: theme.palette.primary.main,
-		fontWeight: "bold",
-		fontSize: "1.5rem",
-		svg: {
-			fill: theme.palette.info.main
-		}
+		fontWeight: "300",
 	}
 ))
 
