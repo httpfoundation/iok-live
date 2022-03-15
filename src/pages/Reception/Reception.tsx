@@ -1,6 +1,14 @@
 import { PageContainer } from "../../components"
 import PageTitle from "../../components/PageTitle"
 import iokCafe from "../../assets/images/iokcafe.png"
+import welcome from "../../assets/images/welcome.png"
+import feedback from "../../assets/images/feedback.png"
+import http from "../../assets/images/http.png"
+import presenters from "../../assets/images/presenters.png"
+import sponsors from "../../assets/images/sponsors.png"
+import schedule from "../../assets/images/schedule.png"
+import handout from "../../assets/images/handout.png"
+import menucard from "../../assets/images/menucard.png"
 import {  Container, } from "@mui/material"
 
 import Dashboard from "../../components/Dashboard"
@@ -8,68 +16,68 @@ import { DashboardItemType } from "../../types"
 
 const receptionDashboardItems : DashboardItemType[] = [
     {
-        caption: "Köszöntő szép szavak",
+        caption: "Köszöntő",
         title: "Üdvözlő szép szavak az elnök úrtól",
-        img: iokCafe,
-        corner: "none",
+        img: welcome,
+        corner: "br",
         light: true,
         link: "/koszonto"
     },
     {
         caption: "Programfüzet",
-        title: "Minden részlet, amit érdemes tudni a szakmai programról",
-        img: iokCafe,
-        corner: "br",
-        light: false,
+        title: "Minden, amit érdemes tudni a szakmai programról",
+        img: schedule,
+        corner: "none",
+        light: true,
         link: "/eloadasok"
     },
     {
         caption: "Előadói tabló",
-        title: "Szakképzési, ITMP és NetAcad szekció előadásai a 1. teremben",
-        img: iokCafe,
-        corner: "br",
+        title: "Előadóink bemutatkozása",
+        img: presenters,
+        corner: "none",
         light: false,
         link: "/eloadok"
     },
     {
-        caption: "Támogatói szórólap",
-        title: "Digitális kultúra szekció előadásai a 2. teremben",
-        img: iokCafe,
+        caption: "Támogatói tabló",
+        title: "Támogatóink bemutatkozása",
+        img: sponsors,
         corner: "bl",
         light: false,
         link: "/tamogatok"
     },
     {
         caption: "Értékelő űrlap",
-        title: "Résztvevők egymás közötti élő beszélgetése öt tematikus asztalnál az IOK kávézójában",
-        img: iokCafe,
-        corner: "none",
+        title: "Előadások és a konferencia értékelése",
+        img: feedback,
+        corner: "tr",
         light: true,
         link: "#"
     },
     {
         caption: "HTTP szervezőcsapat",
-        title: "Résztvevők egymás közötti élő beszélgetése öt tematikus asztalnál az IOK kávézójában",
-        img: iokCafe,
+        title: "A HTTP-csapat állandó és tiszteletbeli tagjai, akik nélkül nem lenne most konferencia",
+        img: http,
         corner: "none",
         light: true,
         link: "/http-csapat"
     },
     {
-        caption: "Útmutató",
-        title: "IOK Virtuális Konferenciaközpont használati útmutató",
-        img: iokCafe,
-        corner: "tr",
-        light: false,
-        link: "/utmutato"
-    },
-    {
-        caption: "Visszatérés az Aulába",
-        title: "Aula: minden IOK-s dolog kiindulópontja",
-        img: iokCafe,
-        corner: "tl",
+        caption: "Menükártya",
+        title: "Ami az asztalra kerül...",
+        img: menucard,
+        corner: "none",
         light: false,
         link: "/"
+    },
+    {
+        caption: "IOK VKK útmutató",
+        title: "IOK Virtuális Konferenciaközpont használati útmutató",
+        img: handout,
+        corner: "tl",
+        light: false,
+        link: "/utmutato"
     },
         
 ]
@@ -79,7 +87,7 @@ const Reception = () => {
 	return (
 		<PageContainer>
             <Container>
-                <PageTitle>Recepció</PageTitle>
+                <PageTitle>Információs pult</PageTitle>
                 <Dashboard items={receptionDashboardItems} />
             </Container>			
 		</PageContainer>

@@ -49,6 +49,16 @@ let theme = createTheme({
 		}
 
 	},
+	components: {
+		MuiTooltip: {
+		  styleOverrides: {
+			tooltip: {
+			  lineHeight: "1.2rem !important",
+			  backgroundColor: "#14475C"
+			}
+		  }
+		}
+	  }
 })
 
 

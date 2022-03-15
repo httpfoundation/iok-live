@@ -1,10 +1,12 @@
 import { PageContainer, PageSubtitle, Paragraph } from "../components"
 import Bubble from "../components/Bubble/Bubble"
 import PageTitle from "../components/PageTitle"
-import { Container, Grid, Typography, TypographyProps } from "@mui/material"
+import { Box, Button, Container, Grid, Typography, TypographyProps } from "@mui/material"
 import { styled } from "@mui/system"
 import { StructuredText } from "react-datocms"
-import { useLiveStaticElements } from "../Store"
+import { useLiveStaticElements, useRegistration } from "../Store"
+import {Home as HomeIcon, PermDeviceInformation as InformationIcon } from '@mui/icons-material'
+import { Link } from "react-router-dom"
 
 const ChairmanImage = styled('img')`
 	width: 100%;
@@ -30,13 +32,14 @@ const Title = styled(Typography)<TypographyProps>(({theme}) => `
 
 const Name = styled(Typography)<TypographyProps>(({theme}) => `
 	text-align: "left";
-	font-weight: 500;
+	font-weight: 700;
     font-size: 1.6rem;
 	margin: 0 0 0 0;
 `)
 
 const Welcome = () => {
     const {welcome} = useLiveStaticElements()
+	const [registration, loading] = useRegistration()
     window.localStorage.setItem("welcome", "true") 
 	return (
  		<PageContainer container>
@@ -48,8 +51,20 @@ const Welcome = () => {
 					<Title>{chairman?.title}, {chairman?.company}</Title>
 				</Grid>
 				<Grid item xs={12} md={8} sx={{display: "flex", flexDirection: "column", justifyContent: "flex-end", pb: 1}}>
-                    <Name >Kedves Kiss Mónika!</Name>
+                    <Name >Kedves {registration?.name}!</Name>
                     <StructuredText data={welcome}></StructuredText> 
+					<Box>
+						<Link to="/utmutato">
+							<Button variant="contained" color="secondary" startIcon={<InformationIcon /> } sx={{ml:2, pt:1, pb:1}}>Tovább az IOK VKK útmutatóhoz</Button>
+						</Link>
+						<Link to="/">
+							<Button variant="contained" color="secondary" startIcon={<HomeIcon />} sx={{ml:2, pt:1, pb:1}}>Tovább az IOK Aulába</Button>
+						</Link>
+					</Box>
+
+						
+
+					
 				</Grid>
 				<Grid item xs={12} md={12} sx={{display: "flex", flexDirection: "column", justifyContent: "flex-end", pb: 1}}>
 

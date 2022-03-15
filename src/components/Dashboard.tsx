@@ -1,4 +1,4 @@
-import { Grid, useMediaQuery, Box } from "@mui/material"
+import { Grid, useMediaQuery, Box, Tooltip }  from "@mui/material"
 import { styled, useTheme } from "@mui/material/styles"
 import Bubble from "./Bubble/Bubble"
 import { DashboardItemType } from "../types"
@@ -25,7 +25,8 @@ interface DashboardItemProps {
 	imgWidth?: string, 
 	empty?: boolean,
 	light?: boolean,
-	timeout?: number
+	timeout?: number,
+	tooltipPlacement?: "bottom" | "left" | "right" | "top" | "bottom-end" | "bottom-start" | "left-end" | "left-start" | "right-end" | "right-start" | "top-end" | "top-start" | undefined,
 	onClick?: () => void,
 
 }
@@ -72,7 +73,8 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 							corner={corner}
 							onClick={onClick}
 							key={key}
-							timeout = {1000} 
+							timeout = {1000}
+							tooltipPlacement = {(key<4) ? "top" : "bottom"}
 						/>
 					)
 					
@@ -86,31 +88,32 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 
 export const DashboardItem = (props: DashboardItemProps) => {
 
-    const { img, caption, to, imgWidth, corner, size, xs, xl, lg, empty, light, timeout, onClick } = props;
+    const { img, caption, title, to, imgWidth, corner, size, xs, xl, lg, empty, light, timeout, tooltipPlacement, onClick } = props
 	if (empty) return <Grid item xs={xs} xl={xl} lg={lg} display="flex" ></Grid>
 	
 
     return (
 		<Grid item xs={xs} xl={xl} lg={lg} display="flex" alignItems="center" justifyContent="center" textAlign="center" >
-			
-			
-				<Bubble size={size} corner={corner} light={light} to={to} onClick={onClick} caption={caption} timeout={timeout}>
-						<>
-							<DashboardImage src={img} alt={caption} width={imgWidth} size={size}/>
-						</>
-				</Bubble>
-		</Grid>
+						<Bubble 
+							size={size} 
+							corner={corner} 
+							light={light} 
+							to={to} 
+							onClick={onClick} 
+							caption={caption} 
+							timeout={timeout} 
+							title={title || ""}
+							tooltipPlacement = {tooltipPlacement}
+							img={img} 
+							imgWidth={imgWidth} />
+						
+				</Grid>
     )
 }
 
-const DashboardImage = styled("img", {shouldForwardProp: (prop) => prop!=='width' && prop!=='size' })<{width?: Object, size?: string}>
-	( ({theme, width, size}) => {
-		if (width) return width
-		else return (
-			{
-				width: (size==="xl") ? "140px" : (size==="lg") ? "100px" : "100%"
-			}
-		)	
-	})
+
+
+	
+
 
 export default Dashboard

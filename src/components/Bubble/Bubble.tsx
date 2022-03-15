@@ -3,9 +3,10 @@
 */
 
 import { styled } from '@mui/material/styles'
-import {Typography} from '@mui/material'
+import {Tooltip, Typography} from '@mui/material'
 import { Link } from 'react-router-dom'
 import {Fade as Grow} from '@mui/material'
+import { useState } from 'react'
 
 interface BubbleProps {
 	corner?: 'bl' | 'br' | 'tl' | 'tr' | 'none',
@@ -20,6 +21,10 @@ interface BubbleProps {
 	to?: string,
 	caption?: string,
 	timeout?: number,
+	title?: string,
+	tooltipPlacement?: "bottom" | "left" | "right" | "top" | "bottom-end" | "bottom-start" | "left-end" | "left-start" | "right-end" | "right-start" | "top-end" | "top-start" | undefined,
+	img?: string,
+	imgWidth?: string,
 	onClick?: () => void,
 }
 
@@ -48,10 +53,12 @@ const LinkOrOnClick = (props: {to?: string, onClick?: () => void, children: Reac
 }
 
 const Bubble = (props: BubbleProps) => {
-	const { size, corner, timeout, caption } = props
+	const { size, corner, timeout, caption, title, tooltipPlacement, img, imgWidth } = props
 	//"xl" is the default size
  	const width = (size === "xs") ? "350px" : (size === "lg") ? "200px" :  "450px"
 	const borderRadius = (size === "xs") ? "250px" : (size === "lg") ? "140px" : "350px" 
+	const [image, setImage] = useState(img)
+	
 	const bubbleWrapperProps = {
 		width,
 		borderBottomRightRadius: (corner==="br") ? "0" : borderRadius,
@@ -61,20 +68,25 @@ const Bubble = (props: BubbleProps) => {
 		light: props.light
 	}
 	return (
-		
-		<BubbleWrapper bubbleWrapperProps={bubbleWrapperProps}>
+		<Tooltip title={title ?? ""} placement={tooltipPlacement ?? "top"} arrow  >
+			<BubbleWrapper bubbleWrapperProps={bubbleWrapperProps} onMouseEnter = {() => {}}>
 				<LinkOrOnClick to={props.to} onClick={props.onClick}>
-			<Grow in style={{ transformOrigin: '0 0 0' }}
-					{...{timeout : timeout}} >
-					<BubbleContent>
-						{props.children}
-						<BubbleCaption sx={{color:"primary.contrastText", minHeight:"38px", fontWeight:"500", margin:"auto", width:"70%"}}>
-							{caption}
-						</BubbleCaption>					
-					</BubbleContent>
-			</Grow>
+					<Grow in style={{ transformOrigin: '0 0 0' }}
+							{...{timeout : timeout}} >
+							<BubbleContent>
+							
+								<BubbleImage src={image} alt={caption} width={imgWidth} size={size}/>
+								
+							
+							{/* 	{props.children} */}
+								<BubbleCaption sx={{color:"primary.contrastText", minHeight:"38px", fontWeight:"500", margin:"auto", width:"70%"}}>
+									{caption}
+								</BubbleCaption>					
+							</BubbleContent>
+					</Grow>
 				</LinkOrOnClick>
-		</BubbleWrapper>
+			</BubbleWrapper>
+		</Tooltip>
 	)
 }
 
@@ -122,5 +134,16 @@ const BubbleCaption = styled(Typography)
 		fontWeight: "300",
 	}
 ))
+
+const BubbleImage = styled("img", {shouldForwardProp: (prop) => prop!=='width' && prop!=='size' })<{width?: string, size?: string}>
+	( ({theme, width, size}) => {
+		if (width) return width
+		else return (
+			{
+				width: (size==="xl") ? "140px" : (size==="lg") ? "100px" : "100%"
+			}
+		)	
+	})
+
 
 export default Bubble

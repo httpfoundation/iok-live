@@ -3,11 +3,14 @@ import { PageContainer, PageTitle } from "../../components"
 import { DashboardItemType } from "../../types"
 
 
-import recepcio from "../../assets/images/recepcio.png";
-import nagyEloado from "../../assets/images/nagyeloado.png";
-import szekcio1 from "../../assets/images/szekcio1.png";
-import szekcio2 from "../../assets/images/szekcio2.png";
-import iokCafe from "../../assets/images/iokcafe.png";
+import recepcio from "../../assets/images/recepcio.png"
+import nagyEloado from "../../assets/images/nagyeloado.png"
+import szekcio1 from "../../assets/images/szekcio1.png"
+import szekcio2 from "../../assets/images/szekcio2.png"
+import szekcio3 from "../../assets/images/szekcio3.png"
+import szekcio4 from "../../assets/images/szekcio4.png"
+import iokCafe from "../../assets/images/iokcafe.png"
+import messageBoard from "../../assets/images/messageboard.png"
 
 import Dashboard from "../../components/Dashboard"
 import Welcome from "../Welcome";
@@ -15,14 +18,7 @@ import Welcome from "../Welcome";
 
 
 const homeDashboardItems : DashboardItemType[] = [
-    {
-        caption: "Recepció",
-        title: "Köszöntő, rogramfüzet, előadói tabló, visszajelző kérdőiv, támogatói szórólap, értékelő űrlap, HTTP-csapat brossúra",
-        img: recepcio,
-        corner: "none",
-        light: true,
-        link: "/recepcio"
-    },
+
     {
         caption: "Nagyterem",
         title: "Délelőtti plenáris előadások a nagyteremben",
@@ -35,7 +31,7 @@ const homeDashboardItems : DashboardItemType[] = [
         caption: "1. terem",
         title: "Szakképzési, ITMP és NetAcad szekció előadásai a 1. teremben",
         img: szekcio1,
-        corner: "br",
+        corner: "none",
         light: false,
         link: "/szekcio/szakkepzes-itmp-netacad"
     },
@@ -43,41 +39,50 @@ const homeDashboardItems : DashboardItemType[] = [
         caption: "2. terem",
         title: "Digitális kultúra szekció előadásai a 2. teremben",
         img: szekcio2,
-        corner: "bl",
+        corner: "none",
         light: false,
         link: "/szekcio/digitalis-kultura"
     },
+
     {
         caption: "IOK Cafe",
-        title: "Résztvevők egymás közötti élő beszélgetése öt tematikus asztalnál az IOK kávézójában",
+        title: "Résztvevők egymás közötti élő beszélgetése négy tematikus asztalnál az IOK kávézójában",
         img: iokCafe,
-        corner: "none",
+        corner: "bl",
         light: true,
         link: "/iok-cafe"
     },
     {
-        caption: "Üzenőfal",
-        title: "Résztvevők egymás közötti élő beszélgetése öt tematikus asztalnál az IOK kávézójában",
-        img: iokCafe,
-        corner: "none",
+        caption: "Információs pult",
+        title: "Köszöntő, rogramfüzet, előadói tabló, visszajelző kérdőiv, támogatói szórólap, értékelő űrlap, HTTP-csapat brossúra",
+        img: recepcio,
+        corner: "tr",
         light: true,
-        link: "/uzenofal"
+        link: "/recepcio"
     },
     {
         caption: "3. terem",
         title: "IT felsőoktatás szekció előadásai a 3. teremben",
-        img: szekcio1,
-        corner: "tr",
+        img: szekcio3,
+        corner: "none",
         light: false,
         link: "/szekcio/it-felsooktatas"
     },
     {
         caption: "4. terem",
         title: "Digitális kultúra az alsótagozatban előadások a 4. teremben",
-        img: szekcio2,
-        corner: "tl",
+        img: szekcio4,
+        corner: "none",
         light: false,
         link: "/szekcio/digitalis-kultura-also-tagozat"
+    },
+    {
+        caption: "Üzenőfal",
+        title: "Résztvevők egymás közötti élő beszélgetése öt tematikus asztalnál az IOK kávézójában",
+        img: messageBoard,
+        corner: "tl",
+        light: true,
+        link: "/uzenofal"
     },
         
 ];

@@ -5,7 +5,10 @@ import Dashboard from '../../components/Dashboard'
 import { useRegistration } from '../../Store'
 import { DashboardItemType } from "../../types"
 
-import iokCafe from "../../assets/images/iokcafe.png"
+import iokCafe0 from "../../assets/images/iokcafe.png"
+import iokCafe1 from "../../assets/images/iokcafe2.png"
+import iokCafe2 from "../../assets/images/iokcafe3.png"
+import iokCafe3 from "../../assets/images/iokcafe4.png"
 import { useNavigate } from 'react-router-dom'
 import { StructuredText } from 'react-datocms'
 import { useLiveStaticElements } from "../../Store"
@@ -71,11 +74,13 @@ const BreakoutRoom = () => {
 
 	const navigate = useNavigate()
 
-	const dashboardItems: WebexRoomDashboardItem[] = rooms.map(room => ({
+	const iokCafeImages = [iokCafe0, iokCafe1, iokCafe2, iokCafe3]
+
+	const dashboardItems: WebexRoomDashboardItem[] = rooms.map((room, index) => ({
 		caption: room.title.replace("IOK Cafe - ", ""),
 		title: "",
 		light: true,
-		img: iokCafe,
+		img: iokCafeImages[index],
 		corner: "none",
 		onClick: () => {
 			setSelectedRoom(room)
