@@ -83,6 +83,7 @@ export type DatoMessage = {
 	message: StructuredTextDocument
 	level: 1 | 2 | 3
 	staff?: DatoStaff
+	createdAt: string
 }
 
 export type DashboardItemType = {
