@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.c0c22331.css",
-    "main.js": "/static/js/main.2046d4e9.js",
+    "main.js": "/static/js/main.80a7d1cc.js",
     "static/js/953.75736d39.chunk.js": "/static/js/953.75736d39.chunk.js",
     "static/css/245.7bfb5ed4.chunk.css": "/static/css/245.7bfb5ed4.chunk.css",
     "static/js/245.0cacb4e0.chunk.js": "/static/js/245.0cacb4e0.chunk.js",
@@ -54,15 +54,17 @@
     "static/media/szekcio3.png": "/static/media/szekcio3.6efec486dcb09a24df36.png",
     "static/media/menucard.png": "/static/media/menucard.4a800dabaf2b0e80358d.png",
     "static/media/iokcafe4.png": "/static/media/iokcafe4.aaff3fe7894148873b2e.png",
+    "static/media/netacad2.png": "/static/media/netacad2.ddb48cec1704a4c173bd.png",
+    "static/media/pannon-mik2.png": "/static/media/pannon-mik2.3544fe72a4bcfee7df2e.png",
     "index.html": "/index.html",
     "main.c0c22331.css.map": "/static/css/main.c0c22331.css.map",
-    "main.2046d4e9.js.map": "/static/js/main.2046d4e9.js.map",
+    "main.80a7d1cc.js.map": "/static/js/main.80a7d1cc.js.map",
     "953.75736d39.chunk.js.map": "/static/js/953.75736d39.chunk.js.map",
     "245.7bfb5ed4.chunk.css.map": "/static/css/245.7bfb5ed4.chunk.css.map",
     "245.0cacb4e0.chunk.js.map": "/static/js/245.0cacb4e0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c0c22331.css",
-    "static/js/main.2046d4e9.js"
+    "static/js/main.80a7d1cc.js"
   ]
 }
