@@ -103,7 +103,7 @@ export type DatoLiveStaticElement = {
 		welcome?: any
 		httpCsapat?: any
 		iokCafe?: any,
-		iokCafeInfo?: any,
+		iokCafeInfo?: any
 		iokCafeHandout?: any
 		httpMemberPlus?: any
 		staff?: any
@@ -112,4 +112,5 @@ export type DatoLiveStaticElement = {
 		sessionLead?: any
 		rating?: any
 		menu?: any
+		handout?: any
 	}

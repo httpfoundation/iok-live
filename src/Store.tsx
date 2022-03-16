@@ -145,6 +145,9 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				}
 				menu {
 					value
+				}
+				handout {
+					value
 				}				
 			}
 			allSpeakers(first: 100) {

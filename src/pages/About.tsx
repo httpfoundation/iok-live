@@ -19,25 +19,25 @@ const About = () => {
 	return (
  		<PageContainer container>
             <PageTitle>A házigazda HTTP-csapat</PageTitle>
-                    <StructuredText data={staffText}></StructuredText> 
+                    <StructuredText data={staffText} />
 					<PresenterGrid sx={{mb: 5}} columns={{lg: Math.max(4, staff.length)}}>
 						{ staff.map((speaker, index)=> (
 						<PresenterCard noClick presenter={speaker} key={index} />
 						))}
 					</PresenterGrid>
-					<StructuredText data={mediaText}></StructuredText> 
+					<StructuredText data={mediaText} /> 
 					<PresenterGrid sx={{mb: 5}} columns={{lg: Math.max(4, staff.length)}}>
 						{ media.map((speaker, index)=> (
 						<PresenterCard noClick presenter={speaker} key={index} />
 						))}
 					</PresenterGrid>	
-					<StructuredText data={juniorText}></StructuredText> 
+					<StructuredText data={juniorText} />
 					<PresenterGrid columns={{lg: Math.max(4, staff.length)}}>
 						{ junior.map((speaker, index)=> (
 						<PresenterCard noClick presenter={speaker} key={index} />
 						))}
 					</PresenterGrid>
-					<StructuredText data={sessionLeadText}></StructuredText> 
+					<StructuredText data={sessionLeadText} />
 					<PresenterGrid columns={{lg: Math.max(4, staff.length)}}>
 						{ sessionLeaders.map((speaker, index)=> (
 						<PresenterCard noClick presenter={speaker} key={index} />

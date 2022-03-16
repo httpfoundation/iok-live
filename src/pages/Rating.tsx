@@ -4,7 +4,6 @@ import { StructuredText } from "react-datocms"
 import { useLiveStaticElements, useRegistration, useStages, useTalk } from "../Store"
 import {  Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, IconButton, Paper, TextField, Typography } from "@mui/material"
 import { Box } from "@mui/system"
-import { DatoTalk } from "../types"
 import { Star as StarFilled, StarOutline as Star } from "@mui/icons-material"
 import { useEffect, useMemo, useState } from "react"
 import { useDatoClient } from "../useQuery"
@@ -116,23 +115,12 @@ const Rating = () => {
 		{id: "elegedett-app", question: "Mennyire vagy elégedett az IOK VKK platform által nyújtott szolgáltatásokkal?", type: "all"},
 		{id: "jovore", question: "Mennyire szívesen vennél részt jövőre is a konferencián?", type: "all"}
 	]
+	const {rating: ratingText } = useLiveStaticElements()
 
 	return (
  		<PageContainer container>
 
-		{/* <Dialog open={success}>
-			<DialogTitle>Értékelések sikeresen elküldve!</DialogTitle>
-			<DialogContent>
-				<DialogContentText>
-					
-				</DialogContentText>
-			</DialogContent>
-			<DialogActions>
-				<Button onClick={() => setSuccess(false)} color="secondary" variant="contained">
-					Bezárás
-				</Button>
-			</DialogActions>
-		</Dialog> */}
+
 		<Dialog open={error}>
 			<DialogTitle>Hiba történt!</DialogTitle>
 			<DialogContent>
@@ -153,7 +141,7 @@ const Rating = () => {
 
             <PageTitle>Értékelés</PageTitle>
 				<Box sx={{textAlign: "center", pb:4}}>
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur repudiandae quos omnis atque earum voluptatibus temporibus, enim qui. Nobis eaque omnis unde officiis enim dolore magni in quaerat fuga vitae.
+				<StructuredText data={ratingText} />
 				</Box>
 				{ ratingsSent && <Box sx={{width: '600px', maxWidth: '100%', mx: 'auto', mb: 2}}>
 					<Paper sx={{p: 2, textAlign: 'center'}}>
