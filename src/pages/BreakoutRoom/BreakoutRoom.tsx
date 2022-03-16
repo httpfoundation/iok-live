@@ -2,8 +2,8 @@ import { CircularProgress, Container, Box, Grid, AppBar, Typography } from '@mui
 import { lazy, Suspense, useEffect, useState } from 'react'
 import { BackButton, PageContainer, PageTitle } from '../../components'
 import Dashboard from '../../components/Dashboard'
-import { useRegistration } from '../../Store'
-import { DashboardItemType } from "../../types"
+import { useBreakoutRooms, useRegistration } from '../../Store'
+import { DashboardItemType, DatoBreakoutRoom } from "../../types"
 
 import iokCafe0 from "../../assets/images/iokcafe.png"
 import iokCafe1 from "../../assets/images/iokcafe2.png"
@@ -33,14 +33,15 @@ const BreakoutRoom = () => {
 	const [registration] = useRegistration()
 	const {iokCafe: iokCafeInfoText} = useLiveStaticElements()
 	const {iokCafeHandout} = useLiveStaticElements()
-	const [rooms, setRooms] = useState<WebexRoom[]>([])
+	//const [rooms, setRooms] = useState<WebexRoom[]>([])
+	const rooms = useBreakoutRooms()
 	const [error, setError] = useState(false)
-	const [selectedRoom, setSelectedRoom] = useState<WebexRoom|null>(null)
+	const [selectedRoom, setSelectedRoom] = useState<DatoBreakoutRoom|null>(null)
 	const [meetingDestination, setMeetingDestination] = useState<string|null>(null)
 	const [meetingDestinationLoading, setMeetingDestinationLoading] = useState(false)
-	const [roomsLoading, setRoomsLoading] = useState(true)
+	//const [roomsLoading, setRoomsLoading] = useState(true)
 
-
+	/*
 	useEffect(() => {
 		fetch("https://webexapis.com/v1/rooms", {
 			method: "GET",
@@ -54,20 +55,34 @@ const BreakoutRoom = () => {
 			if (rooms.length === 0) setError(true)
 		})
 	}, [])
+	*/
 
 	useEffect(() => {
 		if (selectedRoom) {
 			setMeetingDestination(null)
 			setMeetingDestinationLoading(true)
-			fetch("https://webexapis.com/v1/rooms/" + selectedRoom.id + "/meetingInfo", {
-				method: "GET",
+			
+			fetch("https://wy8qg2hpoh.execute-api.eu-west-1.amazonaws.com/default/iokAddToRoom", {
+				method: "POST",
 				headers: {
-					"Authorization": "Bearer " + registration?.webex_access_token,
 					"Content-Type": "application/json"
-				}
+				},
+				body: JSON.stringify({
+					room_id: selectedRoom.roomId,
+					access_token: registration?.webex_access_token
+				})
 			}).then(res => res.json()).then(data => {
-				setMeetingDestinationLoading(false)
-				setMeetingDestination(data.meetingLink)
+				console.log(data)
+				fetch("https://webexapis.com/v1/rooms/" + selectedRoom.roomId + "/meetingInfo", {
+					method: "GET",
+					headers: {
+						"Authorization": "Bearer " + registration?.webex_access_token,
+						"Content-Type": "application/json"
+					}
+				}).then(res => res.json()).then(data => {
+					setMeetingDestinationLoading(false)
+					setMeetingDestination(data.meetingLink)
+				})
 			})
 		} else {
 			setMeetingDestination(null)
@@ -84,7 +99,7 @@ const BreakoutRoom = () => {
 	const iokCafeImages = [iokCafe0, iokCafe1, iokCafe2, iokCafe3]
 
 	const dashboardItems: WebexRoomDashboardItem[] = rooms.map((room, index) => ({
-		caption: room.title.replace("IOK Cafe - ", ""),
+		caption: room.title,
 		mobileOrder: index,
 		title: "",
 		light: true,
@@ -104,8 +119,7 @@ const BreakoutRoom = () => {
 			<PageTitle>{selectedRoom?.title || "IOK Cafe"}</PageTitle>
 			{/* {(error) ? <PageContainer container><Typography>Opsz, valami gond van az IOK Cafeba történő bejutásoddal. Írj nekünk <a href="mailto:info@iok.httpf.hu">info@iok.httpf.hu</a> címre, és megpróbáljuk gyorsan megoldani a problémát!</Typography></PageContainer>: null} */}
 			<>
-			{roomsLoading && <Loader />}
-			{!roomsLoading && !meetingDestinationLoading && !meetingDestination ? 
+			{!meetingDestinationLoading && !meetingDestination ? 
 				<PageContainer container>
 					<Box sx={{textAlign: "center", pb:4}}>
 						<StructuredText data={iokCafeInfoText} />
@@ -116,7 +130,9 @@ const BreakoutRoom = () => {
 			{meetingDestinationLoading || meetingDestination ? 
 				<Grid container sx={{width: '100%', height: '100%'}}>
 					<Grid item xs={12} lg={9} sx={{maxHeight: '100%', position: 'relative', backgroundColor: "#171717"}}>
-						<Suspense fallback={<Box sx={{width: '100%', height: '100%'}}><Loader size={60} /></Box>} ><WebexWidget destination={meetingDestination} /></Suspense>
+						<Suspense fallback={<Box sx={{width: '100%', height: '100%'}}><Loader size={60} /></Box>}>
+							{meetingDestinationLoading ? <Loader /> : <WebexWidget destination={meetingDestination} /> }
+						</Suspense>
 					</Grid>
 					<Grid item xs={12} lg={3}>
 						<Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc(100%)', height: '100%', position: 'relative'}}>

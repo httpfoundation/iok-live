@@ -52,9 +52,9 @@ export type DatoStage = {
 
 export type DatoBreakoutRoom = {
 	id: number
-	name: string
+	title: string
 	slug: string
-	meetingDestination?: string
+	roomId?: string
 }
 
 export type DatoStaff = {
