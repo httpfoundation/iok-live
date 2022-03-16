@@ -45,6 +45,8 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
     const xl = 3
     const lg = 3
 
+	const sortedItems = upperThanMd ? items : items.sort((a,b) => a.mobileOrder - b.mobileOrder)
+
     return (
 		<Box display="flex" alignItems="center" justifyContent="center">
 			<Grid
@@ -56,7 +58,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 				alignItems="center"
 				justifyContent="center"
 			>
-				{items.map((item, key) => {
+				{sortedItems.map((item, key) => {
 					const {caption, title, corner, light, img, link, onClick} = item
 					return  (
 
