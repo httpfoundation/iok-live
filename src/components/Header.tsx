@@ -1,9 +1,9 @@
 import { AppBar, Toolbar, Typography, Drawer, List, ListItemText, ListItemIcon, ListItemButton, ListSubheader, Box, IconButton, Avatar, Divider, Fab, Tooltip, Zoom } from '@mui/material'
 
-import { Home as HomeIcon, Menu as MenuIcon, People as PeopleIcon, Coffee as CoffeeIcon, Star as StarIcon, EventNote as EventNoteIcon, LiveTv as LiveTvIcon, Logout as LogoutIcon, Info as InfoIcon } from '@mui/icons-material'
+import { Home as HomeIcon, Menu as MenuIcon, People as PeopleIcon, Coffee as CoffeeIcon, Star as StarIcon, EventNote as EventNoteIcon, LiveTv as LiveTvIcon, Logout as LogoutIcon, Info as InfoIcon, ArrowBack as ArrowBackIcon } from '@mui/icons-material'
 
 import React, { useEffect, useMemo, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useStages, usePageTitle, useRegistration } from "../Store"
 import iokLogo from "../assets/images/iok2022_logo_w_httpw_sm.png"
 import {styled} from "@mui/system"
@@ -49,6 +49,7 @@ const Header = () => {
 	
 	
 	const location = useLocation()
+	const navigate = useNavigate()
 
 	useEffect(() => setDrawerOpen(false), [location.pathname])
 
@@ -107,11 +108,20 @@ const Header = () => {
 			</Zoom>
 		)}
 		{location.pathname !== "/recepcio" && (
-
 			<Zoom in>
 				<Tooltip title="Tovább az információs pulthoz" placement="bottom" arrow>
-					<Fab color="secondary" aria-label="home" sx={{position: 'absolute', right: location.pathname !== "/" ? 100 : 30, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} component={Link} to="/recepcio" >
+					<Fab color="secondary" sx={{position: 'absolute', right: location.pathname !== "/" ? 100 : 30, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} component={Link} to="/recepcio" >
 						<InfoIcon />
+					</Fab>
+				</Tooltip>
+			</Zoom>
+			)
+		}
+		{ (location.pathname !== "/" && !location.pathname.includes("/szekcio")) && (
+			<Zoom in>
+				<Tooltip title="Vissza" placement="bottom" arrow>
+					<Fab color="secondary" sx={{position: 'absolute', right: location.pathname !== "/recepcio" ? 170 : 100, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} onClick={()=> navigate(-1)} >
+						<ArrowBackIcon />
 					</Fab>
 				</Tooltip>
 			</Zoom>
