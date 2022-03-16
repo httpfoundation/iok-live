@@ -128,7 +128,7 @@ const StagePage = () => {
 								</Tabs>
 							</AppBar>
 							<Box sx={{flex: 1, overflow: "auto"}}>
-								{ selectedTab === 0 && <Box sx={{px: 1}}>{ stage?.schedule?.map(talk => <Link to={`/eloadasok/${talk.id}`}><ScheduleItem open key={talk.id} talkId={talk.id} /></Link>) }</Box> }							
+								{ selectedTab === 0 && <Box sx={{px: 1}}>{ stage?.schedule?.map(talk => <ScheduleItem open key={talk.id} talkId={talk.id} />) }</Box> }
 								{ selectedTab === 1 && <Questions schedule={stage?.schedule} stageId={stage?.id} /> }
 								{ selectedTab === 2 && selectedStream && 
 								<Box sx={{position: "relative", flex: 1, height: '100%', overflowY: 'hidden', minHeight: '500px'}}>

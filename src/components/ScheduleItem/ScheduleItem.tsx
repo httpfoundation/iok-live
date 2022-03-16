@@ -100,19 +100,23 @@ const ScheduleItemContent = styled('div')(({theme}) =>`
 	vertical-align: top;
 `)
 
-const ScheduleItemContainer = styled('div')`
+const ScheduleItemContainer = styled('div', {shouldForwardProp: prop => prop !== "noClick"})<{noClick?: boolean}>(({ noClick}) => `
 	margin: 15px 0;
 	transition: all 0.2s ease-out;
 	padding: 10px;
 	border-radius: 40px;
-	cursor: pointer;
+	${!noClick ? `
+		cursor: pointer;
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.07);
+			/* box-shadow: 0 0rem 1rem rgba(0,0,0,0.2);
+			transform: scale(1.03); */
+		}
+	` : `
+		cursor: default;
+	`}
 	/* box-shadow: 0 0rem 1rem rgba(0,0,0,0.12); */
-	&:hover {
-		background-color: rgba(0, 0, 0, 0.07);
-		/* box-shadow: 0 0rem 1rem rgba(0,0,0,0.2);
-		transform: scale(1.03); */
-	}
-`
+`)
 
 
 const ScheduleItem = (props: {
@@ -120,11 +124,12 @@ const ScheduleItem = (props: {
 	talkId: number
 }) => {
 	const talk = useTalk(props.talkId)
-	
+	const noClick = talk?.speakers.length === 0
+	const LinkOrSpan = noClick ? (props: {to?: string, children: React.ReactNode}) =>  <span>{props.children}</span> : Link
 
 	return (
-		<Link to={`/eloadasok/${talk.id}`}>
-			<ScheduleItemContainer>
+		<LinkOrSpan to={`/eloadasok/${talk.id}`}>
+			<ScheduleItemContainer noClick={noClick}>
 				<SpeakersImages speakers={talk?.speakers} /> 
 				<ScheduleItemContent>
 					<ScheduleTimeCaption date={talk?.start} />
@@ -133,7 +138,7 @@ const ScheduleItem = (props: {
 					<Abstract abstract={talk?.description} />
 				</ScheduleItemContent>
 			</ScheduleItemContainer>
-		</Link>
+		</LinkOrSpan>
 	)
 }
 
