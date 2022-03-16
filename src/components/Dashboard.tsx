@@ -73,7 +73,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 							light={light}
 							corner={corner}
 							onClick={onClick}
-							key={key}
+							key={key + (upperThanMd ? "mobile" : "desktop")}
 							timeout = {1000}
 							tooltipPlacement = {(key<4) ? "top" : "bottom"}
 						/>
