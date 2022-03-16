@@ -78,6 +78,7 @@ const Rating = () => {
 				if (res.length) {
 					console.log("Loaded ratings", JSON.parse(res[0].ratings))
 					setRatings(JSON.parse(res[0].ratings))
+					setComment(res[0].comment)
 				}
 			})
 		}
@@ -97,7 +98,8 @@ const Rating = () => {
 				...data
 			})
 			setSuccess(true)	
-			setRatingsSent(true)	
+			setRatingsSent(true)
+			document.getElementById("main")?.scrollTo(0,0)
 		} catch (e) {
 			console.error(e)
 			setError(true)
@@ -161,7 +163,7 @@ const Rating = () => {
 						<img src={recepcio} style={{width: '300px', margin: '30px 0'}} />
 					</Paper>	
 				</Box>}
-				{ loading || !stages.length ? null : (
+				{ !stages.length ? null : (
 				<Box sx={{width: '600px', maxWidth: '100%', mx: 'auto'}}>
 					{
 						shownStages.map((stage, index) => {
