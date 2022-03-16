@@ -70,12 +70,12 @@ const receptionDashboardItems : DashboardItemType[] = [
         mobileOrder: 1
     },
     {
-        caption: "Menükártya",
+        caption: "Étlap",
         title: "Ami az asztalra kerül...",
         img: menucard,
         corner: "none",
         light: false,
-        link: "/menu",
+        link: "/etlap",
         mobileOrder: 1
     },
     {

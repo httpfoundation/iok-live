@@ -12,6 +12,7 @@ import About from "../pages/About"
 import MessageBoard from "../pages/MessageBoard"
 import Logout from "./Logout"
 import Rating from "../pages/Rating"
+import MenuCard from "../pages/MenuCard"
 
 
 const ScrollToTop = () => {
@@ -53,6 +54,7 @@ const Router = () =>{
 			<Route path="/eloadasok/*" element={<Talks />} />
 			
 			<Route path="/http-csapat/*" element={<About />} />
+			<Route path="/etlap/*" element={<MenuCard />} />
 			<Route path="/ertekeles/*" element={<Rating />} />
 			<Route path="/uzenofal/*" element={<MessageBoard />} />
 			<Route path="/iok-cafe/*" element={<BreakoutRoom />} />
