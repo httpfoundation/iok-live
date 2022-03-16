@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.c0c22331.css",
-    "main.js": "/static/js/main.db3076c3.js",
+    "main.js": "/static/js/main.2046d4e9.js",
     "static/js/953.75736d39.chunk.js": "/static/js/953.75736d39.chunk.js",
     "static/css/245.7bfb5ed4.chunk.css": "/static/css/245.7bfb5ed4.chunk.css",
     "static/js/245.0cacb4e0.chunk.js": "/static/js/245.0cacb4e0.chunk.js",
@@ -56,13 +56,13 @@
     "static/media/iokcafe4.png": "/static/media/iokcafe4.aaff3fe7894148873b2e.png",
     "index.html": "/index.html",
     "main.c0c22331.css.map": "/static/css/main.c0c22331.css.map",
-    "main.db3076c3.js.map": "/static/js/main.db3076c3.js.map",
+    "main.2046d4e9.js.map": "/static/js/main.2046d4e9.js.map",
     "953.75736d39.chunk.js.map": "/static/js/953.75736d39.chunk.js.map",
     "245.7bfb5ed4.chunk.css.map": "/static/css/245.7bfb5ed4.chunk.css.map",
     "245.0cacb4e0.chunk.js.map": "/static/js/245.0cacb4e0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c0c22331.css",
-    "static/js/main.db3076c3.js"
+    "static/js/main.2046d4e9.js"
   ]
 }
