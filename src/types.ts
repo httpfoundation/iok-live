@@ -57,6 +57,18 @@ export type DatoBreakoutRoom = {
 	meetingDestination?: string
 }
 
+export type DatoStaff = {
+	id: number
+	name: string
+	company?: string
+	title?: string
+	slug?: string
+	group?: string
+	image?: {
+		url: string
+	}
+}
+
 
 export type DatoComplex = {
 	allStages: DatoStage[]
@@ -64,13 +76,7 @@ export type DatoComplex = {
 	liveStaticElement: DatoLiveStaticElement
 	allSpeakers: DatoSpeaker[]
 	allMessages: DatoMessage[]
-}
-
-export type DatoStaff = {
-	name: string
-	image: {
-		url: string
-	}
+	allStaffs: DatoStaff[]
 }
 
 export type DatoMessage = {
@@ -99,4 +105,9 @@ export type DatoLiveStaticElement = {
 		iokCafeInfo?: any,
 		iokCafeHandout?: any
 		httpMemberPlus?: any
+		staff?: any
+		junior?: any
+		media?: any
+		sessionLead?: any
+		rating?: any
 	}

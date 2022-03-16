@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom, DatoLiveStaticElement, DatoMessage } from "./types"
+import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom, DatoLiveStaticElement, DatoMessage, DatoStaff } from "./types"
 import useQuery from "./useQuery"
 
 export interface IStore {
@@ -15,6 +15,7 @@ export interface IStore {
 	registrationError: boolean,
 	liveStaticElements: DatoLiveStaticElement
 	messages: DatoMessage[]
+	staff: DatoStaff[]
 }
 
 export const Store = createContext<IStore>({
@@ -28,7 +29,8 @@ export const Store = createContext<IStore>({
 	registrationLoading: true,
 	registrationError: false,
 	liveStaticElements: {},
-	messages: []
+	messages: [],
+	staff: []
 })
 
 type RegistrationData = {
@@ -125,7 +127,23 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				}
 				httpMemberPlus {
 					value
-				}}
+				}
+				staff {
+					value
+				}
+				junior {
+					value
+				}
+				media {
+					value
+				}
+				sessionLead {
+					value
+				}
+				rating {
+					value
+				}
+			}
 			allSpeakers(first: 100) {
 				id
 				name
@@ -152,10 +170,21 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 					}
 				}
 			}
+			allStaffs {
+				id
+				name
+				title
+				company
+				image {
+				  url
+				}
+				group
+				slug
+			}
 	  	}
-	`, {allStages: [], allBreakoutrooms: [], liveStaticElement: {}, allSpeakers: [], allMessages: []})
+	`, {allStages: [], allBreakoutrooms: [], liveStaticElement: {}, allSpeakers: [], allMessages: [], allStaffs: []})
 
-	const {allStages : stages, allBreakoutrooms: breakoutRooms, liveStaticElement: liveStaticElements, allSpeakers: presenters, allMessages: messages} = data
+	const {allStages : stages, allBreakoutrooms: breakoutRooms, liveStaticElement: liveStaticElements, allSpeakers: presenters, allMessages: messages, allStaffs: staff} = data
 
 	const talks = useMemo(() => {
 		const talks: DatoTalk[] = []
@@ -188,8 +217,9 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 		registrationLoading,
 		registrationError,
 		liveStaticElements,
-		messages
-	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle, registration, registrationLoading, registrationError, liveStaticElements, messages])
+		messages,
+		staff
+	}), [stages, presenters, talks, breakoutRooms, pageTitle, setPageTitle, registration, registrationLoading, registrationError, liveStaticElements, messages, staff])
 
 	return <Store.Provider value={store}>{props.children}</Store.Provider>
 }
@@ -241,6 +271,13 @@ export const useStage = (stageSlug?: string) => {
 export const useBreakoutRooms = (stageSlug?: string) => {
 	const store = useStore()
 	return store.breakoutRooms
+}
+
+export const useStaff = (group?: string) => {
+	const store = useStore()
+	console.log("staff", store.staff)
+	if (group) return store.staff.filter(member => member.group===group)
+	return store.staff
 }
 
 
