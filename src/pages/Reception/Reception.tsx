@@ -21,7 +21,8 @@ const receptionDashboardItems : DashboardItemType[] = [
         img: welcome,
         corner: "br",
         light: true,
-        link: "/koszonto"
+        link: "/koszonto",
+        mobileOrder: 1
     },
     {
         caption: "Programfüzet",
@@ -29,7 +30,8 @@ const receptionDashboardItems : DashboardItemType[] = [
         img: schedule,
         corner: "none",
         light: true,
-        link: "/eloadasok"
+        link: "/eloadasok",
+        mobileOrder: 1
     },
     {
         caption: "Előadói tabló",
@@ -37,7 +39,8 @@ const receptionDashboardItems : DashboardItemType[] = [
         img: presenters,
         corner: "none",
         light: false,
-        link: "/eloadok"
+        link: "/eloadok",
+        mobileOrder: 1
     },
     {
         caption: "Támogatói tabló",
@@ -45,7 +48,8 @@ const receptionDashboardItems : DashboardItemType[] = [
         img: sponsors,
         corner: "bl",
         light: false,
-        link: "/tamogatok"
+        link: "/tamogatok",
+        mobileOrder: 1
     },
     {
         caption: "Értékelő űrlap",
@@ -53,7 +57,8 @@ const receptionDashboardItems : DashboardItemType[] = [
         img: feedback,
         corner: "tr",
         light: true,
-        link: "#"
+        link: "/ertekeles",
+        mobileOrder: 1
     },
     {
         caption: "HTTP szervezőcsapat",
@@ -61,7 +66,8 @@ const receptionDashboardItems : DashboardItemType[] = [
         img: http,
         corner: "none",
         light: true,
-        link: "/http-csapat"
+        link: "/http-csapat",
+        mobileOrder: 1
     },
     {
         caption: "Menükártya",
@@ -69,7 +75,8 @@ const receptionDashboardItems : DashboardItemType[] = [
         img: menucard,
         corner: "none",
         light: false,
-        link: "/"
+        link: "/menu",
+        mobileOrder: 1
     },
     {
         caption: "IOK VKK útmutató",
@@ -77,7 +84,8 @@ const receptionDashboardItems : DashboardItemType[] = [
         img: handout,
         corner: "tl",
         light: false,
-        link: "/utmutato"
+        link: "/utmutato",
+        mobileOrder: 1
     },
         
 ]

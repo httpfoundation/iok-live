@@ -96,6 +96,7 @@ export type DashboardItemType = {
     img: string
     link?: string
 	onClick?: () => void
+	mobileOrder: number
 }
 
 export type DatoLiveStaticElement = {

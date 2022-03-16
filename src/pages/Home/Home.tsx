@@ -25,7 +25,8 @@ const homeDashboardItems : DashboardItemType[] = [
         img: nagyEloado,
         corner: "br",
         light: false,
-        link: "/szekcio/plenaris"
+        link: "/szekcio/plenaris",
+        mobileOrder: 1
     },
     {
         caption: "1. szekcióterem",
@@ -33,7 +34,8 @@ const homeDashboardItems : DashboardItemType[] = [
         img: szekcio1,
         corner: "none",
         light: false,
-        link: "/szekcio/szakkepzes-itmp-netacad"
+        link: "/szekcio/szakkepzes-itmp-netacad",
+        mobileOrder: 2
     },
     {
         caption: "2. szekcióterem",
@@ -41,7 +43,8 @@ const homeDashboardItems : DashboardItemType[] = [
         img: szekcio2,
         corner: "none",
         light: false,
-        link: "/szekcio/digitalis-kultura"
+        link: "/szekcio/digitalis-kultura",
+        mobileOrder: 3
     },
 
     {
@@ -50,7 +53,8 @@ const homeDashboardItems : DashboardItemType[] = [
         img: iokCafe,
         corner: "bl",
         light: true,
-        link: "/iok-cafe"
+        link: "/iok-cafe",
+        mobileOrder: 6
     },
     {
         caption: "Információs pult",
@@ -58,7 +62,8 @@ const homeDashboardItems : DashboardItemType[] = [
         img: recepcio,
         corner: "tr",
         light: true,
-        link: "/recepcio"
+        link: "/recepcio",
+        mobileOrder: 0
     },
     {
         caption: "3. szekcióterem",
@@ -66,7 +71,8 @@ const homeDashboardItems : DashboardItemType[] = [
         img: szekcio3,
         corner: "none",
         light: false,
-        link: "/szekcio/it-felsooktatas"
+        link: "/szekcio/it-felsooktatas",
+        mobileOrder: 4
     },
     {
         caption: "4. szekcióterem",
@@ -74,7 +80,8 @@ const homeDashboardItems : DashboardItemType[] = [
         img: szekcio4,
         corner: "none",
         light: false,
-        link: "/szekcio/digitalis-kultura-also-tagozat"
+        link: "/szekcio/digitalis-kultura-also-tagozat",
+        mobileOrder: 5
     },
     {
         caption: "Üzenőfal",
@@ -82,7 +89,8 @@ const homeDashboardItems : DashboardItemType[] = [
         img: messageBoard,
         corner: "tl",
         light: true,
-        link: "/uzenofal"
+        link: "/uzenofal",
+        mobileOrder: 7
     },
         
 ];

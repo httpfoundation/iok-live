@@ -7,5 +7,5 @@ const PageSubtitleStyled = styled(Typography)<TypographyProps>(({theme}) => `
 	margin: -${theme.spacing(2)} 0 0 0;
 `)
 
-const PageSubtitle = (props: {children?: React.ReactNode}) => <PageSubtitleStyled  variant="h5">{props.children}</PageSubtitleStyled>
+const PageSubtitle = (props: {children?: React.ReactNode}) => <PageSubtitleStyled variant="h6">{props.children}</PageSubtitleStyled>
 export default PageSubtitle

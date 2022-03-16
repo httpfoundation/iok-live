@@ -10,6 +10,8 @@ import React, { useEffect } from "react"
 import { Close as CloseIcon, AccessTime as TimeIcon } from "@mui/icons-material"
 import { Link, useLocation } from "react-router-dom"
 
+const hideMessagesAfterMins = 15
+
 const MessageContainer = styled(Card)<{notification?: boolean}>(({ theme, notification }) => `
 	padding: 0 0.5rem;
 	border-radius: 15px;
@@ -28,6 +30,8 @@ const MessageContainer = styled(Card)<{notification?: boolean}>(({ theme, notifi
 		font-size: 1rem;
 	}
 `)
+
+const olderThan = (date: Date|string, limitMins: number) => Math.round(((new Date()).getTime()-(new Date(date)).getTime())/1000/60) > limitMins
 
 const notificationTimeout = 10 * 1000
 
@@ -91,8 +95,7 @@ export const MessageNotifications = () => {
 
 	const [timeouts, setTimeouts] = React.useState<Record<number, number|null>>({})
 
-	const unreadMessages = messages.filter(message => !readMessages.includes(Number(message.id)))
-
+	const unreadMessages = messages.filter(message => !readMessages.includes(Number(message.id)) && !olderThan(message.createdAt, hideMessagesAfterMins))
 	const location = useLocation()
 
 	useEffect(() => {

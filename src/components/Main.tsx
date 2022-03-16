@@ -1,5 +1,6 @@
 import { Box } from '@mui/material'
 import { MessageNotifications } from '../pages/MessageBoard'
+import { Attendance } from './Attendance'
 
 import Router from './Router'
 
@@ -11,6 +12,7 @@ const Main = () => {
 				component="main" id="main">
 			<Router />
 			<MessageNotifications />
+			<Attendance />
 		</Box>
 	)
 }
