@@ -12,11 +12,11 @@ const PresenterWrapper = styled('div', {shouldForwardProp: (prop) => prop !== "n
 	overflow: hidden;
 	transition: all .2s ease-in-out;
 	background-color: #fff;
+	&:hover {
+		transform: scale(1.08);
+	}
 	${!noClick && `
 		cursor: pointer;
-		&:hover {
-			transform: scale(1.08);
-		}
 	`}
 `)
 
