@@ -32,7 +32,7 @@ export const NoRegistration = () => {
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut sequi consectetur ex dolorem quos porro delectus quia totam, officia maiores.
 			</Typography>
 
-			<Button variant="contained" color="primary" sx={{ mt: 2 }} size="large" href="https://iok2022.http-alapitvany.hu/#regisztracio">Regisztráció</Button>
+			<Button variant="contained" color="primary" sx={{ mt: 2 }} size="large" href="https://iok2022.http-alapitvany.hu/">Regisztráció</Button>
 
 			<Divider color="#fff" sx={{ my: 4 }} />
 			<Typography variant="body1" component="p" sx={{ color: '#fff', fontSize: '0.9rem', mb: 1, mt: 2 }}>

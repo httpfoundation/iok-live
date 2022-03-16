@@ -27,12 +27,25 @@ const TalkRate = (props: {id: number, rating: number|null, setRating: (r: number
 	)
 }
 
+const OtherQuestion = (props: {id: number|string, rating: number|null, question: string, setRating: (r: number|null) => void}) => {
+	return (
+		<Box sx={{mt: 1, textAlign: 'center', mb: 2, my: 3}}>
+			<Typography variant="h6" fontSize={'1rem'} align="center" fontWeight={600}>{props.question}</Typography>
+			<Box sx={{margin: 'auto', display: 'inline-block'}}>
+				{[1,2,3,4,5].map((r) => (
+					<IconButton onClick={() => props.setRating(props.rating === r ? null : r)} key={r}>{ (props.rating||0) < r ? <Star /> : <StarFilled sx={{color: '#FFC107'}} />}</IconButton>
+				))}
+			</Box>
+		</Box>
+	)
+}
+
 
 const Rating = () => {
 
 	const stages = useStages()
 
-	const [ratings, setRatings] = useState<{[id: number]: number|null}>(JSON.parse(window.localStorage.getItem("ratings") || "{}"))
+	const [ratings, setRatings] = useState<{[id: number|string]: number|null}>({})
 	const [comment, setComment] = useState<string>("")
 
 	const client = useDatoClient()
@@ -54,10 +67,19 @@ const Rating = () => {
 							eq: registration.id
 						}
 					}
+				},
+				orderBy: "createdAt_DESC",
+				page: {
+					limit: 1
 				}
 			}).then(res => {
 				setLoading(false)
 				setRatingsSent(res.length > 0)
+				if (res.length) {
+					console.log("Loaded ratings", JSON.parse(res[0].ratings))
+					setRatings(JSON.parse(res[0].ratings))
+					setComment(res[0].comment)
+				}
 			})
 		}
 	}, [registration])
@@ -76,7 +98,8 @@ const Rating = () => {
 				...data
 			})
 			setSuccess(true)	
-			setRatingsSent(true)	
+			setRatingsSent(true)
+			document.getElementById("main")?.scrollTo(0,0)
 		} catch (e) {
 			console.error(e)
 			setError(true)
@@ -86,6 +109,13 @@ const Rating = () => {
 	}
 
 	const shownStages = useMemo(() => registration?.stage ? stages.filter(s => Number(s.id) === registration.stage || s.name.includes("Plenáris")) : stages, [stages, registration])
+
+	const otherQuestions: Array<{id: string, question: string, type: "all" | "onsite" | "offsite"}> = [
+		{id: "elegedett-szervezes", question: "Mennyire vagy elégedett a szervezéssel, tájékoztatással?", type: "all"},
+		{id: "elegedett-menu", question: "Mennyire vagy elégedett a menüvel?", type: "onsite"},
+		{id: "elegedett-app", question: "Mennyire vagy elégedett az IOK VKK platform által nyújtott szolgáltatásokkal?", type: "all"},
+		{id: "jovore", question: "Mennyire szívesen vennél részt jövőre is a konferencián?", type: "all"}
+	]
 
 	return (
  		<PageContainer container>
@@ -117,7 +147,7 @@ const Rating = () => {
 			</DialogActions>
 		</Dialog>
 
-		<Backdrop open={loading}>
+		<Backdrop open={loading || !stages.length}>
 			<CircularProgress size={60} />
 		</Backdrop>
 
@@ -125,16 +155,24 @@ const Rating = () => {
 				<Box sx={{textAlign: "center", pb:4}}>
 					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Pariatur repudiandae quos omnis atque earum voluptatibus temporibus, enim qui. Nobis eaque omnis unde officiis enim dolore magni in quaerat fuga vitae.
 				</Box>
-				{ loading || ratingsSent || !stages.length ? null : (
+				{ ratingsSent && <Box sx={{width: '600px', maxWidth: '100%', mx: 'auto', mb: 2}}>
+					<Paper sx={{p: 2, textAlign: 'center'}}>
+						<Typography variant="h6" fontWeight={700} align="center" sx={{mt: 0.5}}>
+							Köszönjük, hogy értékelted a konferenciát!
+						</Typography>
+						<img src={recepcio} style={{width: '300px', margin: '30px 0'}} />
+					</Paper>	
+				</Box>}
+				{ !stages.length ? null : (
 				<Box sx={{width: '600px', maxWidth: '100%', mx: 'auto'}}>
 					{
 						shownStages.map((stage, index) => {
-							return (<Paper sx={{px: 2, mb: 2, pb: 1, pt: 2}}>
+							return (<Paper sx={{px: 2, mb: 2, pb: 1, pt: 2}} key={index}>
 								<Typography variant="h6" fontWeight={700} align="center" sx={{mt: 0.5}}>{stage.pageTitle}</Typography>
 								<Divider sx={{mt: 2, mb: 4}} />
 								{stage.schedule?.map((talk, index) => <TalkRate rating={ratings[talk.id]} setRating={r => {
 									const _ratings = {...ratings, [talk.id]: r}
-									window.localStorage.setItem("ratings", JSON.stringify(_ratings))
+									//window.localStorage.setItem("ratings", JSON.stringify(_ratings))
 									setRatings(_ratings)
 								}} key={index} id={talk.id} />)}
 
@@ -142,7 +180,12 @@ const Rating = () => {
 						})
 					}
 
-					<Paper sx={{px: 2, mb: 2, pb: 2, pt: 2}}>
+					<Paper sx={{px: 2, mb: 2, pb: 2, pt: '1px'}}>
+						{otherQuestions.map((question, index) => (question.type === "all" || (question.type === "onsite" && registration?.onsite) || (question.type === "offsite" && !registration?.onsite)) ? <OtherQuestion question={question.question} rating={ratings[question.id]} setRating={r => {
+								const _ratings = {...ratings, [question.id]: r}
+								//window.localStorage.setItem("ratings", JSON.stringify(_ratings))
+								setRatings(_ratings)
+							}} key={index} id={question.id} /> : null)}
 						<Typography variant="h6" fontSize={'0.8rem'} align="left" fontWeight={600}>Megjegyzések</Typography>
 						<TextField value={comment} onChange={e=>setComment(e.target.value)} multiline fullWidth minRows={8} color="secondary" placeholder="Ide írhatja javaslatait, észrevételeit, egyéb megjegyzéseit"/>
 					</Paper>
@@ -152,14 +195,7 @@ const Rating = () => {
 					</Button>
 				</Box> )}
 				
-				{ ratingsSent && <Box sx={{width: '600px', maxWidth: '100%', mx: 'auto'}}>
-					<Paper sx={{p: 2, textAlign: 'center'}}>
-						<Typography variant="h6" fontWeight={700} align="center" sx={{mt: 0.5}}>
-							Köszönjük, hogy értékelted a konferenciát!
-						</Typography>
-						<img src={recepcio} style={{width: '300px', margin: '30px 0'}} />
-					</Paper>	
-				</Box>}
+				
 		</PageContainer> 
 	)
 }
