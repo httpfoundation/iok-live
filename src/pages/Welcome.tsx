@@ -55,7 +55,7 @@ const Welcome = () => {
                     <StructuredText data={welcome}></StructuredText> 
 					<Box>
 						<Link to="/utmutato">
-							<Button variant="contained" color="secondary" startIcon={<InformationIcon /> } sx={{ml:2, pt:1, pb:1}}>Tovább az IOK VKK útmutatóhoz</Button>
+							<Button variant="contained" color="secondary" startIcon={<InformationIcon /> } sx={{pt:1, pb:1}}>Tovább az IOK VKK útmutatóhoz</Button>
 						</Link>
 						<Link to="/">
 							<Button variant="contained" color="secondary" startIcon={<HomeIcon />} sx={{ml:2, pt:1, pb:1}}>Tovább az IOK Aulába</Button>
