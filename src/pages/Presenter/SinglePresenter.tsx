@@ -48,7 +48,7 @@ export const SinglePresenter = () => {
 	)
 }
 
-const TalkTitle = styled("h2")<TypographyProps>(({theme}) => `
+const TalkTitle = styled(Typography)<TypographyProps>(({theme}) => `
 	text-align: "left";
 	margin: -${theme.spacing(2)} 0 ${theme.spacing(2)} 0;
 `)
