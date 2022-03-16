@@ -32,7 +32,7 @@ export const SinglePresenter = () => {
 					<PresenterImage src={presenter?.image?.url} alt={presenter?.name} />
 				</Grid>
 				<Grid item xs={12} md={8} sx={{display: "flex", flexDirection: "column", justifyContent: "flex-end", pb: 1}}>
-					<TalkTitle align="left">{presenter?.name}</TalkTitle>
+					<TalkTitle variant="h2" align="left">{presenter?.name}</TalkTitle>
 					<PageSubtitle>{presenter?.title}, {presenter?.company}</PageSubtitle>
 					{presenter?.bio && <Paragraph>
 						{presenter.bio}
