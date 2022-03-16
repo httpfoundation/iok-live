@@ -107,7 +107,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				  value
 				}
 				title
-				meetingDestination
+				roomId
 			}
 			liveStaticElement {
 				welcome {
