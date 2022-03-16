@@ -275,7 +275,6 @@ export const useBreakoutRooms = (stageSlug?: string) => {
 
 export const useStaff = (group?: string) => {
 	const store = useStore()
-	console.log("staff", store.staff)
 	if (group) return store.staff.filter(member => member.group===group)
 	return store.staff
 }

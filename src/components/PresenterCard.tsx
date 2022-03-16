@@ -1,8 +1,9 @@
 import { styled } from '@mui/material/styles'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { DatoSpeaker } from "../types"
 
-const PresenterWrapper = styled('div')(({ theme }) => `
+const PresenterWrapper = styled('div', {shouldForwardProp: (prop) => prop !== "noClick"})<{noClick?: boolean}>(({ theme, noClick }) => `
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -10,11 +11,13 @@ const PresenterWrapper = styled('div')(({ theme }) => `
 	border-radius: 12px;
 	overflow: hidden;
 	transition: all .2s ease-in-out;
-	cursor: pointer;
 	background-color: #fff;
-	&:hover {
-		transform: scale(1.08);
-	}
+	${!noClick && `
+		cursor: pointer;
+		&:hover {
+			transform: scale(1.08);
+		}
+	`}
 `)
 
 const PresenterCardImage = styled('img')(({ theme }) => `
@@ -25,34 +28,36 @@ const PresenterCardImage = styled('img')(({ theme }) => `
 
 const PresenterDetails = styled('div')(({ theme }) => `
 	flex: 1;
-	min-height: 80px;
+	//min-height: 80px;
 	padding: 5px;
 `)
 
 const PresenterName = styled('div')(({ theme }) => `
 	font-weight: 700;
     font-size: 0.9rem;
-    margin: 7px 0;
+    margin: 10px 0 7px 0;
 	text-align: center;
 `)
 
 const PresenterTitle = styled('div')(({ theme }) => `
 	font-size: 0.7rem;
 	text-align: center;
+	margin-bottom: 5px;
 `)
 
-const PresenterCard = (props: {presenter: DatoSpeaker}) => {
-	const { presenter } = props
+const PresenterCard = (props: {presenter: DatoSpeaker, noClick?: boolean}) => {
+	const { presenter, noClick } = props
+	const LinkOrSpan = noClick ? (props: {to?: string, children: React.ReactNode}) =>  <span>{props.children}</span> : Link
 	return (
-		<Link to={`/eloadok/${presenter.slug}`}>
-		<PresenterWrapper>
-			<PresenterCardImage src={props.presenter.image?.url} alt={presenter.name} />
-			<PresenterDetails>
-				<PresenterName>{presenter.name}</PresenterName>
-				<PresenterTitle>{presenter.title}, {presenter.company}</PresenterTitle>
-			</PresenterDetails>
-		</PresenterWrapper>
-		</Link>
+		<LinkOrSpan to={`/eloadok/${presenter.slug}`}>
+			<PresenterWrapper noClick={noClick}>
+				<PresenterCardImage src={props.presenter.image?.url} alt={presenter.name} />
+				<PresenterDetails>
+					<PresenterName>{presenter.name}</PresenterName>
+					{(presenter.title || presenter.company) && <PresenterTitle>{presenter.title}{presenter.title && presenter.company ? ", " : ""}{presenter.company}</PresenterTitle>}
+				</PresenterDetails>
+			</PresenterWrapper>
+		</LinkOrSpan>
 	)
 }
 

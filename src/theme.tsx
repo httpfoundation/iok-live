@@ -42,7 +42,7 @@ let theme = createTheme({
 			fontSize: '1.7rem',
 			fontWeight: 700,
 			color: '#14475C',
-		},		
+		},	
 		h6: {
 			fontSize: '18px',
 			fontWeight: 400,
