@@ -111,4 +111,5 @@ export type DatoLiveStaticElement = {
 		media?: any
 		sessionLead?: any
 		rating?: any
+		menu?: any
 	}

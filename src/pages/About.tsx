@@ -14,6 +14,7 @@ const About = () => {
 	const staff = useStaff("staff") as DatoSpeaker[]
 	const junior = useStaff("junior") as DatoSpeaker[]
 	const media = useStaff("media") as DatoSpeaker[]
+	const sessionLeaders = useStaff("sessionleaders") as DatoSpeaker[]
 
 	return (
  		<PageContainer container>
@@ -35,7 +36,13 @@ const About = () => {
 						{ junior.map((speaker, index)=> (
 						<PresenterCard noClick presenter={speaker} key={index} />
 						))}
-					</PresenterGrid>					
+					</PresenterGrid>
+					<StructuredText data={sessionLeadText}></StructuredText> 
+					<PresenterGrid columns={{lg: Math.max(4, staff.length)}}>
+						{ sessionLeaders.map((speaker, index)=> (
+						<PresenterCard noClick presenter={speaker} key={index} />
+						))}
+					</PresenterGrid>				
 		</PageContainer> 
 	)
 }
