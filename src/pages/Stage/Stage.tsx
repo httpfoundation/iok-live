@@ -127,7 +127,7 @@ const StagePage = () => {
 								{ selectedTab === 2 && selectedStream && 
 								<Box sx={{position: "relative", flex: 1, height: '100%', overflowY: 'hidden', minHeight: '500px'}}>
 									<Box sx={{position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}><CircularProgress sx={{zIndex: 100}} color="secondary" /></Box>
-									<iframe key={selectedStream?.youtubeVideoId} title="chat" style={{position: 'relative', width: '100%', height: '100%'}} allowFullScreen frameBorder="0" src={`https://www.youtube.com/live_chat?v=${selectedStream?.youtubeVideoId}&embed_domain=${embedDomain}&dark_theme=0`}></iframe>
+									<iframe key={selectedStream?.youtubeVideoId} title="chat" style={{position: 'relative', width: '100%', height: '100%', minHeight: '500px'}} allowFullScreen frameBorder="0" src={`https://www.youtube.com/live_chat?v=${selectedStream?.youtubeVideoId}&embed_domain=${embedDomain}&dark_theme=0`}></iframe>
 								</Box>}
 							</Box>
 						</Box>
