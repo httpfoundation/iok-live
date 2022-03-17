@@ -58,7 +58,7 @@ const homeDashboardItems : DashboardItemType[] = [
     },
     {
         caption: "Információs pult",
-        title: "Köszöntő, rogramfüzet, előadói tabló, visszajelző kérdőiv, támogatói szórólap, értékelő űrlap, HTTP-csapat brossúra",
+        title: "Köszöntő, programfüzet, előadói tabló, visszajelző kérdőiv, támogatói szórólap, értékelő űrlap, HTTP-csapat brossúra",
         img: recepcio,
         corner: "tr",
         light: true,
