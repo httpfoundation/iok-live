@@ -93,11 +93,11 @@ const StagePage = () => {
 						
 							{ (selectedStream?.live && selectedStream?.youtubeVideoId) && <VideoContainer><YoutubeVideoComponent key={selectedStream.youtubeVideoId} videoId={selectedStream.youtubeVideoId} /></VideoContainer> }
 
-							{ (!selectedStream?.live && stage.staticVideo?.video.url)  && <VideoContainer>
-								<video style={{width: '100%', height: '100%'}} src={stage.staticVideo.video.url} autoPlay loop controls />
+							{ (!selectedStream?.live || !selectedStream?.youtubeVideoId) && <VideoContainer>
+								{(stage.staticVideo) ? <video style={{width: '100%', height: '100%'}} src={stage.staticVideo.video.url} autoPlay loop controls /> : <NoStream />}
 							</VideoContainer> }
 						
-						{ stage?.name && (!selectedStreamId || (!selectedStream?.live && !stage.staticVideo?.video.url) ) && <NoStream /> }
+						{/* { stage?.name && (!selectedStreamId || (!selectedStream?.live && !stage.staticVideo?.video.url) ) && <NoStream /> } */}
 					</Grid>
 					<Grid item xs={12} lg={3} sx={{height: {xs: 'calc(100% - (100vw * 9 / 16))', lg: '100%'}, minHeight: {xs: '300px', lg: 0}}}>
 						<Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc(100%)', height: '100%'}}>
