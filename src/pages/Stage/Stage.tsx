@@ -70,6 +70,12 @@ const StagePage = () => {
 		{title: `${stage.prevStage?.name || ""}`, to: `/szekcio/${stage?.prevStage?.slug}`, icon: <ArrowLeftIcon sx={{transform: 'translateX(-2px)'}} />, disabled: !stage?.prevStage},
 	]
 
+	const chatDisabled = !selectedStream || !selectedStream?.youtubeVideoId || !selectedStream.live
+
+	useEffect(() => {
+		if (chatDisabled) setSelectedTab(0)
+	}, [selectedStreamId])
+
 	useEffect(() => setSelectedTab(0), [stageSlug])
 
 	return (
@@ -112,7 +118,7 @@ const StagePage = () => {
 								<Tabs textColor="secondary" indicatorColor="secondary" value={selectedTab} onChange={(e, v) => setSelectedTab(v)} centered sx={{mt: stage?.streams?.length ? 1 : 0}}>
 									<Tab label="Program" />
 									<Tab label="Kérdések" />
-									<Tab label="Chat" disabled={!selectedStream} />
+									<Tab label="Chat" disabled={chatDisabled} />
 								</Tabs>
 							</AppBar>
 							<Box sx={{flex: 1, overflow: "auto"}}>
