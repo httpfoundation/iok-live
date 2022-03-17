@@ -29,7 +29,7 @@ export const NoRegistration = () => {
 			</Typography>
 			<img src={NagyEloado} alt="" style={{ width: '200px', maxWidth: '70%' }} />
 			<Typography variant="body1" component="p" sx={{ color: '#fff', my: 1 }}>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut sequi consectetur ex dolorem quos porro delectus quia totam, officia maiores.
+				Regisztrálj, és emailben megkapod a bejelentkezéshez használható személyes linkedet és a személyes kódodat!
 			</Typography>
 
 			<Button variant="contained" color="primary" sx={{ mt: 2 }} size="large" href="https://iok2022.http-alapitvany.hu/">Regisztráció</Button>
