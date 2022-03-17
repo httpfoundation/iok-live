@@ -10,7 +10,7 @@ const PageTitleStyled = styled(Typography)<TypographyProps | { align: "center" |
 )
 
 const PageTitle = (props: {
-    children?: React.ReactElement | string;
+    children?: React.ReactNode | string;
     align?: "center" | "left" | "right";
     color?: string;
 }) => (

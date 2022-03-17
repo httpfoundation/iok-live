@@ -3,23 +3,27 @@ import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
 import { Link, useParams } from "react-router-dom"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { LanguageSelect, PageTitle } from "../../components"
-import { useStage, useStages } from "../../Store"
+import { useLiveStaticElements, useStage, useStages } from "../../Store"
 import { Box } from "@mui/system"
 import ItmpImg from "../../assets/img/itmp-1.png"
 import { styled } from '@mui/material/styles'
 import { PageHeaderTitle } from "../../components/PageContainer"
 import {ArrowBackIosNew as ArrowLeftIcon, ArrowForwardIos as ArrowRightIcon } from '@mui/icons-material'
 import { Questions } from "./Questions"
+import { StructuredText } from "react-datocms"
 
 
 const NoStream = () => {
+
+	const text = useLiveStaticElements().streamNotLive
+
 	return <Box sx={{width: '100%', height: '100%', bgcolor: "secondary.main", color: '#fff', py: 4, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
 		<Zoom in>
 			<Box sx={{textAlign: 'center'}}>
 				<img src={ItmpImg} alt="" style={{width: '400px', maxWidth: 'min(calc(50vw * 9 / 16), 50vh)'}}/>
-				<Typography sx={{textAlign: 'center', fontSize: {xs: '26px', lg:'40px'}, fontWeight: 700, mt: 2, color: '#fff'}}>A közvetítés hamarosan kezdődik!</Typography>
+				<Typography sx={{textAlign: 'center', fontSize: {xs: '26px', lg:'40px'}, fontWeight: 700, mt: 2, color: '#fff'}}><StructuredText data={text} /></Typography>
 			</Box>
 		</Zoom>
 	</Box>
@@ -29,7 +33,7 @@ const embedDomain = window.localStorage.dev === "true" ? "localhost" : window.or
 console.log(embedDomain)
 
 const VideoContainer = styled('div')(({theme}) => `
-
+	background-color: #000;
 	height: calc(100vw * 9 / 16);
 	${theme.breakpoints.up("lg")} {
 		height: 100%;
@@ -45,8 +49,6 @@ const VideoContainer = styled('div')(({theme}) => `
 const StagePage = () => {
 
 	const { stageId: stageSlug } = useParams()
-
-	const stages = useStages()
 	
 	const stage = useStage(stageSlug)
 
@@ -89,27 +91,13 @@ const StagePage = () => {
 							</Box>
 						</Box> */}
 						
-							{ selectedStream?.youtubeVideoId && <VideoContainer><YouTubeVideo
-								videoId={selectedStream.youtubeVideoId}
-								containerClassName="embed-video"
-								className="embed-video-inner"
-								opts={{
-									playerVars: {
-										autoplay: 1,
-										hl: 'hu',
-										//modestbranding: 1,
-										rel: 0,
-										color: 'white',
-										controls: 1,
-										showinfo: 0,
-										loop: 1,
-										origin: window.location.origin,
-										playlist: selectedStream.youtubeVideoId
-									}
-								}}
-							/></VideoContainer> }
+							{ (selectedStream?.live && selectedStream?.youtubeVideoId) && <VideoContainer><YoutubeVideoComponent key={selectedStream.youtubeVideoId} videoId={selectedStream.youtubeVideoId} /></VideoContainer> }
+
+							{ (!selectedStream?.live && stage.staticVideo?.video.url)  && <VideoContainer>
+								<video style={{width: '100%', height: '100%'}} src={stage.staticVideo.video.url} autoPlay loop controls />
+							</VideoContainer> }
 						
-						{ stage?.name && !selectedStreamId && <NoStream /> }
+						{ stage?.name && (!selectedStreamId || (!selectedStream?.live && !stage.staticVideo?.video.url) ) && <NoStream /> }
 					</Grid>
 					<Grid item xs={12} lg={3} sx={{height: {xs: 'calc(100% - (100vw * 9 / 16))', lg: '100%'}, minHeight: {xs: '300px', lg: 0}}}>
 						<Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc(100%)', height: '100%'}}>
@@ -141,6 +129,31 @@ const StagePage = () => {
 				</Grid>
 			</Box>
 		</>
+	)
+}
+
+const YoutubeVideoComponent = (props: {videoId: string}) => {
+	return (
+		<YouTubeVideo
+			/* key={key} */
+			videoId={props.videoId}
+			containerClassName="embed-video"
+			className="embed-video-inner"
+			opts={{
+				playerVars: {
+					autoplay: 1,
+					hl: 'hu',
+					//modestbranding: 1,
+					rel: 0,
+					color: 'white',
+					controls: 1,
+					showinfo: 0,
+					loop: 0,
+					origin: window.location.origin,
+					//playlist: props.videoId
+				}
+			}}
+		/>
 	)
 }
 

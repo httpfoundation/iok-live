@@ -39,6 +39,15 @@ export type DatoStream = {
 	name: string
 	youtubeVideoId: string
 	language: DatoLanguage
+	live: boolean
+}
+
+export type DatoStaticVideo = {
+	name: string
+	video: {
+		url: string
+	}
+
 }
 
 export type DatoStage = {
@@ -48,6 +57,7 @@ export type DatoStage = {
 	slug: string
 	schedule?: DatoTalk[]
 	streams?: DatoStream[]
+	staticVideo?: DatoStaticVideo
 }
 
 export type DatoBreakoutRoom = {
@@ -114,4 +124,5 @@ export type DatoLiveStaticElement = {
 		menu?: any
 		handout?: any
 		menuImage?: any
+		streamNotLive?: any
 	}

@@ -79,10 +79,17 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				name
 				pageTitle
 				slug
+				staticVideo {
+					video {
+					  url
+					}
+					name
+				}
 				streams {
 					id
 					name
 					youtubeVideoId
+					live
 					language {
 						id
 						name
@@ -151,7 +158,10 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				}
 				menuImage {
 					url
-				}					
+				}
+				streamNotLive {
+					value
+				}			
 			}
 			allSpeakers(first: 100) {
 				id
