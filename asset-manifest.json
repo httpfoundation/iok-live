@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.c0c22331.css",
-    "main.js": "/static/js/main.c4a33bd4.js",
+    "main.js": "/static/js/main.f4614a5f.js",
     "static/js/953.80625b0b.chunk.js": "/static/js/953.80625b0b.chunk.js",
     "static/css/245.7bfb5ed4.chunk.css": "/static/css/245.7bfb5ed4.chunk.css",
     "static/js/245.0cacb4e0.chunk.js": "/static/js/245.0cacb4e0.chunk.js",
@@ -58,13 +58,13 @@
     "static/media/pannon-mik2.png": "/static/media/pannon-mik2.3544fe72a4bcfee7df2e.png",
     "index.html": "/index.html",
     "main.c0c22331.css.map": "/static/css/main.c0c22331.css.map",
-    "main.c4a33bd4.js.map": "/static/js/main.c4a33bd4.js.map",
+    "main.f4614a5f.js.map": "/static/js/main.f4614a5f.js.map",
     "953.80625b0b.chunk.js.map": "/static/js/953.80625b0b.chunk.js.map",
     "245.7bfb5ed4.chunk.css.map": "/static/css/245.7bfb5ed4.chunk.css.map",
     "245.0cacb4e0.chunk.js.map": "/static/js/245.0cacb4e0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c0c22331.css",
-    "static/js/main.c4a33bd4.js"
+    "static/js/main.f4614a5f.js"
   ]
 }
