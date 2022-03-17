@@ -113,4 +113,5 @@ export type DatoLiveStaticElement = {
 		rating?: any
 		menu?: any
 		handout?: any
+		menuImage?: any
 	}

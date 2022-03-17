@@ -148,7 +148,10 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				}
 				handout {
 					value
-				}				
+				}
+				menuImage {
+					url
+				}					
 			}
 			allSpeakers(first: 100) {
 				id
