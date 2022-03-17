@@ -25,7 +25,7 @@ export const NoRegistration = () => {
 				Ha még nem regisztráltál, akkor kattints az alábbi "Regisztráció" gombra.
 			</Alert></Zoom> }
 			<Typography variant="h5" sx={{ fontWeight: 'bold', mb: 4 }}>
-				A konferencián való részvétel regisztrációhoz kötött!
+				A konferencián való részvétel regisztrációhoz kötött!!
 			</Typography>
 			<img src={NagyEloado} alt="" style={{ width: '200px', maxWidth: '70%' }} />
 			<Typography variant="body1" component="p" sx={{ color: '#fff', my: 1 }}>
