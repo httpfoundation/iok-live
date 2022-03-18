@@ -41,7 +41,7 @@ const Router = () =>{
 			{/* Home */}
 			<Route index element={(isWelcomeVisited) ?  <Home /> : <Navigate to="/koszonto/" />} />
 			{/* Reception */}
-			<Route path="/recepcio" element={<Reception />} />
+			<Route path="/infopult" element={<Reception />} />
 			{/* Welcome */}
 			<Route path="/koszonto/*" element={<Welcome />} />
 			{/* Stage */}

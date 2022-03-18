@@ -68,7 +68,7 @@ const homeDashboardItems : DashboardItemType[] = [
         img: recepcio,
         corner: "tr",
         light: true,
-        link: "/recepcio",
+        link: "/infopult",
         mobileOrder: 0
     },
     {

@@ -107,10 +107,10 @@ const Header = () => {
 				</Tooltip>
 			</Zoom>
 		)}
-		{location.pathname !== "/recepcio" && (
+		{location.pathname !== "/infopult" && (
 			<Zoom in>
 				<Tooltip title="Tovább az információs pulthoz" placement="bottom" arrow>
-					<Fab color="secondary" sx={{position: 'absolute', right: location.pathname !== "/" ? 100 : 30, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} component={Link} to="/recepcio" >
+					<Fab color="secondary" sx={{position: 'absolute', right: location.pathname !== "/" ? 100 : 30, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} component={Link} to="/infopult" >
 						<InfoIcon />
 					</Fab>
 				</Tooltip>
@@ -120,7 +120,7 @@ const Header = () => {
 		{ (location.pathname !== "/" && !location.pathname.includes("/szekcio")) && (
 			<Zoom in>
 				<Tooltip title="Vissza" placement="bottom" arrow>
-					<Fab color="secondary" sx={{position: 'absolute', right: location.pathname !== "/recepcio" ? 170 : 100, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} onClick={()=> navigate(-1)} >
+					<Fab color="secondary" sx={{position: 'absolute', right: location.pathname !== "/infopult" ? 170 : 100, top: 80, zIndex: 800, display: {lg: 'flex', xs: 'none'}}} onClick={()=> navigate(-1)} >
 						<ArrowBackIcon />
 					</Fab>
 				</Tooltip>
