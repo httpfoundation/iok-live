@@ -80,9 +80,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				pageTitle
 				slug
 				staticVideo {
-					video {
-					  url
-					}
+					url
 					name
 				}
 				streams {

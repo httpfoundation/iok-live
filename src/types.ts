@@ -44,10 +44,7 @@ export type DatoStream = {
 
 export type DatoStaticVideo = {
 	name: string
-	video: {
-		url: string
-	}
-
+	url: string
 }
 
 export type DatoStage = {

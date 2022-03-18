@@ -100,7 +100,7 @@ const StagePage = () => {
 							{ (selectedStream?.live && selectedStream?.youtubeVideoId) && <VideoContainer><YoutubeVideoComponent key={selectedStream.youtubeVideoId} videoId={selectedStream.youtubeVideoId} /></VideoContainer> }
 
 							{ (!selectedStream?.live || !selectedStream?.youtubeVideoId) && <VideoContainer>
-								{(stage.staticVideo) ? <video style={{width: '100%', height: '100%'}} src={stage.staticVideo.video.url} autoPlay loop controls /> : <NoStream />}
+								{(stage.staticVideo) ? <video style={{width: '100%', height: '100%'}} src={stage.staticVideo.url} autoPlay loop controls /> : <NoStream />}
 							</VideoContainer> }
 						
 						{/* { stage?.name && (!selectedStreamId || (!selectedStream?.live && !stage.staticVideo?.video.url) ) && <NoStream /> } */}
