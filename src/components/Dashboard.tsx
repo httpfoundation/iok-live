@@ -17,6 +17,7 @@ interface DashboardItemProps {
 	icon?: boolean,
 	children?: React.ReactNode,
 	img?: any,
+	hoverImg?: any,
 	caption?: string,
 	to?: string, 
 	xs: number, 
@@ -58,12 +59,13 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 				justifyContent="center"
 			>
 				{sortedItems.map((item, key) => {
-					const {caption, title, corner, light, img, link, onClick} = item
+					const {caption, title, corner, light, img, link, onClick, hoverImg} = item
 					return  (
 
 						<DashboardItem
 							caption={caption}
 							img={img}
+							hoverImg={hoverImg}
 							to={link}
 							xs={xs}
 							xl={xl}
@@ -89,7 +91,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 
 export const DashboardItem = (props: DashboardItemProps) => {
 
-    const { img, caption, title, to, imgWidth, corner, size, xs, xl, lg, empty, light, timeout, tooltipPlacement, onClick } = props
+    const { img, caption, title, to, imgWidth, corner, size, xs, xl, lg, empty, light, timeout, tooltipPlacement, onClick, hoverImg } = props
 	if (empty) return <Grid item xs={xs} xl={xl} lg={lg} display="flex" ></Grid>
 	
 
@@ -106,6 +108,7 @@ export const DashboardItem = (props: DashboardItemProps) => {
 							title={title || ""}
 							tooltipPlacement = {tooltipPlacement}
 							img={img} 
+							hoverImg={hoverImg}
 							imgWidth={imgWidth} />
 						
 				</Grid>

@@ -104,6 +104,7 @@ export type DashboardItemType = {
     corner: 'bl' | 'br' | 'tl' | 'tr' | 'none'
     light: boolean
     img: string
+	hoverImg?: string
     link?: string
 	onClick?: () => void
 	mobileOrder: number

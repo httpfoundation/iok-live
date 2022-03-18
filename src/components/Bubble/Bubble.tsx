@@ -24,6 +24,7 @@ interface BubbleProps {
 	title?: string,
 	tooltipPlacement?: "bottom" | "left" | "right" | "top" | "bottom-end" | "bottom-start" | "left-end" | "left-start" | "right-end" | "right-start" | "top-end" | "top-start" | undefined,
 	img?: string,
+	hoverImg?: string,
 	imgWidth?: string,
 	onClick?: () => void,
 }
@@ -53,7 +54,7 @@ const LinkOrOnClick = (props: {to?: string, onClick?: () => void, children: Reac
 }
 
 const Bubble = (props: BubbleProps) => {
-	const { size, corner, timeout, caption, title, tooltipPlacement, img, imgWidth } = props
+	const { size, corner, timeout, caption, title, tooltipPlacement, img, imgWidth, hoverImg } = props
 	//"xl" is the default size
  	const width = (size === "xs") ? "350px" : (size === "lg") ? "200px" :  "450px"
 	const borderRadius = (size === "xs") ? "250px" : (size === "lg") ? "140px" : "350px" 
@@ -69,7 +70,7 @@ const Bubble = (props: BubbleProps) => {
 	}
 	return (
 		<Tooltip title={title ?? ""} placement={tooltipPlacement ?? "top"} arrow  >
-			<BubbleWrapper bubbleWrapperProps={bubbleWrapperProps} onMouseEnter = {() => {}}>
+			<BubbleWrapper bubbleWrapperProps={bubbleWrapperProps} onMouseEnter = {() => {if (hoverImg) setImage(hoverImg)}} onMouseLeave={() => {if (hoverImg) setImage(img)}}>
 				<LinkOrOnClick to={props.to} onClick={props.onClick}>
 					<Grow in style={{ transformOrigin: '0 0 0' }}
 							{...{timeout : timeout}} >
