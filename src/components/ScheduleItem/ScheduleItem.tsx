@@ -164,13 +164,13 @@ const ScheduleItem = (props: {
 						</IconButton>
 					</Tooltip>) }
 					
-					<Tooltip title="Prezentáció letöltése" arrow>
+					{talk.presentation && <Tooltip title="Prezentáció letöltése" arrow>
 						<IconButton target="_blank" href={talk.presentation?.url || ""} size="small" color="secondary" disabled={!talk.presentation} onClick={e => {
 							e.stopPropagation()
 						}}>
 							<DownloadIcon sx={{fontSize: 40}} />
 						</IconButton>
-					</Tooltip>
+					</Tooltip>}
 					<Tooltip title="További információ" arrow>
 						<IconButton size="small" color="secondary" onClick={e => {
 							e.stopPropagation()
