@@ -1,10 +1,11 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { usePresenterWithTalksByStage } from "../../Store"
 //import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import {PageContainer, PageTitle, Paragraph, ScheduleItem} from "../../components"
 import { Grid, Typography, TypographyProps } from "@mui/material"
 import { PageSubtitle } from "../../components"
 import { styled } from '@mui/material/styles'
+import { useState } from "react"
 
 const PresenterImage = styled('img')`
 	width: 100%;
@@ -23,6 +24,8 @@ export const SinglePresenter = () => {
 	const { presenterSlug } = useParams()
 
 	const presenter = usePresenterWithTalksByStage(presenterSlug ?? null)
+	const navigate = useNavigate()
+	const [openScheduleItem, setOpenScheduleItem] = useState<number | null>(null)
 
 	return (
 		<PageContainer container>
@@ -41,7 +44,7 @@ export const SinglePresenter = () => {
 			</Grid>
 			{ presenter.talksByStage?.map(stage => <>
 				<SectionTitle variant="h5">"{stage?.name}" szekció</SectionTitle>
-				{ stage.schedule?.map(talk => <ScheduleItem key={talk.id} open talkId={talk.id} />)}
+				{ stage.schedule?.map(talk => <ScheduleItem onPlay={streamId => navigate('/szekcio/' + stage.slug, {state: {streamId, openScheduleItem: talk.id}})} key={talk.id} onClick={() => setOpenScheduleItem(openScheduleItem === talk.id ? null : talk.id)} open={openScheduleItem === talk.id} talkId={talk.id} />)}
 				</>
 			) }
 		</PageContainer>

@@ -1,7 +1,7 @@
 import { AppBar, Grid, Tab, Tabs, Typography, Zoom, CircularProgress, Alert, Tooltip, Fab } from "@mui/material"
 import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
-import { Link, useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import { useCallback, useEffect, useState } from "react"
 import { LanguageSelect, PageTitle } from "../../components"
@@ -53,7 +53,9 @@ const StagePage = () => {
 	const stage = useStage(stageSlug)
 	const streams = useStreams()
 
-	const [selectedStreamId, setSelectedStreamId] = useState<number | null>(null)
+	const location = useLocation()
+
+	const [selectedStreamId, setSelectedStreamId] = useState<number | null>((location.state as any)?.streamId || null)
 
 	useEffect(() => {
 		// TODO: Keep language preference
@@ -79,7 +81,7 @@ const StagePage = () => {
 
 	useEffect(() => setSelectedTab(0), [stageSlug])
 
-	const [openScheduleItem, setOpenScheduleItem] = useState<number | null>(null)
+	const [openScheduleItem, setOpenScheduleItem] = useState<number | null>((location.state as any)?.openScheduleItem || null)
 
 	return (
 		<>
