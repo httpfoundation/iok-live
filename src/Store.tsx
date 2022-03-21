@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
-import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom, DatoLiveStaticElement, DatoMessage, DatoStaff } from "./types"
+import { DatoStage, DatoSpeaker, DatoTalk, DatoComplex, DatoBreakoutRoom, DatoLiveStaticElement, DatoMessage, DatoStaff, DatoStream } from "./types"
 import useQuery from "./useQuery"
 
 export interface IStore {
 	stages: DatoStage[],
 	presenters: DatoSpeaker[],
+	streams: DatoStream[],
 	talks: DatoTalk[],
 	breakoutRooms: DatoBreakoutRoom[],
 	pageTitle: string, 
@@ -22,6 +23,7 @@ export const Store = createContext<IStore>({
 	stages: [],
 	presenters: [],
 	talks: [],
+	streams: [],
 	breakoutRooms: [],
 	pageTitle: "IOK 2022",
 	setPageTitle: (t: string) => {},
@@ -102,6 +104,23 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 					title
 					start
 					description
+					recordings {
+						id
+						name
+						youtubeVideoId
+						language {
+							id
+							name
+							slug
+							playRecordingText
+							image {
+								url
+							}
+						}
+					}
+					presentation {
+						url
+					}
 					speaker {
 						id
 					}
@@ -198,10 +217,26 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				group
 				slug
 			}
+			allStreams {
+				id
+				name
+				youtubeVideoId
+				live
+				recording
+				language {
+					id
+					name
+					slug
+					image {
+						url
+					}
+					playRecordingText
+				}
+			}
 	  	}
-	`, {allStages: [], allBreakoutrooms: [], liveStaticElement: {}, allSpeakers: [], allMessages: [], allStaffs: []})
+	`, {allStages: [], allBreakoutrooms: [], liveStaticElement: {}, allSpeakers: [], allMessages: [], allStaffs: [], allStreams: []})
 
-	const {allStages : stages, allBreakoutrooms: breakoutRooms, liveStaticElement: liveStaticElements, allSpeakers: presenters, allMessages: messages, allStaffs: staff} = data
+	const {allStages : stages, allStreams: streams, allBreakoutrooms: breakoutRooms, liveStaticElement: liveStaticElements, allSpeakers: presenters, allMessages: messages, allStaffs: staff} = data
 
 	const talks = useMemo(() => {
 		const talks: DatoTalk[] = []
@@ -227,6 +262,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 		stages,
 		presenters,
 		talks,
+		streams,
 		breakoutRooms,
 		pageTitle,
 		setPageTitle,
@@ -324,6 +360,11 @@ export const useRegistration = (): [RegistrationData|null, boolean, boolean] => 
 export const useMessages = () => {
 	const store = useStore()
 	return store.messages
+}
+
+export const useStreams = () => {
+	const store = useStore()
+	return store.streams
 }
 
 export default Store
