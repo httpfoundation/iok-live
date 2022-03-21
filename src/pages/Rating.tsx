@@ -83,22 +83,26 @@ const Rating = () => {
 		}
 	}, [registration])
 
-	const sendRating = async () => {
+	const sendRating = async (submit = true, __ratings: Record<number, number|null>|null = null) => {
+		let _ratings = __ratings || ratings
+		console.log("Send rating", Object.fromEntries(Object.entries(_ratings).filter(([_, v]) => v !== null)))
 		const data = {
 			registration: String(registration?.id) ?? null,
-			ratings: JSON.stringify(Object.fromEntries(Object.entries(ratings).filter(([_, v]) => v !== null))),
+			ratings: JSON.stringify(Object.fromEntries(Object.entries(_ratings).filter(([_, v]) => v !== null))),
 			comment
 		}
 		
-		setLoading(true)
+		if (submit) setLoading(true)
 		try {
 			await client?.items.create({
 				itemType: '1958391',
 				...data
 			})
-			setSuccess(true)	
-			setRatingsSent(true)
-			document.getElementById("main")?.scrollTo(0,0)
+			if (submit) {
+				setSuccess(true)	
+				setRatingsSent(true)
+				document.getElementById("main")?.scrollTo(0,0)
+			}
 		} catch (e) {
 			console.error(e)
 			setError(true)
@@ -162,6 +166,7 @@ const Rating = () => {
 									const _ratings = {...ratings, [talk.id]: r}
 									//window.localStorage.setItem("ratings", JSON.stringify(_ratings))
 									setRatings(_ratings)
+									sendRating(false, _ratings)
 								}} key={index} id={talk.id} />)}
 
 							</Paper>)
@@ -173,6 +178,7 @@ const Rating = () => {
 								const _ratings = {...ratings, [question.id]: r}
 								//window.localStorage.setItem("ratings", JSON.stringify(_ratings))
 								setRatings(_ratings)
+								sendRating(false, _ratings)
 							}} key={index} id={question.id} /> : null)}
 						<Typography variant="h6" fontSize={'0.8rem'} align="left" fontWeight={600}>Megjegyzések</Typography>
 						<TextField value={comment} onChange={e=>setComment(e.target.value)} multiline fullWidth minRows={8} color="secondary" placeholder="Ide írhatja javaslatait, észrevételeit, egyéb megjegyzéseit"/>
