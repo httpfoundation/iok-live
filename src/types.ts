@@ -138,4 +138,5 @@ export type DatoLiveStaticElement = {
 		handout?: any
 		menuImage?: any
 		streamNotLive?: any
+		galleryUrl?: string
 	}

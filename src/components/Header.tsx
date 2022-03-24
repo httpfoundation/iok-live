@@ -35,7 +35,7 @@ const Header = () => {
 		{label: 'Szekciók', divider: true, icon: <LiveTvIcon sx={{mr: 1, transform: 'translateY(5px)', color: 'rgba(0, 0, 0, 0.4)'}} />},
 		...stages.map(stage => ({label: stage.name, to: `/szekcio/${stage.slug}`})),
 		{divider: true},
-		{label: 'IOK Cafe', to: '/iok-cafe', icon: <CoffeeIcon />},
+		//{label: 'IOK Cafe', to: '/iok-cafe', icon: <CoffeeIcon />},
 		{label: 'Támogatók', to: '/tamogatok', icon: <StarIcon />},
 		{label: 'Értékelő űrlap', to: '/ertekeles', icon: <StarIcon />},
 		{divider: true},
