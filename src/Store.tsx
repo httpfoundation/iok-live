@@ -178,7 +178,8 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				}
 				streamNotLive {
 					value
-				}			
+				}
+				galleryUrl		
 			}
 			allSpeakers(first: 100) {
 				id
