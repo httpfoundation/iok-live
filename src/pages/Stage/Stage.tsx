@@ -1,11 +1,11 @@
 import { AppBar, Grid, Tab, Tabs, Typography, Zoom, CircularProgress, Alert, Tooltip, Fab } from "@mui/material"
 import YouTubeVideo from 'react-youtube'
 import "./Stage.scss"
-import { Link, useParams } from "react-router-dom"
+import { Link, useLocation, useParams } from "react-router-dom"
 import ScheduleItem from "../../components/ScheduleItem/ScheduleItem"
 import { useCallback, useEffect, useState } from "react"
 import { LanguageSelect, PageTitle } from "../../components"
-import { useLiveStaticElements, useStage, useStages } from "../../Store"
+import { useLiveStaticElements, useStage, useStages, useStreams } from "../../Store"
 import { Box } from "@mui/system"
 import ItmpImg from "../../assets/img/itmp-1.png"
 import { styled } from '@mui/material/styles'
@@ -51,17 +51,20 @@ const StagePage = () => {
 	const { stageId: stageSlug } = useParams()
 	
 	const stage = useStage(stageSlug)
+	const streams = useStreams()
 
-	const [selectedStreamId, setSelectedStreamId] = useState<number | null>(null)
+	const location = useLocation()
+
+	const [selectedStreamId, setSelectedStreamId] = useState<number | null>((location.state as any)?.streamId || null)
 
 	useEffect(() => {
 		// TODO: Keep language preference
-		if (!stage?.streams?.find(stream => stream.id === selectedStreamId)) setSelectedStreamId(stage?.streams?.length ? stage?.streams[0].id : null)
+		//if (!stage?.streams?.find(stream => stream.id === selectedStreamId)) setSelectedStreamId(stage?.streams?.length ? stage?.streams[0].id : null)
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [stage])
 
 	
-	const selectedStream = stage?.streams?.find(stream => stream.id === selectedStreamId)
+	const selectedStream = streams?.find(stream => stream.id === selectedStreamId)
 	
 	const [selectedTab, setSelectedTab] = useState<number>(0)
 
@@ -77,6 +80,8 @@ const StagePage = () => {
 	}, [selectedStreamId])
 
 	useEffect(() => setSelectedTab(0), [stageSlug])
+
+	const [openScheduleItem, setOpenScheduleItem] = useState<number | null>((location.state as any)?.openScheduleItem || null)
 
 	return (
 		<>
@@ -97,9 +102,9 @@ const StagePage = () => {
 							</Box>
 						</Box> */}
 						
-							{ (selectedStream?.live && selectedStream?.youtubeVideoId) && <VideoContainer><YoutubeVideoComponent key={selectedStream.youtubeVideoId} videoId={selectedStream.youtubeVideoId} /></VideoContainer> }
+							{ ((selectedStream?.live || selectedStream?.recording) && selectedStream?.youtubeVideoId) && <VideoContainer><YoutubeVideoComponent key={selectedStream.youtubeVideoId} videoId={selectedStream.youtubeVideoId} /></VideoContainer> }
 
-							{ (!selectedStream?.live || !selectedStream?.youtubeVideoId) && <VideoContainer>
+							{ ((!selectedStream?.live && !selectedStream?.recording) || !selectedStream?.youtubeVideoId) && <VideoContainer>
 								{(stage.staticVideo) ? <video style={{width: '100%', height: '100%'}} src={stage.staticVideo.url} autoPlay loop controls /> : <NoStream />}
 							</VideoContainer> }
 						
@@ -108,13 +113,13 @@ const StagePage = () => {
 					<Grid item xs={12} lg={3} sx={{height: {xs: 'calc(100% - (100vw * 9 / 16))', lg: '100%'}, minHeight: {xs: '300px', lg: 0}}}>
 						<Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc(100%)', height: '100%'}}>
 							<AppBar component="div" position="static" color="default" sx={{px: 2, bgcolor: "##f3f3f3", pt: 2}} elevation={1}>
-								<div>
+								{/* <div>
 									<LanguageSelect
 										value={selectedStream?.language.id ?? null}
 										onChange={(languageId) => setSelectedStreamId(stage?.streams?.find(stream => stream.language.id === languageId)?.id ?? null)}
 										options={stage?.streams?.map(stream => stream.language) ?? []}
 									/>
-								</div>
+								</div> */}
 								<Tabs textColor="secondary" indicatorColor="secondary" value={selectedTab} onChange={(e, v) => setSelectedTab(v)} centered sx={{mt: stage?.streams?.length ? 1 : 0}}>
 									<Tab label="Program" />
 									<Tab label="Kérdések" />
@@ -122,7 +127,7 @@ const StagePage = () => {
 								</Tabs>
 							</AppBar>
 							<Box sx={{flex: 1, overflow: "auto"}}>
-								{ selectedTab === 0 && <Box sx={{px: 1}}>{ stage?.schedule?.map(talk => <ScheduleItem open key={talk.id} talkId={talk.id} />) }</Box> }
+								{ selectedTab === 0 && <Box sx={{px: 1}}>{ stage?.schedule?.map(talk => <ScheduleItem onPlay={streamId => setSelectedStreamId(streamId)} onClick={() => setOpenScheduleItem(openScheduleItem === talk.id ? null : talk.id)} open={openScheduleItem === talk.id} key={talk.id} talkId={talk.id} />) }</Box> }
 								{ selectedTab === 1 && <Questions schedule={stage?.schedule} stageId={stage?.id} /> }
 								{ selectedTab === 2 && selectedStream && 
 								<Box sx={{position: "relative", flex: 1, height: '100%', overflowY: 'hidden', minHeight: '500px'}}>

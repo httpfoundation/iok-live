@@ -3,7 +3,9 @@ import { DatoSpeaker } from "../../types"
 import { styled } from '@mui/system'
 import { ScheduleTimeCaption } from ".."
 import { useTalk } from "../../Store"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { Avatar, Badge, Button, IconButton, Tooltip } from "@mui/material"
+import { PlayCircle as PlayCircleIcon, DownloadForOffline as DownloadIcon, Info as InfoIcon  } from "@mui/icons-material"
 
 /* Egy napirendi pont komponense */
 
@@ -100,7 +102,7 @@ const ScheduleItemContent = styled('div')(({theme}) =>`
 	vertical-align: top;
 `)
 
-const ScheduleItemContainer = styled('div', {shouldForwardProp: prop => prop !== "noClick"})<{noClick?: boolean}>(({ noClick}) => `
+const ScheduleItemContainer = styled('div', {shouldForwardProp: prop => prop !== "noClick"})<{noClick?: boolean, open?: boolean}>(({ noClick, open }) => `
 	margin: 15px 0;
 	transition: all 0.2s ease-out;
 	padding: 10px;
@@ -108,28 +110,41 @@ const ScheduleItemContainer = styled('div', {shouldForwardProp: prop => prop !==
 	${!noClick ? `
 		cursor: pointer;
 		&:hover {
-			background-color: rgba(0, 0, 0, 0.07);
+			background-color: rgba(0, 0, 0, 0.1);
 			/* box-shadow: 0 0rem 1rem rgba(0,0,0,0.2);
 			transform: scale(1.03); */
 		}
 	` : `
 		cursor: default;
 	`}
+	${open ? `background-color: rgba(0, 0, 0, 0.07);` : ''}
 	/* box-shadow: 0 0rem 1rem rgba(0,0,0,0.12); */
+`)
+
+const ScheduleItemControls = styled('div')<{open?: boolean}>(({theme, open}) =>`
+	transition: all 0.1s ease-out;
+	height: 0;
+	overflow: hidden;
+	${open ? `
+		height: 50px;
+	` : ''}
 `)
 
 
 const ScheduleItem = (props: {
 	open: boolean,
-	talkId: number
+	talkId: number,
+	onClick?: () => void,
+	onPlay?: (streamId: number) => void,
 }) => {
 	const talk = useTalk(props.talkId)
 	const noClick = talk?.speakers.length === 0
-	const LinkOrSpan = noClick ? (props: {to?: string, children: React.ReactNode}) =>  <span>{props.children}</span> : Link
+	const LinkOrSpan = (true||noClick) ? (props: {to?: string, children: React.ReactNode}) =>  <span>{props.children}</span> : Link
+	/* <LinkOrSpan to={`/eloadasok/${talk.id}`}> */
+	const navigate = useNavigate()
 
 	return (
-		<LinkOrSpan to={`/eloadasok/${talk.id}`}>
-			<ScheduleItemContainer noClick={noClick}>
+		<ScheduleItemContainer open={props.open} noClick={noClick} onClick={props.onClick && !noClick ? props.onClick : () => {}}>
 				<SpeakersImages speakers={talk?.speakers} /> 
 				<ScheduleItemContent>
 					<ScheduleTimeCaption date={talk?.start} />
@@ -137,8 +152,37 @@ const ScheduleItem = (props: {
 					<Speakers speakers={talk?.speakers} />
 					<Abstract abstract={talk?.description} />
 				</ScheduleItemContent>
+				<ScheduleItemControls open={props.open}>
+					{ talk.recordings?.map(recording => <Tooltip title={recording.language.playRecordingText || "Felvétel lejátszása"} arrow>
+						<IconButton size="small" color="secondary" onClick={e => {
+							e.stopPropagation()
+							props.onPlay && props.onPlay(recording.id)
+						}}>
+							<Badge anchorOrigin={{ vertical: 'bottom', horizontal: 'right'}} overlap="circular" badgeContent={<Avatar src={recording.language.image?.url} sx={{width: 20, height: 20}}></Avatar>} >
+								<PlayCircleIcon sx={{fontSize: 40}} />
+							</Badge>
+						</IconButton>
+					</Tooltip>) }
+					
+					{talk.presentation && <Tooltip title="Prezentáció letöltése" arrow>
+						<IconButton target="_blank" href={talk.presentation?.url || ""} size="small" color="secondary" disabled={!talk.presentation} onClick={e => {
+							e.stopPropagation()
+						}}>
+							<DownloadIcon sx={{fontSize: 40}} />
+						</IconButton>
+					</Tooltip>}
+					<Tooltip title="További információ" arrow>
+						<IconButton size="small" color="secondary" onClick={e => {
+							e.stopPropagation()
+							navigate(`/eloadasok/${talk.id}`)
+						}}>
+							<InfoIcon sx={{fontSize: 40}} />
+						</IconButton>
+					</Tooltip>
+				</ScheduleItemControls>
 			</ScheduleItemContainer>
-		</LinkOrSpan>
+
+		/* </LinkOrSpan> */
 	)
 }
 

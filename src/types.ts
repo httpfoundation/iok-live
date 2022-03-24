@@ -19,6 +19,10 @@ export type DatoTalk = {
 	start: Date
 	description: string
 	//speaker?: DatoSpeaker[]
+	recordings?: DatoRecording[]
+	presentation?: {
+		url: string
+	}
 	speaker: {
 		id: number
 	}[]
@@ -29,8 +33,9 @@ export type DatoLanguage = {
 	id: number
 	name: string
 	slug: string
+	playRecordingText?: string
 	image?: {
-	url: string
+		url: string
 	}
 }
 
@@ -40,6 +45,14 @@ export type DatoStream = {
 	youtubeVideoId: string
 	language: DatoLanguage
 	live: boolean
+	recording: boolean
+}
+
+export type DatoRecording = {
+	id: number
+	title: string
+	youtubeVideoId: string
+	language: DatoLanguage
 }
 
 export type DatoStaticVideo = {
@@ -79,6 +92,7 @@ export type DatoStaff = {
 
 export type DatoComplex = {
 	allStages: DatoStage[]
+	allStreams: DatoStream[]
 	allBreakoutrooms: DatoBreakoutRoom[]
 	liveStaticElement: DatoLiveStaticElement
 	allSpeakers: DatoSpeaker[]
