@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.c0c22331.css",
-    "main.js": "/static/js/main.732deb0f.js",
+    "main.js": "/static/js/main.ce844345.js",
     "static/js/953.80625b0b.chunk.js": "/static/js/953.80625b0b.chunk.js",
     "static/css/245.7bfb5ed4.chunk.css": "/static/css/245.7bfb5ed4.chunk.css",
     "static/js/245.c08c58ea.chunk.js": "/static/js/245.c08c58ea.chunk.js",
@@ -45,6 +45,7 @@
     "static/media/welcome.png": "/static/media/welcome.ea4e07228c2a77282f7e.png",
     "static/media/feedback.png": "/static/media/feedback.57c3bbb69e5e8c66294e.png",
     "static/media/nagyeloadonyitva.png": "/static/media/nagyeloadonyitva.a17826f54279b3dda52c.png",
+    "static/media/galeria.png": "/static/media/galeria.c1e7a89681f86c6308ad.png",
     "static/media/szekcio4.png": "/static/media/szekcio4.a5ea981a2e2a9e49fb46.png",
     "static/media/szekcio2nyitva.png": "/static/media/szekcio2nyitva.e579784cba1a1e8ed3c9.png",
     "static/media/szekcio1.png": "/static/media/szekcio1.d86aabe3c9c14b3411c2.png",
@@ -61,13 +62,13 @@
     "static/media/pannon-mik2.png": "/static/media/pannon-mik2.3544fe72a4bcfee7df2e.png",
     "index.html": "/index.html",
     "main.c0c22331.css.map": "/static/css/main.c0c22331.css.map",
-    "main.732deb0f.js.map": "/static/js/main.732deb0f.js.map",
+    "main.ce844345.js.map": "/static/js/main.ce844345.js.map",
     "953.80625b0b.chunk.js.map": "/static/js/953.80625b0b.chunk.js.map",
     "245.7bfb5ed4.chunk.css.map": "/static/css/245.7bfb5ed4.chunk.css.map",
     "245.c08c58ea.chunk.js.map": "/static/js/245.c08c58ea.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c0c22331.css",
-    "static/js/main.732deb0f.js"
+    "static/js/main.ce844345.js"
   ]
 }
