@@ -217,7 +217,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 				group
 				slug
 			}
-			allStreams {
+			allStreams(first: 100) {
 				id
 				name
 				youtubeVideoId

@@ -19,6 +19,7 @@ interface BubbleProps {
 	children?: React.ReactNode,
 	light? : boolean,
 	to?: string,
+	external?: boolean
 	caption?: string,
 	timeout?: number,
 	title?: string,
@@ -41,11 +42,12 @@ interface BubbleWrapperProps {
 	}
 }
 
-const LinkOrOnClick = (props: {to?: string, onClick?: () => void, children: React.ReactElement}) => {
-	const {to, onClick} = props
+const LinkOrOnClick = (props: {to?: string, onClick?: () => void, children: React.ReactElement, external?: boolean}) => {
+	const {to, onClick, external} = props
 	const style = {display: 'block', width: '100%', height: '100%', cursor:'pointer'}
 	if (to) {
-		return <Link style={style} to={to}>{props.children}</Link>
+		if (external) return <a target="_blank" rel="noreferrer noopener" href={to} style={style}>{props.children}</a>
+		else return <Link style={style} to={to}>{props.children}</Link>
 	}
 	if (onClick) {
 		return <div style={style} onClick={onClick}>{props.children}</div>
@@ -54,7 +56,7 @@ const LinkOrOnClick = (props: {to?: string, onClick?: () => void, children: Reac
 }
 
 const Bubble = (props: BubbleProps) => {
-	const { size, corner, timeout, caption, title, tooltipPlacement, img, imgWidth, hoverImg } = props
+	const { size, corner, timeout, caption, title, tooltipPlacement, img, imgWidth, hoverImg, external } = props
 	//"xl" is the default size
  	const width = (size === "xs") ? "350px" : (size === "lg") ? "200px" :  "450px"
 	const borderRadius = (size === "xs") ? "250px" : (size === "lg") ? "140px" : "350px" 
@@ -71,7 +73,7 @@ const Bubble = (props: BubbleProps) => {
 	return (
 		<Tooltip title={title ?? ""} placement={tooltipPlacement ?? "top"} arrow  >
 			<BubbleWrapper bubbleWrapperProps={bubbleWrapperProps} onMouseEnter = {() => {if (hoverImg) setImage(hoverImg)}} onMouseLeave={() => {if (hoverImg) setImage(img)}}>
-				<LinkOrOnClick to={props.to} onClick={props.onClick}>
+				<LinkOrOnClick external={external} to={props.to} onClick={props.onClick}>
 					<Grow in style={{ transformOrigin: '0 0 0' }}
 							{...{timeout : timeout}} >
 							<BubbleContent>

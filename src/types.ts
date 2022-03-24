@@ -119,6 +119,7 @@ export type DashboardItemType = {
     link?: string
 	onClick?: () => void
 	mobileOrder: number
+	external?: boolean
 }
 
 export type DatoLiveStaticElement = {

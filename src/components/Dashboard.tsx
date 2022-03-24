@@ -20,6 +20,7 @@ interface DashboardItemProps {
 	hoverImg?: any,
 	caption?: string,
 	to?: string, 
+	external?: boolean
 	xs: number, 
 	xl?: number,
 	lg?: number,
@@ -59,7 +60,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 				justifyContent="center"
 			>
 				{sortedItems.map((item, key) => {
-					const {caption, title, corner, light, img, link, onClick, hoverImg} = item
+					const {caption, title, corner, light, img, link, onClick, hoverImg, external} = item
 					return  (
 
 						<DashboardItem
@@ -67,6 +68,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 							img={img}
 							hoverImg={hoverImg}
 							to={link}
+							external={external}
 							xs={xs}
 							xl={xl}
 							lg={lg}
@@ -91,7 +93,7 @@ const Dashboard = (props : {items: DashboardItemType[]}) => {
 
 export const DashboardItem = (props: DashboardItemProps) => {
 
-    const { img, caption, title, to, imgWidth, corner, size, xs, xl, lg, empty, light, timeout, tooltipPlacement, onClick, hoverImg } = props
+    const { img, caption, title, to, imgWidth, corner, size, xs, xl, lg, empty, light, timeout, tooltipPlacement, onClick, hoverImg, external } = props
 	if (empty) return <Grid item xs={xs} xl={xl} lg={lg} display="flex" ></Grid>
 	
 
@@ -102,6 +104,7 @@ export const DashboardItem = (props: DashboardItemProps) => {
 							corner={corner} 
 							light={light} 
 							to={to} 
+							external={external}
 							onClick={onClick} 
 							caption={caption} 
 							timeout={timeout} 

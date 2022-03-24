@@ -82,6 +82,8 @@ const StagePage = () => {
 	useEffect(() => setSelectedTab(0), [stageSlug])
 
 	const [openScheduleItem, setOpenScheduleItem] = useState<number | null>((location.state as any)?.openScheduleItem || null)
+	console.log(streams)
+	console.log(selectedStream)
 
 	return (
 		<>

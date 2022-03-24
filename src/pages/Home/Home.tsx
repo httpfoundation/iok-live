@@ -14,6 +14,7 @@ import szekcio3 from "../../assets/images/szekcio3.png"
 import szekcio4 from "../../assets/images/szekcio4.png"
 import iokCafe from "../../assets/images/iokcafe.png"
 import messageBoard from "../../assets/images/messageboard.png"
+import galeria from "../../assets/images/galeria.png"
 
 import Dashboard from "../../components/Dashboard"
 import Welcome from "../Welcome";
@@ -52,14 +53,23 @@ const homeDashboardItems : DashboardItemType[] = [
         link: "/szekcio/digitalis-kultura",
         mobileOrder: 3
     },
-
-    {
+    /* {
         caption: "IOK Cafe",
         title: "Résztvevők egymás közötti élő beszélgetése négy tematikus asztalnál az IOK kávézójában",
         img: iokCafe,
         corner: "bl",
         light: true,
         link: "/iok-cafe",
+        mobileOrder: 6
+    }, */
+    {
+        caption: "Galéria",
+        title: "Megnézheted az eseményen készült fótókat",
+        img: galeria,
+        corner: "bl",
+        light: true,
+        link: "https://1drv.ms/f/s!AtuKCresPDDAi6FF36GPh04-cA2EbA",
+        external: true,
         mobileOrder: 6
     },
     {
