@@ -36,15 +36,15 @@ export const Store = createContext<IStore>({
 })
 
 type RegistrationData = {
-	id: number
+	id: number|null
 	name: string
 	dato_token: string
-	webex_access_token: string
+	webex_access_token: string|null
 	onsite: boolean
 	stage: number | null
 }
 
-const useRegistrationData = (regId: string|null) : [RegistrationData|null, boolean, boolean] => {
+const useRegistrationData = (regId: string|null, regNeeded = true) : [RegistrationData|null, boolean, boolean] => {
 	const [registrationData, setRegistrationData] = useState<RegistrationData|null>(null)
 	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(false)
@@ -61,10 +61,22 @@ const useRegistrationData = (regId: string|null) : [RegistrationData|null, boole
 					window.localStorage.setItem("iok_registration_data", JSON.stringify(data))
 					window.history.replaceState(null, '', window.location.href.replace(window.location.search, ""))
 				} else {
-					setError(true)
+					setError(true)	
 				}
 			} else if (window.localStorage.getItem("iok_registration_data")) {
 				setRegistrationData(JSON.parse(window.localStorage.getItem("iok_registration_data") as string))
+			} else if (!regNeeded) {
+				const data = {
+					"id": null,
+					"name": "Résztvevő",
+					"webex_access_token": null,
+					"dato_token": "86562f6d25113edf16c2608cedf976",
+					"stage": null,
+					"onsite": false
+				}
+				setRegistrationData(data)
+				window.localStorage.setItem("iok_registration_data", JSON.stringify(data))
+				window.history.replaceState(null, '', window.location.href.replace(window.location.search, ""))
 			}
 			setLoading(false)
 		})()
@@ -257,7 +269,7 @@ export const StoreProvider = (props: { children: React.ReactElement }) => {
 	const [pageTitle, setPageTitle] = useState("IOK 2022")
 
 	const regId = (new URLSearchParams(window.location.search)).get('q') || null
-	const [registration, registrationLoading, registrationError] = useRegistrationData(regId)
+	const [registration, registrationLoading, registrationError] = useRegistrationData(regId, false)
 
 	const store:IStore = useMemo(() => ({
 		stages,

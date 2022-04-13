@@ -91,7 +91,7 @@ const Header = () => {
 					{/* {pageTitle} */}
 				</Typography>
 				<Typography variant="h6" noWrap sx={{flex: '0 0 auto', transform: 'translateY(2px)', mr: 2, display: {xs: 'none', md: 'block'}}} align="center">
-					{registration?.name}
+					{(registration?.id) ? registration?.name : ""}
 				</Typography>
 				<IconButton size="large" edge="start" color="inherit" aria-label="menu" onClick={() => setDrawerOpen(!drawerOpen)}>
            			<MenuIcon />

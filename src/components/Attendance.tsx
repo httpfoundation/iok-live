@@ -14,23 +14,29 @@ export const Attendance = () => {
 	const [lastPath, setLastPath] = useState<string>(location.pathname)
 
 	const sendAttendance = async () => {
+		console.log("Skipping sending attendance")
+		return
 		const attendanceId = window.localStorage.getItem('iok_attendance_id')
 		if (!registration?.id || !attendanceId)
 			return
-		try {
-			const attendance = await client?.item.find(attendanceId)
-			if (attendance) {
-				await client?.item.update(attendanceId, {
-					attendances: JSON.stringify([...(JSON.parse(attendance.attendances)), { date: new Date(), path: window.location.pathname }])
-				})
-				console.log("Sent attendance")
+		if (attendanceId) {
+			try {
+				const attendance = await client?.item.find(attendanceId as string)
+				if (attendance) {
+					await client?.item.update(attendanceId as string, {
+						attendances: JSON.stringify([...(JSON.parse(attendance.attendances)), { date: new Date(), path: window.location.pathname }])
+					})
+					console.log("Sent attendance")
+				}
+			} catch (e) {
+				console.error("Failed to send attendance", e)
 			}
-		} catch (e) {
-			console.error("Failed to send attendance", e)
 		}
 	}
 
 	const createAttendance = async () => {
+		console.log("Skipping creating attendance")
+		return null
 		if (!registration?.id)
 			return
 		try {
@@ -67,7 +73,7 @@ export const Attendance = () => {
 	}
 
 	useEffect(() => {
-		if (registration && !interval) {
+		if (registration && registration?.id && !interval) {
 			(async () => {
 				await createAttendance()
 				await sendAttendance()
@@ -82,7 +88,7 @@ export const Attendance = () => {
 	}, [])
 
 	useEffect(() => {
-		if (registration && interval && (lastPath.includes("szekcio") || location.pathname.includes("szekcio"))) {
+		if (registration && registration?.id && interval && (lastPath.includes("szekcio") || location.pathname.includes("szekcio"))) {
 			sendAttendance()
 			setLastPath(location.pathname)
 		}
